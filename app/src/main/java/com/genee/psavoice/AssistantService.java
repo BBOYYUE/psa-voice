@@ -51,6 +51,7 @@ public final class AssistantService extends Service {
     private String deviceId;
     private String diagnosticText;
     private boolean retried;
+    private volatile boolean fillerSpoken;
     private File requestDirectory;
     private SharedPreferences diagnostic;
 
@@ -94,6 +95,7 @@ public final class AssistantService extends Service {
         long run = ++generation;
         diagnosticText = null;
         retried = false;
+        fillerSpoken = false;
         if ((getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0 && intent != null) {
             diagnosticText = intent.getStringExtra("diagnostic_text");
         }
@@ -108,6 +110,8 @@ public final class AssistantService extends Service {
             beep(run, () -> finish(run));
             return START_NOT_STICKY;
         }
+        // 录音期间预热到网关的 TCP+TLS 连接，正式上传几乎零握手等待。
+        io.execute(gateway::warmup);
         state(State.CONNECTING, "正在连接原车人声服务");
         tts = new CarTtsClient(this, new CarTtsClient.Listener() {
             @Override public void ready(boolean available, String message) {
@@ -182,12 +186,12 @@ public final class AssistantService extends Service {
     private void upload(long run, File file, String text) {
         GatewayClient client = gateway;
         String id = requestId, device = deviceId;
-        // 等待较久（多为 LLM 知识判断）时先插一句口播，避免长时间无反馈。
-        if (file != null) main.postDelayed(() -> {
-            if (valid(run) && state == State.WAITING && tts != null && tts.isReady()) {
-                tts.speak(filler());
-            }
-        }, 2500);
+        // 插话只在真的慢时出现：服务端 X-Stage 头（ASR 完成、LLM 开始）后再等 2.5 秒；
+        // 旧服务端没有该响应头时，从上传起盲等 3.5 秒兜底。普通速度的请求不插话。
+        if (file != null) {
+            client.stageListener = () -> main.postDelayed(() -> maybeFiller(run), 2500);
+            main.postDelayed(() -> maybeFiller(run), 3500);
+        }
         io.execute(() -> {
             try {
                 GatewayClient.Result result = text == null ? client.voice(file, id, device) : client.text(text, id, device);
@@ -236,6 +240,13 @@ public final class AssistantService extends Service {
         });
     }
 
+    private void maybeFiller(long run) {
+        if (!valid(run) || state != State.WAITING || fillerSpoken) return;
+        if (tts == null || !tts.isReady()) return;
+        fillerSpoken = true;
+        tts.speak(FILLER);
+    }
+
     private void retry(long run, String message) {
         if (!valid(run)) return;
         retried = true;
@@ -245,11 +256,7 @@ public final class AssistantService extends Service {
         else beep(run, () -> record(run));
     }
 
-    private static final String[] FILLERS = {"我找找。", "我想一下。"};
-    private int fillerIndex;
-    private String filler() {
-        return FILLERS[fillerIndex++ % FILLERS.length];
-    }
+    private static final String FILLER = "我想一下。";
 
     private void feedback(long run, String message) {
         if (!valid(run)) return;

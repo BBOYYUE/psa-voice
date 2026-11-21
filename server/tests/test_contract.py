@@ -170,6 +170,7 @@ class HttpContractTest(unittest.IsolatedAsyncioTestCase):
             response = await self.client.post("/v1/text", headers=self.headers,
                 json={"text": "周杰伦的晴天", "request_id": "car-001", "device_id": "car", "context": {"scene": "music"}})
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers.get("x-stage"), "analyzing")  # 模型路径提前刷头，供客户端插话
         body = response.json()
         self.assertEqual(body["schema"], "v1")
         self.assertEqual(body["request_id"], "car-001")
@@ -185,6 +186,7 @@ class HttpContractTest(unittest.IsolatedAsyncioTestCase):
         # 快路径：0.2.3 旧客户端（不带 client_version）收到降级提示而不是未知动作。
         response = await self.client.post("/v1/text", headers=self.headers,
             json={"text": "打开QQ音乐", "scene": "music", "request_id": "old-001"})
+        self.assertNotIn("x-stage", response.headers)  # 快路径不是流式响应
         body = response.json()
         self.assertEqual(body["decision"], "unsupported")
         self.assertIsNone(body["action"])
@@ -233,7 +235,10 @@ class HttpContractTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(list(config.AUDIO_TEMP_DIR.iterdir()), [])
         with patch.object(hermes_client, "ask", return_value=("not json", 1)):
             response = await self.client.post("/v1/text", headers=self.headers, json={"text": "晴天", "scene": "music"})
-        self.assertEqual(response.status_code, 502)
+        # 模型路径是流式响应：头部已提前发出，错误以 200 + ok:false 正文表达。
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.json()["ok"])
+        self.assertEqual(response.json()["error"]["code"], "invalid_intent")
         self.assertIsNone(response.json()["action"])
 
     async def test_validation_auth_and_upload_limit(self):

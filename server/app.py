@@ -11,7 +11,7 @@ import uuid
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.formparsers import MultiPartException
 
@@ -203,21 +203,66 @@ def _context(fields):
     return values
 
 
+def _gate_music(rid, result, fields):
+    """Old head-unit builds reject unknown actions; downgrade instead of breaking them."""
+    if result["decision"] == "execute" and not music.client_supports(
+            result["action"]["type"], fields.get("client_version")):
+        logger.info("[%s] action %s gated: client_version=%s",
+                    rid, result["action"]["type"], fields.get("client_version"))
+        return {"decision": "unsupported", "action": None,
+                "answer": "车机端 App 需要升级到最新版本后才能执行该操作。"}
+    return result
+
+
+def _music_error(rid, code, message):
+    body, _ = responses.with_status(responses.fail(request_id=rid, code=code, message=message, status=502))
+    body.update(schema="v1", scene="music", action=None, request_id=rid)
+    return json.dumps(body, ensure_ascii=False).encode()
+
+
+def _music_model_stream(rid, text, fields, session_id, extra, turns, asr_ms, duration_s):
+    """LLM 路径流式响应：先刷响应头让客户端尽早插话，正文在模型返回后送达。
+    头部一旦发出状态码就是 200，模型错误以 ok:false 正文表达（客户端按 code 处理）。"""
+    future = asyncio.get_running_loop().run_in_executor(
+        None, music.complete, text, session_id, extra, turns)
+
+    async def body():
+        yield b""  # 立即刷出 X-Stage: analyzing 响应头。
+        try:
+            result, elapsed = await future
+        except music.IntentError:
+            logger.warning("[%s] Invalid music intent response", rid)
+            yield _music_error(rid, "invalid_intent", "没有得到可执行的音乐指令，请换个说法。")
+            return
+        except hermes_client.HermesError:
+            logger.warning("[%s] Hermes unavailable", rid)
+            yield _music_error(rid, "hermes_failed", "语义分析暂时不可用，请稍后再试。")
+            return
+        result = _gate_music(rid, result, fields)
+        logger.info("[%s] music asr_ms=%d semantic_ms=%d decision=%s", rid, asr_ms, elapsed, result["decision"])
+        payload = music.response(request_id=rid, transcript=text, result=result,
+                                 asr_ms=asr_ms, hermes_ms=elapsed, session_id=session_id, duration_s=duration_s)
+        body_dict, _ = responses.with_status(payload)
+        body_dict["request_id"] = rid
+        yield json.dumps(body_dict, ensure_ascii=False).encode()
+
+    return StreamingResponse(body(), media_type="application/json; charset=utf-8",
+                             headers={"X-Stage": "analyzing",
+                                      "X-Accel-Buffering": "no", "Cache-Control": "no-cache"})
+
+
 async def _analyze(rid, text, fields, *, asr_ms=0, duration_s=None, audio=False):
     session_id = fields.get("session_id") or fields.get("device_id")
     scene = fields["scene"]
     try:
         if scene == "music":
-            result, elapsed = await asyncio.to_thread(music.analyze, text, session_id=session_id)
-            if result["decision"] == "execute" and not music.client_supports(
-                    result["action"]["type"], fields.get("client_version")):
-                logger.info("[%s] action %s gated: client_version=%s",
-                            rid, result["action"]["type"], fields.get("client_version"))
-                result = {"decision": "unsupported", "action": None,
-                          "answer": "车机端 App 需要升级到最新版本后才能执行该操作。"}
-            logger.info("[%s] music asr_ms=%d semantic_ms=%d decision=%s", rid, asr_ms, elapsed, result["decision"])
+            result, extra, turns = await asyncio.to_thread(music.prepare, text, session_id)
+            if result is None:
+                return _music_model_stream(rid, text, fields, session_id, extra, turns, asr_ms, duration_s)
+            result = _gate_music(rid, result, fields)
+            logger.info("[%s] music asr_ms=%d semantic_ms=0 decision=%s", rid, asr_ms, result["decision"])
             return _reply(rid, music.response(request_id=rid, transcript=text, result=result,
-                          asr_ms=asr_ms, hermes_ms=elapsed, session_id=session_id, duration_s=duration_s))
+                          asr_ms=asr_ms, hermes_ms=0, session_id=session_id, duration_s=duration_s))
         answer, elapsed = await asyncio.to_thread(
             hermes_client.ask, text, session_id=session_id,
             system_prompt=fields.get("system_prompt"), extra_instruction=fields.get("prompt"))

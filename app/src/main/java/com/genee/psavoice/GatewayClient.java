@@ -16,6 +16,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 final class GatewayClient {
+    interface StageListener {
+        void analyzing();
+    }
+    volatile StageListener stageListener;
     static final class Result {
         String decision;
         String answer;
@@ -74,6 +78,7 @@ final class GatewayClient {
                 }
                 output.write(suffix);
             }
+            stage(current);
             return result(current, requestId);
         } finally { current.disconnect(); connection = null; }
     }
@@ -86,8 +91,28 @@ final class GatewayClient {
         try {
             current.setFixedLengthStreamingMode(body.length);
             try (OutputStream output = current.getOutputStream()) { output.write(body); }
+            stage(current);
             return result(current, requestId);
         } finally { current.disconnect(); connection = null; }
+    }
+    // 录音期间预先建立 TCP+TLS，正式上传时几乎零握手等待。
+    void warmup() {
+        try {
+            HttpURLConnection c = (HttpURLConnection) new URL(base + "/health").openConnection();
+            c.setConnectTimeout(5000);
+            c.setReadTimeout(5000);
+            c.setRequestProperty("Authorization", "Bearer " + token);
+            try (InputStream in = c.getInputStream()) {
+                byte[] buffer = new byte[512];
+                while (in.read(buffer) != -1) { }
+            }
+        } catch (Exception ignored) { }
+    }
+    // 服务端在 LLM 路径会提前刷出 X-Stage: analyzing 响应头。
+    private void stage(HttpURLConnection current) throws IOException {
+        if (!"analyzing".equals(current.getHeaderField("X-Stage"))) return;
+        StageListener listener = stageListener;
+        if (listener != null) listener.analyzing();
     }
     private HttpURLConnection open(String path, String contentType) throws IOException {
         if (cancelled) throw new IOException("请求已取消");

@@ -199,7 +199,9 @@ _FAST = {
 }
 
 
-def analyze(text: str, *, session_id: str | None = None) -> tuple[dict, int]:
+def prepare(text: str, session_id: str | None = None) -> tuple[dict | None, str | None, list | None]:
+    """快路径/缓存短路。返回 (result, extra_instruction, clarify_turns)；
+    result 为 None 表示需要调用模型——调用方据此可以尽早通知客户端。"""
     key = " ".join(text.strip().split()).casefold()
     now = time.monotonic()
     pending = _pending_clarify(session_id, now)
@@ -207,15 +209,14 @@ def analyze(text: str, *, session_id: str | None = None) -> tuple[dict, int]:
         fast = _FAST.get(key.rstrip("。！!"))
         if fast:
             logger.info("Music intent route=control elapsed_ms=0")
-            return {"decision": "execute", "action": {"app": "qqmusic", **fast}, "answer": ""}, 0
+            return {"decision": "execute", "action": {"app": "qqmusic", **fast}, "answer": ""}, None, None
         with _cache_lock:
             hit = _cache.get(key)
             if hit and now - hit[0] < _CACHE_TTL:
                 _cache.move_to_end(key)
                 logger.info("Music intent route=cache elapsed_ms=0")
-                return copy.deepcopy(hit[1]), 0
+                return copy.deepcopy(hit[1]), None, None
             _cache.pop(key, None)
-
     extra = None
     if pending:
         # 追问上下文的唯一用途：让“对/不是/换一首”这类回答能对应之前的对话。
@@ -226,6 +227,12 @@ def analyze(text: str, *, session_id: str | None = None) -> tuple[dict, int]:
                      "否定或补充新信息就结合此前对话解析；仍然无法确定可以继续追问。"
                      "不要重复执行与追问无关的旧指令。")
         extra = "\n".join(lines)
+    return None, extra, pending
+
+
+def complete(text: str, session_id: str | None, extra: str | None,
+             turns: list | None) -> tuple[dict, int]:
+    """调用模型并完成校验、追问上下文与缓存维护。"""
     raw, elapsed = hermes_client.ask(
         text,
         session_id=None,  # Music key commands must not replay earlier pending requests.
@@ -235,10 +242,11 @@ def analyze(text: str, *, session_id: str | None = None) -> tuple[dict, int]:
     )
     result = parse_result(raw)
     if result["decision"] == "clarify":
-        _store_clarify(session_id, pending, text, result["answer"])
+        _store_clarify(session_id, turns, text, result["answer"])
     else:
         _clear_clarify(session_id)
-    if result["decision"] == "execute" and not pending:
+    if result["decision"] == "execute" and not turns:
+        key = " ".join(text.strip().split()).casefold()
         with _cache_lock:
             _cache[key] = (time.monotonic(), copy.deepcopy(result))
             _cache.move_to_end(key)
@@ -246,6 +254,13 @@ def analyze(text: str, *, session_id: str | None = None) -> tuple[dict, int]:
                 _cache.popitem(last=False)
     logger.info("Music intent route=hermes elapsed_ms=%d", elapsed)
     return result, elapsed
+
+
+def analyze(text: str, *, session_id: str | None = None) -> tuple[dict, int]:
+    result, extra, turns = prepare(text, session_id)
+    if result is not None:
+        return result, 0
+    return complete(text, session_id, extra, turns)
 
 
 def response(*, request_id: str, transcript: str, result: dict, asr_ms: int,
