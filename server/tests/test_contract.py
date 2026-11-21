@@ -268,10 +268,34 @@ class MusicLatencyTest(unittest.TestCase):
         with patch.object(hermes_client, "ask", return_value=(execute, 5)) as ask:
             result, _ = music.analyze("对", session_id="car-1")
             self.assertEqual(result["action"]["query"], "周杰伦 黑色毛衣")
-            self.assertIn("黑色毛衣", ask.call_args.kwargs["extra_instruction"])
+            extra = ask.call_args.kwargs["extra_instruction"]
+            self.assertIn("黑色毛衣", extra)                       # 上一轮的追问
+            self.assertIn("周杰伦那首毛衣的歌叫什么来着", extra)    # 上一轮的用户转写
         # 执行后上下文清除：再说“对”不带上下文，也不命中缓存（带上下文的结果不缓存）。
         with patch.object(hermes_client, "ask", return_value=(clarify, 5)) as ask:
             music.analyze("对", session_id="car-1")
+            self.assertIsNone(ask.call_args.kwargs["extra_instruction"])
+
+    def test_clarify_context_accumulates_multiple_turns(self):
+        q1 = json.dumps({"decision": "clarify", "action": None, "answer": "您说的是《黑色毛衣》吗？"})
+        q2 = json.dumps({"decision": "clarify", "action": None, "answer": "那是《可爱女人》吗？"})
+        execute = json.dumps({"decision": "execute", "action": {"type": "music.search_play", "app": "qqmusic", "query": "简单爱"}})
+        with patch.object(hermes_client, "ask", return_value=(q1, 5)):
+            music.analyze("周杰伦那首毛衣的歌", session_id="car-9")
+        with patch.object(hermes_client, "ask", return_value=(q2, 5)) as ask:
+            music.analyze("不是", session_id="car-9")
+            extra = ask.call_args.kwargs["extra_instruction"]
+            self.assertIn("周杰伦那首毛衣的歌", extra)  # 第一轮的用户转写
+            self.assertIn("黑色毛衣", extra)            # 第一轮的追问
+        with patch.object(hermes_client, "ask", return_value=(execute, 5)) as ask:
+            result, _ = music.analyze("也不是", session_id="car-9")
+            extra = ask.call_args.kwargs["extra_instruction"]
+            self.assertIn("不是", extra)      # 第二轮的回答已进入历史
+            self.assertIn("可爱女人", extra)  # 第二轮的追问
+            self.assertEqual(result["action"]["query"], "简单爱")
+        # 追问结束后上下文已清除。
+        with patch.object(hermes_client, "ask", return_value=(execute, 5)) as ask:
+            music.analyze("也不是", session_id="car-9")
             self.assertIsNone(ask.call_args.kwargs["extra_instruction"])
 
     def test_pending_clarify_bypasses_fast_path(self):

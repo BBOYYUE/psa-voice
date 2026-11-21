@@ -131,29 +131,39 @@ _cache = OrderedDict()
 _cache_lock = threading.Lock()
 _CACHE_TTL = 600
 _CACHE_LIMIT = 128
-# 每台车机（device/session）只保留最近一轮追问，TTL 短，避免旧猜测污染新指令。
+# 每台车机（device/session）只保留最近几轮追问对话，TTL 短，避免旧猜测污染新指令。
+# 结构：session -> (最近更新时间, [(用户转写, 追问), ...])，最多 _CLARIFY_TURNS 轮。
 _clarify = OrderedDict()
 _CLARIFY_TTL = 120
 _CLARIFY_LIMIT = 64
+_CLARIFY_TURNS = 4
 
 
-def _pending_clarify(session_id: str | None, now: float) -> str | None:
+def _clip(text: str, limit: int = 80) -> str:
+    text = text.strip()
+    return text if len(text) <= limit else text[: limit - 1] + "…"
+
+
+def _pending_clarify(session_id: str | None, now: float) -> list[tuple[str, str]] | None:
     if not session_id:
         return None
     with _cache_lock:
         item = _clarify.get(session_id)
-        if item and now - item[0] < _CLARIFY_TTL:
+        if item and now - item[0] < _CLARIFY_TTL and item[1]:
             _clarify.move_to_end(session_id)
-            return item[1]
+            return list(item[1])
         _clarify.pop(session_id, None)
     return None
 
 
-def _store_clarify(session_id: str | None, question: str) -> None:
+def _store_clarify(session_id: str | None, turns: list[tuple[str, str]] | None,
+                   user_text: str, question: str) -> None:
     if not session_id:
         return
+    turns = list(turns or [])
+    turns.append((_clip(user_text), _clip(question)))
     with _cache_lock:
-        _clarify[session_id] = (time.monotonic(), question)
+        _clarify[session_id] = (time.monotonic(), turns[-_CLARIFY_TURNS:])
         _clarify.move_to_end(session_id)
         while len(_clarify) > _CLARIFY_LIMIT:
             _clarify.popitem(last=False)
@@ -208,10 +218,14 @@ def analyze(text: str, *, session_id: str | None = None) -> tuple[dict, int]:
 
     extra = None
     if pending:
-        # 追问上下文的唯一用途：让“对/不是/换一首”这类回答能对应上一轮猜测。
-        extra = ("上一轮你追问用户：「" + pending + "」。用户这句话是在回答你的追问："
-                 "用户肯定（对、是的、嗯）就执行你当时猜测的动作；用户否定或补充新信息就按新信息解析；"
-                 "仍然无法确定可以继续追问。不要重复执行与追问无关的旧指令。")
+        # 追问上下文的唯一用途：让“对/不是/换一首”这类回答能对应之前的对话。
+        lines = ["此前追问对话（从旧到新）："]
+        for user_text, question in pending:
+            lines.append("用户说：「" + user_text + "」；你问：「" + question + "」")
+        lines.append("用户这句话是在回答你最后一个问题：肯定（对、是的、嗯）就执行你当时猜测的动作；"
+                     "否定或补充新信息就结合此前对话解析；仍然无法确定可以继续追问。"
+                     "不要重复执行与追问无关的旧指令。")
+        extra = "\n".join(lines)
     raw, elapsed = hermes_client.ask(
         text,
         session_id=None,  # Music key commands must not replay earlier pending requests.
@@ -221,7 +235,7 @@ def analyze(text: str, *, session_id: str | None = None) -> tuple[dict, int]:
     )
     result = parse_result(raw)
     if result["decision"] == "clarify":
-        _store_clarify(session_id, result["answer"])
+        _store_clarify(session_id, pending, text, result["answer"])
     else:
         _clear_clarify(session_id)
     if result["decision"] == "execute" and not pending:
