@@ -52,6 +52,8 @@ public final class AssistantService extends Service {
     private String diagnosticText;
     private boolean retried;
     private volatile boolean fillerSpoken;
+    // 追问已播报、正等待用户回答；交互在此期间结束要通知服务端清除追问上下文。
+    private volatile boolean clarifyAwaiting;
     private File requestDirectory;
     private SharedPreferences diagnostic;
 
@@ -96,6 +98,7 @@ public final class AssistantService extends Service {
         diagnosticText = null;
         retried = false;
         fillerSpoken = false;
+        clarifyAwaiting = false;
         if ((getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0 && intent != null) {
             diagnosticText = intent.getStringExtra("diagnostic_text");
         }
@@ -173,6 +176,7 @@ public final class AssistantService extends Service {
                         else feedback(run, "没听清，请再说一次。");
                     } else {
                         state(State.WAITING, "正在理解音乐指令");
+                        clarifyAwaiting = false; // 回答已发出，上下文交由服务端按响应更新
                         upload(run, file, null);
                     }
                 });
@@ -200,7 +204,7 @@ public final class AssistantService extends Service {
                     // 表述不清晰时不执行任何操作：播报追问并直接再录一次。
                     // 追问不限轮次（服务端会记住最近一轮追问的上下文）；
                     // ADB 文字探针不重试，直接播报问题结束。
-                    if ("clarify".equals(result.decision) && file != null) { retry(run, result.answer); return; }
+                    if ("clarify".equals(result.decision) && file != null) { clarifyAwaiting = true; retry(run, result.answer); return; }
                     if (!"execute".equals(result.decision)) { feedback(run, result.answer); return; }
                     if (id.equals(diagnostic.getString("last_executed_id", ""))) { finish(run); return; }
                     diagnostic.edit().putString("last_executed_id", id).putString("last_action", result.type).apply();
@@ -299,10 +303,19 @@ public final class AssistantService extends Service {
     }
     private void finish(long run) {
         if (!valid(run)) return;
+        // 交互结束时若仍挂着未回答的追问，尽力通知服务端清除上下文。
+        clearPendingClarify();
         releaseFocus();
         state(State.IDLE, "交互结束");
         stopForeground(true);
         stopSelf();
+    }
+    private void clearPendingClarify() {
+        if (!clarifyAwaiting) return;
+        clarifyAwaiting = false;
+        GatewayClient client = gateway;
+        String device = deviceId;
+        if (client != null && device != null) io.execute(() -> client.clearContext(device));
     }
     private void state(State value, String message) {
         long now = SystemClock.elapsedRealtime();
@@ -334,6 +347,7 @@ public final class AssistantService extends Service {
     @Override public void onDestroy() {
         destroyed = true;
         generation++;
+        clearPendingClarify();
         if (recorder != null) recorder.cancel();
         if (gateway != null) gateway.cancel();
         if (music != null) music.cancel();

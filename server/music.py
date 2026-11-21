@@ -173,6 +173,11 @@ def _clear_clarify(session_id: str | None) -> None:
     if session_id:
         with _cache_lock:
             _clarify.pop(session_id, None)
+
+
+def clear_context(session_id: str | None) -> None:
+    """客户端取消或未回答追问时显式清除挂起的追问上下文。"""
+    _clear_clarify(session_id)
 logger = logging.getLogger("vg.music")
 # 精确指令快路径：整句完全匹配（仅允许结尾标点差异）时直接解析，不经过模型。
 # 任何带否定、附加条件或额外词语的说法都会绕过这里，交给模型判断。

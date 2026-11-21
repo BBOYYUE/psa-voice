@@ -319,6 +319,23 @@ async def _audio_endpoint(request, *, transcribe_only=False):
     return await _analyze(rid, transcript, fields, asr_ms=asr_ms, duration_s=duration_s, audio=True)
 
 
+@app.post("/v1/music/context/clear", dependencies=[Depends(require_token)])
+async def clear_music_context(request: Request):
+    rid = _rid()
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise InputError()
+    except (ValueError, TypeError):
+        return _fail(rid, "bad_json", "请求体必须是 JSON 对象", 400)
+    session = body.get("session_id") or body.get("device_id")
+    if not isinstance(session, str) or not session or len(session) > 128:
+        return _fail(rid, "bad_request", "device_id 无效", 400)
+    music.clear_context(session)
+    logger.info("[%s] clarify context cleared by client session=%s", rid, session)
+    return {"ok": True, "schema": "v1", "scene": "music"}
+
+
 @app.post("/v1/voice", dependencies=[Depends(require_token)])
 async def voice(request: Request):
     return await _audio_endpoint(request)

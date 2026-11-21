@@ -108,6 +108,30 @@ final class GatewayClient {
             }
         } catch (Exception ignored) { }
     }
+    // 用户没有回答追问或取消交互时，尽力通知服务端清除挂起的追问上下文。
+    void clearContext(String deviceId) {
+        HttpURLConnection c = null;
+        try {
+            byte[] body = new JSONObject().put("device_id", deviceId)
+                    .toString().getBytes(StandardCharsets.UTF_8);
+            c = (HttpURLConnection) new URL(base + "/v1/music/context/clear").openConnection();
+            c.setRequestMethod("POST");
+            c.setConnectTimeout(5000);
+            c.setReadTimeout(5000);
+            c.setDoOutput(true);
+            c.setRequestProperty("Authorization", "Bearer " + token);
+            c.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+            c.setFixedLengthStreamingMode(body.length);
+            try (OutputStream output = c.getOutputStream()) { output.write(body); }
+            try (InputStream in = c.getInputStream()) {
+                byte[] buffer = new byte[256];
+                while (in.read(buffer) != -1) { }
+            }
+        } catch (Exception ignored) {
+        } finally {
+            if (c != null) c.disconnect();
+        }
+    }
     // 服务端在 LLM 路径会提前刷出 X-Stage: analyzing 响应头。
     private void stage(HttpURLConnection current) throws IOException {
         if (!"analyzing".equals(current.getHeaderField("X-Stage"))) return;

@@ -212,6 +212,21 @@ class HttpContractTest(unittest.IsolatedAsyncioTestCase):
                 json={"text": "来一首晴天", "scene": "music", "request_id": "old-003"})
         self.assertEqual(response.json()["action"]["type"], "music.search_play")
 
+    async def test_client_can_clear_pending_clarify_context(self):
+        clarify = json.dumps({"decision": "clarify", "action": None, "answer": "您说的是《黑色毛衣》吗？"})
+        with patch.object(hermes_client, "ask", return_value=(clarify, 5)):
+            await self.client.post("/v1/text", headers=self.headers,
+                json={"text": "那首歌叫什么", "scene": "music", "device_id": "car-clear"})
+        self.assertIn("car-clear", music._clarify)
+        response = await self.client.post("/v1/music/context/clear", headers=self.headers,
+            json={"device_id": "car-clear"})
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["ok"])
+        self.assertNotIn("car-clear", music._clarify)
+        # 未授权与参数校验。
+        self.assertEqual((await self.client.post("/v1/music/context/clear", json={"device_id": "x"})).status_code, 401)
+        self.assertEqual((await self.client.post("/v1/music/context/clear", headers=self.headers, json={})).status_code, 400)
+
     async def test_audio_multipart_and_cleanup_before_hermes(self):
         async def transcribe_file(path):
             self.assertTrue(path.exists())
