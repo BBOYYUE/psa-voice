@@ -50,6 +50,7 @@ public final class AssistantService extends Service {
     private String requestId;
     private String deviceId;
     private String diagnosticText;
+    private boolean retried;
     private File requestDirectory;
     private SharedPreferences diagnostic;
 
@@ -92,6 +93,7 @@ public final class AssistantService extends Service {
         diagnostic.edit().remove("last_action").remove("last_confirmed").remove("last_result").apply();
         long run = ++generation;
         diagnosticText = null;
+        retried = false;
         if ((getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0 && intent != null) {
             diagnosticText = intent.getStringExtra("diagnostic_text");
         }
@@ -162,7 +164,9 @@ public final class AssistantService extends Service {
                     recorder = null;
                     if (!heard) {
                         file.delete();
-                        feedback(run, "没听清，请再说一次。");
+                        // 没听到人声时自动再录一次，第二次仍失败才结束。
+                        if (!retried) retry(run, "没听清，请再说一次。");
+                        else feedback(run, "没听清，请再说一次。");
                     } else {
                         state(State.WAITING, "正在理解音乐指令");
                         upload(run, file, null);
@@ -183,6 +187,9 @@ public final class AssistantService extends Service {
                 GatewayClient.Result result = text == null ? client.voice(file, id, device) : client.text(text, id, device);
                 main.post(() -> {
                     if (!valid(run)) return;
+                    // 表述不清晰时不执行任何操作：语音路径播报追问并直接再录一次（仅一轮）；
+                    // ADB 文字探针不重试，直接播报问题结束。
+                    if ("clarify".equals(result.decision) && !retried && file != null) { retry(run, result.answer); return; }
                     if (!"execute".equals(result.decision)) { feedback(run, result.answer); return; }
                     if (id.equals(diagnostic.getString("last_executed_id", ""))) { finish(run); return; }
                     diagnostic.edit().putString("last_executed_id", id).putString("last_action", result.type).apply();
@@ -190,7 +197,12 @@ public final class AssistantService extends Service {
                 });
             } catch (Exception e) {
                 Log.w(TAG, "request=" + id + " gateway failure: " + e.getClass().getSimpleName());
-                main.post(() -> { if (valid(run)) feedback(run, userError(e)); });
+                main.post(() -> {
+                    if (!valid(run)) return;
+                    String message = userError(e);
+                    if ("没听清，请再说一次。".equals(message) && !retried && file != null) retry(run, message);
+                    else feedback(run, message);
+                });
             } finally {
                 if (file != null) file.delete();
             }
@@ -215,6 +227,15 @@ public final class AssistantService extends Service {
                 main.post(() -> { if (valid(run)) feedback(run, "音乐操作未完成，请确认QQ音乐已安装。"); });
             }
         });
+    }
+
+    private void retry(long run, String message) {
+        if (!valid(run)) return;
+        retried = true;
+        // 保持音频焦点不释放：追问与再次录音之间音乐不能恢复。
+        state(State.PROMPTING, message);
+        if (tts != null && tts.isReady()) tts.speak(message);
+        else beep(run, () -> record(run));
     }
 
     private void feedback(long run, String message) {

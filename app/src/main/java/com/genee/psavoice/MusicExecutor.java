@@ -72,10 +72,14 @@ final class MusicExecutor {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         if (!play) return new Outcome(false, "已打开搜索结果。");
+        boolean heardPlaying = false;
         long until = SystemClock.elapsedRealtime() + 20000;
         while (!cancelled && SystemClock.elapsedRealtime() < until) {
             MediaController controller = controller();
+            String failure = playbackError(controller);
+            if (failure != null) return new Outcome(false, failure);
             if (playing(controller)) {
+                heardPlaying = true;
                 String title = title(controller.getMetadata());
                 String artist = artist(controller.getMetadata());
                 TrackMatcher.Result match = TrackMatcher.match(action.query, title, artist);
@@ -87,6 +91,8 @@ final class MusicExecutor {
             }
             Thread.sleep(300);
         }
+        // 区分"完全没有播放迹象"（可能没搜到或可播放结果）与"播了但和请求对不上"。
+        if (!heardPlaying) return new Outcome(false, "没有检测到播放，可能没有搜到可播放的结果，请查看屏幕确认。");
         return new Outcome(false, "已打开QQ音乐，请确认播放结果。");
     }
 
@@ -104,10 +110,12 @@ final class MusicExecutor {
         long until = SystemClock.elapsedRealtime() + 10000;
         while (!cancelled && SystemClock.elapsedRealtime() < until) {
             MediaController controller = controller();
+            String failure = playbackError(controller);
+            if (failure != null) return new Outcome(false, failure);
             if (playing(controller)) return new Outcome(true, "正在播放" + title(controller.getMetadata()) + "。");
             Thread.sleep(300);
         }
-        return new Outcome(false, "已打开" + name + "，请确认播放。");
+        return new Outcome(false, "已打开" + name + "，没有检测到播放，请确认。");
     }
 
     private Outcome mediaControl(GatewayClient.Result action) throws Exception {
@@ -169,6 +177,17 @@ final class MusicExecutor {
         if (controller == null) return false;
         PlaybackState state = controller.getPlaybackState();
         return state != null && state.getState() == PlaybackState.STATE_PLAYING;
+    }
+    // QQ 无法播放（常见为版权限制）时会话会进入 STATE_ERROR；只报告检测到的错误，不猜测结果。
+    private static String playbackError(MediaController controller) {
+        if (controller == null) return null;
+        PlaybackState state = controller.getPlaybackState();
+        if (state == null || state.getState() != PlaybackState.STATE_ERROR) return null;
+        CharSequence detail = state.getErrorMessage();
+        if (detail != null && detail.toString().contains("版权")) {
+            return "这首歌因版权原因暂时无法播放，请换一首。";
+        }
+        return "这首歌暂时无法播放，请换一首试试。";
     }
     private static String title(MediaMetadata data) {
         if (data == null) return "";
