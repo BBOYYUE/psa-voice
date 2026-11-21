@@ -24,11 +24,41 @@ class IntentContractTest(unittest.TestCase):
             action = {"type": kind, "app": "qqmusic"}
             if kind in {"music.search", "music.search_play"}:
                 action["query"] = "周杰伦 晴天"
+            elif kind == "music.open_page":
+                action.update(page="favorite", autoplay=True)
             result = music.parse_result(json.dumps({"decision": "execute", "action": action, "answer": "已经播放"}))
             self.assertEqual(result["action"], action)
             self.assertEqual(result["answer"], "")
         for decision in ("clarify", "unsupported"):
             self.assertIsNone(music.parse_result(json.dumps({"decision": decision, "action": None, "answer": "请说出歌名"}))["action"])
+
+    def test_open_page_defaults_and_strict_params(self):
+        raw = json.dumps({"decision": "execute", "action": {"type": "music.open_page", "app": "qqmusic", "page": "recent"}})
+        result = music.parse_result(raw)
+        self.assertEqual(result["action"], {"type": "music.open_page", "app": "qqmusic", "page": "recent", "autoplay": False})
+        invalid = [
+            {"type": "music.open_page", "app": "qqmusic"},                                  # 缺少 page
+            {"type": "music.open_page", "app": "qqmusic", "page": "search"},                # 搜索页走 search 动作
+            {"type": "music.open_page", "app": "qqmusic", "page": 4},                       # page 必须是字符串枚举
+            {"type": "music.open_page", "app": "qqmusic", "page": "favorite", "action": 4}, # 不允许 LLM 指定协议数字
+            {"type": "music.open_page", "app": "qqmusic", "page": "favorite", "m1": True},  # 不允许直接透传协议参数
+            {"type": "music.open_page", "app": "qqmusic", "page": "favorite", "autoplay": "yes"},
+            {"type": "music.open_page", "app": "qqmusic", "page": "favorite", "mb": False},
+            {"type": "music.open", "app": "qqmusic", "page": "recent"},
+            {"type": "music.close", "app": "qqmusic", "autoplay": False},
+        ]
+        for action in invalid:
+            with self.subTest(action=action), self.assertRaises(music.IntentError):
+                music.parse_result(json.dumps({"decision": "execute", "action": action}))
+
+    def test_new_actions_require_a_recent_client(self):
+        for old in (None, "", "0.2.3", "0.2.9", "v0.3.0", "0.3"):
+            self.assertFalse(music.client_supports("music.open_page", old))
+        for new in ("0.3.0", "0.3.1", "1.0.0"):
+            self.assertTrue(music.client_supports("music.open_page", new))
+        for legacy in (None, "0.2.3"):
+            self.assertTrue(music.client_supports("music.pause", legacy))
+            self.assertTrue(music.client_supports("music.search_play", legacy))
 
     def test_invalid_model_outputs_fail_closed(self):
         cases = ["not json", "[]", '{"decision":[]}', '{"decision":"execute","action":null}']
@@ -151,6 +181,35 @@ class HttpContractTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(response.json()["schema"], "v0")
         self.assertEqual(response.json()["answer"], "你好")
 
+    async def test_new_actions_are_gated_for_old_clients(self):
+        # 快路径：0.2.3 旧客户端（不带 client_version）收到降级提示而不是未知动作。
+        response = await self.client.post("/v1/text", headers=self.headers,
+            json={"text": "打开QQ音乐", "scene": "music", "request_id": "old-001"})
+        body = response.json()
+        self.assertEqual(body["decision"], "unsupported")
+        self.assertIsNone(body["action"])
+        self.assertIn("升级", body["answer"])
+        # 快路径：新客户端正常执行。
+        response = await self.client.post("/v1/text", headers=self.headers,
+            json={"text": "打开QQ音乐", "scene": "music", "request_id": "new-001", "client_version": "0.3.0"})
+        self.assertEqual(response.json()["action"], {"type": "music.open", "app": "qqmusic"})
+        # 模型路径：open_page 同样按版本门控；旧客户端不收到 open_page。
+        raw = json.dumps({"decision": "execute", "action": {"type": "music.open_page", "app": "qqmusic", "page": "radio", "autoplay": True}})
+        with patch.object(hermes_client, "ask", return_value=(raw, 9)):
+            response = await self.client.post("/v1/text", headers=self.headers,
+                json={"text": "我想听电台", "scene": "music", "request_id": "old-002", "client_version": "0.2.3"})
+            self.assertEqual(response.json()["decision"], "unsupported")
+            response = await self.client.post("/v1/text", headers=self.headers,
+                json={"text": "我想听电台", "scene": "music", "request_id": "new-002", "client_version": "0.3.0"})
+            self.assertEqual(response.json()["action"]["page"], "radio")
+            self.assertTrue(response.json()["action"]["autoplay"])
+        # 既有动作对旧客户端保持可用，不受门控影响。
+        raw = json.dumps({"decision": "execute", "action": {"type": "music.search_play", "app": "qqmusic", "query": "晴天"}})
+        with patch.object(hermes_client, "ask", return_value=(raw, 9)):
+            response = await self.client.post("/v1/text", headers=self.headers,
+                json={"text": "来一首晴天", "scene": "music", "request_id": "old-003"})
+        self.assertEqual(response.json()["action"]["type"], "music.search_play")
+
     async def test_audio_multipart_and_cleanup_before_hermes(self):
         async def transcribe_file(path):
             self.assertTrue(path.exists())
@@ -210,6 +269,25 @@ class MusicLatencyTest(unittest.TestCase):
         with patch.object(hermes_client, "ask", return_value=(raw, 7)) as ask:
             music.analyze("不要暂停，播放晴天")
             music.analyze("不要暂停，播放晴天")
+            self.assertEqual(ask.call_count, 2)
+
+    def test_exact_page_routes_bypass_model_but_negation_does_not(self):
+        with patch.object(hermes_client, "ask") as ask:
+            cases = [("打开QQ音乐", {"type": "music.open"}),
+                     ("关闭QQ音乐", {"type": "music.close"}),
+                     ("打开收藏", {"type": "music.open_page", "page": "favorite", "autoplay": False}),
+                     ("打开最近播放", {"type": "music.open_page", "page": "recent", "autoplay": False}),
+                     ("播放最近播放", {"type": "music.open_page", "page": "recent", "autoplay": True}),
+                     ("打开我的歌单", {"type": "music.open_page", "page": "my_playlist", "autoplay": False})]
+            for text, action in cases:
+                result, elapsed = music.analyze(text)
+                self.assertEqual(result["action"], {"app": "qqmusic", **action})
+                self.assertEqual(elapsed, 0)
+            ask.assert_not_called()
+        raw = json.dumps({"decision": "unsupported", "action": None, "answer": "暂不收藏歌曲"})
+        with patch.object(hermes_client, "ask", return_value=(raw, 7)) as ask:
+            music.analyze("别打开收藏")
+            music.analyze("把这首歌加入收藏")
             self.assertEqual(ask.call_count, 2)
 
     def test_success_cache_is_bounded_expires_and_does_not_share_mutations(self):

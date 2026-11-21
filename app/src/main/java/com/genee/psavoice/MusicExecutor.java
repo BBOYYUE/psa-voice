@@ -10,9 +10,9 @@ import android.media.session.PlaybackState;
 import android.os.SystemClock;
 import android.util.Base64;
 import java.nio.charset.StandardCharsets;
-import java.text.Normalizer;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 final class MusicExecutor {
     static final class Outcome {
@@ -21,6 +21,20 @@ final class MusicExecutor {
         Outcome(boolean confirmed, String message) { this.confirmed = confirmed; this.message = message; }
     }
     private static final String QQ = "com.tencent.qqmusiccar";
+    private static final String DISPATCHER = QQ + ".app.activity.DispacherActivityForThird";
+    private static final String STARTER = QQ + ".app.activity.AppStarterActivity";
+    // QQ 车机版官方外部拉起协议 action=2~9 的页面。
+    private static final Map<String, Integer> PAGE_ACTIONS = new HashMap<>();
+    private static final Map<String, String> PAGE_NAMES = new HashMap<>();
+    static {
+        PAGE_ACTIONS.put("recent", 2);       PAGE_NAMES.put("recent", "最近播放");
+        PAGE_ACTIONS.put("local", 3);        PAGE_NAMES.put("local", "本地音乐");
+        PAGE_ACTIONS.put("favorite", 4);     PAGE_NAMES.put("favorite", "收藏");
+        PAGE_ACTIONS.put("car_playlist", 5); PAGE_NAMES.put("car_playlist", "车载歌单");
+        PAGE_ACTIONS.put("radio", 6);        PAGE_NAMES.put("radio", "音乐电台");
+        PAGE_ACTIONS.put("rank", 7);         PAGE_NAMES.put("rank", "排行榜");
+        PAGE_ACTIONS.put("my_playlist", 9);  PAGE_NAMES.put("my_playlist", "自建歌单");
+    }
     private final Context context;
     private volatile boolean cancelled;
     MusicExecutor(Context context) { this.context = context; }
@@ -28,35 +42,78 @@ final class MusicExecutor {
 
     Outcome execute(GatewayClient.Result action) throws Exception {
         if (cancelled) return new Outcome(false, "已取消。");
-        if (action.type.equals("music.search") || action.type.equals("music.search_play")) {
-            String query = Base64.encodeToString(action.query.getBytes(StandardCharsets.UTF_8), Base64.NO_WRAP);
-            boolean play = action.type.equals("music.search_play");
-            if (play) {
-                // QQ 3.16 can retain a stale global scene after CLEAR_TASK.
-                // Its own scene-switch entry rebuilds the UI without killing it.
-                context.startActivity(new Intent().setClassName(QQ, QQ + ".app.activity.AppStarterActivity")
-                        .putExtra("KEY_SWITCH_APP_SCENE", true).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                Thread.sleep(450);
-                if (cancelled) return new Outcome(false, "已取消。");
-            }
-            Intent intent = new Intent("com.tencent.qqmusiccar.action").setClassName(QQ, QQ + ".app.activity.DispacherActivityForThird")
-                    .putExtra("action", 8).putExtra("search_key", query).putExtra("m1", play)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-            if (action.type.equals("music.search")) return new Outcome(false, "已打开搜索结果。");
-            long until = SystemClock.elapsedRealtime() + 20000;
-            while (!cancelled && SystemClock.elapsedRealtime() < until) {
-                MediaController controller = controller();
-                if (playing(controller) && matches(action.query, controller.getMetadata())) {
-                    return new Outcome(true, "正在播放" + title(controller) + "。");
-                }
-                Thread.sleep(300);
-            }
-            return new Outcome(false, "已打开QQ音乐，请确认播放结果。");
+        switch (action.type) {
+            case "music.search":
+            case "music.search_play":
+                return search(action);
+            case "music.open":
+                launch(0, null);
+                return new Outcome(false, "已打开QQ音乐。");
+            case "music.close":
+                launch(1, null);
+                return new Outcome(false, "正在关闭QQ音乐。");
+            case "music.open_page":
+                return openPage(action);
+            default:
+                return mediaControl(action);
         }
+    }
+
+    private Outcome search(GatewayClient.Result action) throws Exception {
+        boolean play = action.type.equals("music.search_play");
+        String beforeKey = play ? playingTrackKey() : "";
+        if (play) {
+            refreshScene();
+            if (cancelled) return new Outcome(false, "已取消。");
+        }
+        String query = Base64.encodeToString(action.query.getBytes(StandardCharsets.UTF_8), Base64.NO_WRAP);
+        Intent intent = new Intent("com.tencent.qqmusiccar.action").setClassName(QQ, DISPATCHER)
+                .putExtra("action", 8).putExtra("search_key", query).putExtra("m1", play)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+        if (!play) return new Outcome(false, "已打开搜索结果。");
+        long until = SystemClock.elapsedRealtime() + 20000;
+        while (!cancelled && SystemClock.elapsedRealtime() < until) {
+            MediaController controller = controller();
+            if (playing(controller)) {
+                String title = title(controller.getMetadata());
+                String artist = artist(controller.getMetadata());
+                TrackMatcher.Result match = TrackMatcher.match(action.query, title, artist);
+                // 严格匹配（歌名完整命中）可立即确认；宽松匹配必须等曲目真正变化，
+                // 避免旧歌曲短暂恢复时被误报为新请求成功。
+                if (match.matched && (match.strict || !TrackMatcher.trackKey(title, artist).equals(beforeKey))) {
+                    return new Outcome(true, "正在播放" + title + "。");
+                }
+            }
+            Thread.sleep(300);
+        }
+        return new Outcome(false, "已打开QQ音乐，请确认播放结果。");
+    }
+
+    private Outcome openPage(GatewayClient.Result action) throws Exception {
+        Integer code = PAGE_ACTIONS.get(action.page);
+        String name = PAGE_NAMES.get(action.page);
+        if (code == null || name == null) return new Outcome(false, "不支持该音乐操作。");
+        if (!action.autoplay) {
+            launch(code, false);
+            return new Outcome(false, "已打开" + name + "。");
+        }
+        refreshScene();
+        if (cancelled) return new Outcome(false, "已取消。");
+        launch(code, true);
+        long until = SystemClock.elapsedRealtime() + 10000;
+        while (!cancelled && SystemClock.elapsedRealtime() < until) {
+            MediaController controller = controller();
+            if (playing(controller)) return new Outcome(true, "正在播放" + title(controller.getMetadata()) + "。");
+            Thread.sleep(300);
+        }
+        return new Outcome(false, "已打开" + name + "，请确认播放。");
+    }
+
+    private Outcome mediaControl(GatewayClient.Result action) throws Exception {
         MediaController controller = controller();
         if (controller == null) return new Outcome(false, "请先打开QQ音乐，再试一次。");
-        String before = title(controller);
+        String before = title(controller.getMetadata());
         switch (action.type) {
             case "music.pause": controller.getTransportControls().pause(); break;
             case "music.resume": controller.getTransportControls().play(); break;
@@ -71,12 +128,35 @@ final class MusicExecutor {
                 if (state != null && state.getState() == PlaybackState.STATE_PAUSED) return new Outcome(true, "已暂停。");
             } else if (playing(controller)) {
                 if (action.type.equals("music.resume")) return new Outcome(true, "继续播放。");
-                if (!before.equals(title(controller))) return new Outcome(true, "正在播放" + title(controller) + "。");
+                if (!before.equals(title(controller.getMetadata()))) return new Outcome(true, "正在播放" + title(controller.getMetadata()) + "。");
             }
             Thread.sleep(200);
         }
         return new Outcome(false, "已发送音乐指令。");
     }
+
+    // QQ 3.16 can retain a stale global scene after CLEAR_TASK.
+    // Its own scene-switch entry rebuilds the UI without killing it.
+    private void refreshScene() throws Exception {
+        context.startActivity(new Intent().setClassName(QQ, STARTER)
+                .putExtra("KEY_SWITCH_APP_SCENE", true).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        Thread.sleep(450);
+    }
+
+    // 官方协议 action=0~9，mb 固定 true：返回键回 launcher（车机无界面助手场景）。
+    private void launch(int code, Boolean m1) {
+        Intent intent = new Intent("com.tencent.qqmusiccar.action").setClassName(QQ, DISPATCHER)
+                .putExtra("action", code).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (m1 != null) intent.putExtra("m1", m1.booleanValue()).putExtra("mb", true);
+        context.startActivity(intent);
+    }
+
+    private String playingTrackKey() {
+        MediaController controller = controller();
+        if (!playing(controller)) return "";
+        return TrackMatcher.trackKey(title(controller.getMetadata()), artist(controller.getMetadata()));
+    }
+
     private MediaController controller() {
         try {
             MediaSessionManager manager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
@@ -90,28 +170,14 @@ final class MusicExecutor {
         PlaybackState state = controller.getPlaybackState();
         return state != null && state.getState() == PlaybackState.STATE_PLAYING;
     }
-    private static String title(MediaController controller) {
-        MediaMetadata data = controller.getMetadata();
+    private static String title(MediaMetadata data) {
         if (data == null) return "";
         String value = data.getString(MediaMetadata.METADATA_KEY_TITLE);
         return value == null ? "" : value;
     }
-    private static boolean matches(String query, MediaMetadata metadata) {
-        if (metadata == null) return false;
-        String title = normalize(metadata.getString(MediaMetadata.METADATA_KEY_TITLE));
-        String artist = normalize(metadata.getString(MediaMetadata.METADATA_KEY_ARTIST));
-        String normalized = normalize(query);
-        if (normalized.isEmpty()) return false;
-        String[] words = query.trim().split("\\s+");
-        if (words.length > 1) {
-            for (String word : words) if (!(title + artist).contains(normalize(word))) return false;
-            return true;
-        }
-        return normalized.equals(title) || normalized.equals(artist)
-                || (!title.isEmpty() && !artist.isEmpty() && normalized.contains(title) && normalized.contains(artist));
-    }
-    private static String normalize(String value) {
-        return value == null ? "" : Normalizer.normalize(value, Normalizer.Form.NFKC)
-                .toLowerCase(Locale.ROOT).replaceAll("[\\s\\p{Punct}]", "");
+    private static String artist(MediaMetadata data) {
+        if (data == null) return "";
+        String value = data.getString(MediaMetadata.METADATA_KEY_ARTIST);
+        return value == null ? "" : value;
     }
 }

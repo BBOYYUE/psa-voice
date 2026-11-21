@@ -1,6 +1,6 @@
 # AGENTS.md — PSA 车机语音音乐助手
 
-无界面车机语音音乐助手：长按方向盘音乐键 → 录音 → 公网网关转写/语义 → 控制 QQ 音乐车机版 → 原车 TTS 播报。当前版本 0.2.3。
+无界面车机语音音乐助手：长按方向盘音乐键 → 录音 → 公网网关转写/语义 → 控制 QQ 音乐车机版 → 原车 TTS 播报。当前版本 0.3.0。
 
 ## 仓库结构
 
@@ -15,7 +15,7 @@
 - `docs/` — QQ 音乐集成研究、QPlay IPC SDK 调研（未接入生产）
 - `experiments/` — 旧音频测试源码，不编入 APK
 - `vendor/` — Hermes 源码快照（tar.gz 不入库）、QPlay IPC SDK
-- `tests/SpeechGateCheck.java` — 端点检测本地检查
+- `tests/SpeechGateCheck.java` — 端点检测本地检查；`tests/TrackMatcherCheck.java` — 播放结果匹配本地检查
 
 ## 构建与验证
 

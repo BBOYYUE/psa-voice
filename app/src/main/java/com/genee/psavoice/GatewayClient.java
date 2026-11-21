@@ -21,9 +21,14 @@ final class GatewayClient {
         String answer;
         String type;
         String query;
+        String page;
+        boolean autoplay;
     }
     private static final Set<String> ACTIONS = new HashSet<>(Arrays.asList(
-            "music.search", "music.search_play", "music.pause", "music.resume", "music.next", "music.previous"));
+            "music.search", "music.search_play", "music.pause", "music.resume", "music.next", "music.previous",
+            "music.open", "music.close", "music.open_page"));
+    private static final Set<String> PAGES = new HashSet<>(Arrays.asList(
+            "recent", "local", "favorite", "car_playlist", "radio", "rank", "my_playlist"));
     private final String token;
     private final String base;
     private volatile HttpURLConnection connection;
@@ -52,6 +57,7 @@ final class GatewayClient {
         field(head, boundary, "trigger", "music_key_long_press");
         field(head, boundary, "device_id", deviceId);
         field(head, boundary, "request_id", requestId);
+        field(head, boundary, "client_version", BuildConfig.VERSION_NAME);
         head.append("--").append(boundary).append("\r\nContent-Disposition: form-data; name=\"file\"; filename=\"record.wav\"\r\nContent-Type: audio/wav\r\n\r\n");
         byte[] prefix = head.toString().getBytes(StandardCharsets.UTF_8);
         byte[] suffix = ("\r\n--" + boundary + "--\r\n").getBytes(StandardCharsets.UTF_8);
@@ -73,7 +79,8 @@ final class GatewayClient {
     }
     Result text(String text, String requestId, String deviceId) throws Exception {
         byte[] body = new JSONObject().put("scene", "music").put("preferred_app", "qqmusic")
-                .put("device_id", deviceId).put("request_id", requestId).put("text", text)
+                .put("device_id", deviceId).put("request_id", requestId)
+                .put("client_version", BuildConfig.VERSION_NAME).put("text", text)
                 .toString().getBytes(StandardCharsets.UTF_8);
         HttpURLConnection current = open("/v1/text", "application/json; charset=utf-8");
         try {
@@ -131,14 +138,25 @@ final class GatewayClient {
         result.type = action.optString("type");
         if (!ACTIONS.contains(result.type) || !"qqmusic".equals(action.optString("app"))) throw new IOException("不支持该音乐操作。");
         boolean search = result.type.equals("music.search") || result.type.equals("music.search_play");
+        boolean page = result.type.equals("music.open_page");
         for (java.util.Iterator<String> keys = action.keys(); keys.hasNext();) {
             String key = keys.next();
-            if (!key.equals("type") && !key.equals("app") && !(search && key.equals("query"))) throw new IOException("音乐操作参数无效。");
+            if (!key.equals("type") && !key.equals("app")
+                    && !(search && key.equals("query"))
+                    && !(page && (key.equals("page") || key.equals("autoplay")))) throw new IOException("音乐操作参数无效。");
         }
         if (search) {
             Object query = action.opt("query");
             if (!(query instanceof String) || ((String) query).trim().isEmpty() || ((String) query).length() > 200) throw new IOException("搜索词无效。");
             result.query = ((String) query).trim();
+        }
+        if (page) {
+            Object name = action.opt("page");
+            if (!(name instanceof String) || !PAGES.contains(name)) throw new IOException("音乐页面参数无效。");
+            result.page = (String) name;
+            Object autoplay = action.opt("autoplay");
+            if (autoplay != null && !(autoplay instanceof Boolean)) throw new IOException("自动播放参数无效。");
+            result.autoplay = Boolean.TRUE.equals(autoplay);
         }
         return result;
     }

@@ -115,7 +115,8 @@ async def health():
 @app.get("/v1/capabilities", dependencies=[Depends(require_token)])
 async def capabilities():
     return {"ok": True, "schema": "v1", "scenes": ["general", "music"],
-            "music": {"apps": ["qqmusic"], "actions": sorted(music.ACTIONS)},
+            "music": {"apps": ["qqmusic"], "actions": sorted(music.ACTIONS), "pages": sorted(music.PAGES),
+                      "requires_client": {".".join(map(str, music.MIN_CLIENT_VERSION)): sorted(music.NEW_ACTIONS)}},
             "audio": {"preferred_format": "wav", "sample_rate": 16000, "channels": 1, "sample_bits": 16,
                       "max_bytes": config.MAX_UPLOAD_BYTES, "max_seconds": config.MAX_AUDIO_SECONDS},
             "retention": {"audio_saved": False, "crash_cleanup_after_seconds": config.AUDIO_TEMP_TTL_S}}
@@ -126,7 +127,7 @@ AUDIO_CT_SUFFIX = {"audio/wav": ".wav", "audio/x-wav": ".wav", "audio/wave": ".w
                    "audio/x-m4a": ".m4a", "audio/aac": ".aac", "audio/amr": ".amr",
                    "audio/3gpp": ".3gp", "audio/ogg": ".ogg", "audio/webm": ".webm",
                    "audio/flac": ".flac", "application/octet-stream": ".bin"}
-FIELDS = ("device_id", "session_id", "prompt", "language", "scene", "preferred_app", "trigger", "request_id", "context")
+FIELDS = ("device_id", "session_id", "prompt", "language", "scene", "preferred_app", "trigger", "request_id", "context", "client_version")
 
 
 class InputError(ValueError):
@@ -184,7 +185,7 @@ def _context(fields):
         for key in ("scene", "preferred_app", "trigger"):
             if key in nested and key not in values:
                 values[key] = nested[key]
-    for key in ("device_id", "session_id", "scene", "preferred_app", "trigger", "request_id", "prompt", "system_prompt"):
+    for key in ("device_id", "session_id", "scene", "preferred_app", "trigger", "request_id", "prompt", "system_prompt", "client_version"):
         if key in values and (not isinstance(values[key], str) or len(values[key]) > 2000):
             raise InputError(f"{key} 类型或长度不正确")
     scene = values.get("scene", "general")
@@ -208,6 +209,12 @@ async def _analyze(rid, text, fields, *, asr_ms=0, duration_s=None, audio=False)
     try:
         if scene == "music":
             result, elapsed = await asyncio.to_thread(music.analyze, text, session_id=session_id)
+            if result["decision"] == "execute" and not music.client_supports(
+                    result["action"]["type"], fields.get("client_version")):
+                logger.info("[%s] action %s gated: client_version=%s",
+                            rid, result["action"]["type"], fields.get("client_version"))
+                result = {"decision": "unsupported", "action": None,
+                          "answer": "车机端 App 需要升级到最新版本后才能执行该操作。"}
             logger.info("[%s] music asr_ms=%d semantic_ms=%d decision=%s", rid, asr_ms, elapsed, result["decision"])
             return _reply(rid, music.response(request_id=rid, transcript=text, result=result,
                           asr_ms=asr_ms, hermes_ms=elapsed, session_id=session_id, duration_s=duration_s))

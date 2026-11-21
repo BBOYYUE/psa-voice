@@ -1,6 +1,6 @@
 # PSA 音乐语音助手
 
-Android 9 车机上的无界面音乐助手，包名 `com.genee.psavoice`，当前版本 `0.2.3`。
+Android 9 车机上的无界面音乐助手，包名 `com.genee.psavoice`，当前版本 `0.3.0`。
 
 ## 已接通的流程
 
@@ -14,7 +14,7 @@ Android 9 车机上的无界面音乐助手，包名 `com.genee.psavoice`，当�
 - 只接音乐场景。短按音乐键保持启动 QQ 音乐，其他按键未改。
 - 原车 TTS 接口不可用时，以短提示音降级；正式音色跟随原车当前设置，当前在线音色是 `qianranf`。
 
-支持搜歌播放、仅搜索、暂停、继续、上一首和下一首。没有确认 QQ 音乐实际状态时，只播报指令已发送或请确认结果，不宣称已播放。
+支持搜歌播放、仅搜索、暂停、继续、上一首和下一首；0.3.0 起按 QQ 音乐车机版官方外部拉起协议（action=0~9）增加：打开/关闭 QQ 音乐、打开最近播放、本地音乐、收藏、车载歌单、音乐电台、排行榜、自建歌单页面，并可按用户原意选择“进入后直接播放”（协议 `m1`）。打开页面不等于收藏歌曲或创建歌单，这些未接通能力会明确回复不支持。没有确认 QQ 音乐实际状态时，只播报指令已发送或请确认结果，不宣称已播放。
 
 ## 车机上的配置
 
@@ -58,9 +58,18 @@ adb shell cmd notification allow_listener com.genee.psavoice/.MediaAccessService
 实测 QQ 音乐车机版 `3.16.0.1`。
 搜索使用第三方 `action=8` 和 Base64 UTF-8 `search_key`。
 自动播放先通过 `AppStarterActivity` 的 `KEY_SWITCH_APP_SCENE=true` 刷新主场景，稍后再发送搜索播放指令。这避免旧搜索 Fragment 复用，也避免 CLEAR_TASK 可能造成的空白主界面。
+0.3.0 起，打开/关闭 QQ 音乐和打开各页面沿用同一已验证传输通道（显式 `DispacherActivityForThird` + `action` 整型 extra），页面映射按官方协议 action=2~7、9，`m1` 表示进入后直接播放，`mb` 固定为 true（返回键回 launcher）。action=0、1、2~7、9 的参数组合尚待车机实测；官方推荐的 `qqmusiccar://` scheme 传输方式未迁移，避免破坏已验证行为。
+
+搜索播放的结果确认使用独立的纯 Java 匹配器（`TrackMatcher`）：NFKC 归一化后按词匹配歌名/歌手；歌名被查询完整覆盖的严格匹配可立即确认，仅命中歌手或歌名只是更长标题子串的宽松匹配必须等曲目真正变化才确认，避免旧歌曲短暂恢复时误报新请求成功。本地检查见 `tests/TrackMatcherCheck.java`：
+
+```sh
+javac -encoding UTF-8 -d /tmp/psa-check app/src/main/java/com/genee/psavoice/TrackMatcher.java tests/TrackMatcherCheck.java
+java -cp /tmp/psa-check com.genee.psavoice.TrackMatcherCheck
+```
 
 后台会话控制使用 QQ 音乐的 MediaController，限定包名为 `com.tencent.qqmusiccar`。
-服务器动作会在客户端再次校验，仅允许预定义音乐动作；request_id 必须匹配本次请求，同一请求不会重复执行。
+服务器动作会在客户端再次校验，仅允许预定义音乐动作和参数枚举；request_id 必须匹配本次请求，同一请求不会重复执行。
+0.3.0 起客户端请求携带 `client_version`，服务端对旧客户端（0.2.3 及更早，不识别新动作）把打开页面类指令降级为明确的“请升级客户端”提示，不会下发旧客户端无法执行的动作。
 
 旧的研究记录见 [docs/qqmusic-integration.md](docs/qqmusic-integration.md)，以本次普通 App 的实测方式为准。
 
@@ -100,6 +109,8 @@ adb shell am broadcast -n com.genee.psavoice/.DiagnosticReceiver \
 0.2.2：分别提示语义服务无响应、无法理解指令和实际连接失败。车载 Hermes voice profile 固定 `model.context_length: 65536`，避免初始化自动探测阻塞；音乐指令独立解析，不重放历史中尚未执行的指令。通用聊天会话行为不变。
 
 0.2.3：车载 Hermes 显式关闭思考模式，DeepSeek 单次请求/停滞超时 12 秒、api_max_retries=1；暂停、继续和上一首/下一首等精确指令直接解析，其他请求仍由 Hermes 处理。成功的独立音乐解析结果在内存缓存 10 分钟，最多 128 条，未执行结果和错误不缓存，不缓存录音。车机保存各阶段耗时用于排查偶发延迟。
+
+0.3.0：按 QQ 音乐车机版官方外部拉起协议接入 action=0~9。新增 music.open、music.close、music.open_page（page 枚举：recent/local/favorite/car_playlist/radio/rank/my_playlist，autoplay 对应协议 m1），两端严格校验，LLM 不能指定协议数字或 Activity。常用“打开XX”精确指令走快路径直接解析。客户端请求新增 client_version 字段，服务端对 0.2.3 及更早客户端把新动作降级为升级提示，保持兼容。播放结果确认逻辑抽出为纯 Java `TrackMatcher`，修复“歌名是更长标题子串（如晴天/晴天娃娃）”和“旧歌曲短暂恢复”两类误确认，本地检查覆盖中文、英文多词、全角字符、标点与含字母 s/p 的词。已核对此前怀疑的正则多转义问题：源码 `split("\\s+")`、`replaceAll("[\\s\\p{Punct}]", "")` 转义正确，实际缺陷在匹配逻辑而非正则。action=0、1、2~7、9 的发送与播报文案已就绪，页面实际打开与 m1 自动播放效果待车机连接后实测。
 
 ## 本地完整代码与配置
 

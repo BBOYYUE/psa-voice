@@ -1,4 +1,6 @@
 > 后续普通 App 实测修正：CLEAR_TASK 在 QQ 3.16.0.1 的热运行状态下仍可能产生空白页。当前实现已改为先启动 AppStarterActivity 并传 KEY_SWITCH_APP_SCENE=true，再发送第三方 action=8、Base64 search_key、m1=true。普通 App 搜索播放及实际音乐键语音请求均已验证成功。以下保留早期排查记录。
+>
+> 2026-11-22（0.3.0）：按官方《外部拉起 QQ 音乐车机版协议》（[external.md](https://y.qq.com/music_developer/static/docs/car/external.md)，v1.9.8）接入 action=0~9。实现沿用同一已验证传输通道（显式 `DispacherActivityForThird` + `action` int extra），页面映射：recent=2、local=3、favorite=4、car_playlist=5、radio=6、rank=7、my_playlist=9；`m1`（进入后直接播放，默认 false）与 `mb`（固定 true，返回键回 launcher）作为 boolean extra 传递。action=0、1、2~7、9 的发送代码已完成，页面实际打开与 m1 效果待车机实测；官方推荐的 `qqmusiccar://` scheme 方式未迁移，避免破坏已验证行为。服务端/客户端均不允许 LLM 直接输出协议数字、Activity 或 URI。
 
 # QQ 音乐车机版搜索接口验证
 

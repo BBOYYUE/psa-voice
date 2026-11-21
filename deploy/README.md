@@ -2,7 +2,7 @@
 
 根目录：`/Users/genee/my_files/my_hermes/tools/psa-voice`。
 
-- `app/`：Android 助手客户端，0.2.3，包含 Gradle 构建入口。
+- `app/`：Android 助手客户端，0.3.0，包含 Gradle 构建入口。
 - `server/`：当前部署的语音识别、音乐语义分析、Hermes HTTP 客户端、缓存与清理逻辑，含测试和 `requirements.lock.txt`。
 - `deploy/systemd/`：服务器实际使用的两个 user service 单元。
 - `deploy/hermes/`：车载 voice profile 的脱敏配置模板、SOUL.md 和运行版本信息。
@@ -26,6 +26,6 @@ Nginx 的读取限制见 `nginx/README.md`。
 
 ## 校验
 
-`server-source.sha256` 记录服务器 10 个核心源码及配置文件的 SHA-256，本次已与本地核对一致。源码同步不包含本地新增说明文档。
+`server-source.sha256` 记录服务器 10 个核心源码及配置文件的 SHA-256，2026-11-22 部署 action=0~9 扩展（app.py、music.py、tests/test_contract.py）后已与线上重新核对一致。部署前备份在服务器 `backups/20261121T182647Z-open-page/`（含旧代码、服务单元与配置）。源码同步不包含本地新增说明文档。
 客户端构建：在项目根执行 `bash ./gradlew assembleDebug lintDebug`，需 JDK 17/21、Android SDK 34。
 服务端测试：在 server 目录执行 `venv/bin/python -m unittest discover -s tests -v`。
