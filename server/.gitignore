@@ -1,0 +1,10 @@
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
+.audio-tmp/
+service.log*
+models/
+backups/
+.deploy-*/

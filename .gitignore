@@ -1,0 +1,25 @@
+.gradle/
+**/build/
+local.properties
+*.iml
+.idea/
+
+# Credentials and machine-local deployment state
+.private/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+
+# Runtime data and local research checkouts
+.DS_Store
+*.apk
+*.apk.idsig
+*.log
+*.log.*
+*.db
+*.db-shm
+*.db-wal
+/vendor/Hermes-Agent-*.tar.gz
+/vendor/qplay-ipc-demo/

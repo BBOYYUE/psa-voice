@@ -1,0 +1,61 @@
+{
+  "retrieved_date": "2026-11-22",
+  "demo_commit": "6bd8a9e1734e8927b08160440540f44658677f8a",
+  "sources": [
+    {
+      "file": "ChangeLogs.md",
+      "url": "https://y.qq.com/music_developer/static/docs/TMEConnect/QPlayAIDL/ChangeLogs.md",
+      "sha256": "4bbb62709e1abbcdb097367c4f1ea35cd44e2afae63179947a94a85bb8d4024a"
+    },
+    {
+      "file": "FAQ.md",
+      "url": "https://y.qq.com/music_developer/static/docs/TMEConnect/QPlayAIDL/FAQ.md",
+      "sha256": "4458b69c5f0bcdc9d17461116c10c8410197b9241629ec0efe471265a1bac40b"
+    },
+    {
+      "file": "_sidebar.md",
+      "url": "https://y.qq.com/music_developer/static/docs/TMEConnect/QPlayAIDL/_sidebar.md",
+      "sha256": "2074378efd50dfb3f04d0f26c8b121b76905c5e8edbc0ca599bcf4fbb9135baf"
+    },
+    {
+      "file": "entity.md",
+      "url": "https://y.qq.com/music_developer/static/docs/TMEConnect/QPlayAIDL/entity.md",
+      "sha256": "6cd26fed022cafe236d4ad6920c5d27bb8520efecc7a2f4ab4c253f80b9577a9"
+    },
+    {
+      "file": "error_code_and_return.md",
+      "url": "https://y.qq.com/music_developer/static/docs/TMEConnect/QPlayAIDL/error_code_and_return.md",
+      "sha256": "dac1b387a810e84bf0e984486b3f144742cdf61364728527d0167db32c90ddfc"
+    },
+    {
+      "file": "guide.md",
+      "url": "https://y.qq.com/music_developer/static/docs/TMEConnect/QPlayAIDL/guide.md",
+      "sha256": "d388153c5c8c27f8aee1e7440f8f4b920afca7c57d1e27330af7f877f2296f02"
+    },
+    {
+      "file": "interface.md",
+      "url": "https://y.qq.com/music_developer/static/docs/TMEConnect/QPlayAIDL/interface.md",
+      "sha256": "204d13373bc4bd1f7895ff267e91d428ddca816fe3b2cbe70567c734e6c45a9c"
+    },
+    {
+      "file": "maven-metadata.xml",
+      "url": "https://ct.y.qq.com/TVapp/nexus/repository/maven-public/com/tencent/qqmusic/innovation/aidl-api-sdk/maven-metadata.xml",
+      "sha256": "b009c2d96926234933f5d3ef91e83c06c8b49c458fcea42a172bf5212fcf6ff2"
+    },
+    {
+      "file": "overview.md",
+      "url": "https://y.qq.com/music_developer/static/docs/TMEConnect/QPlayAIDL/overview.md",
+      "sha256": "b92229e9fdbd979eb8cc0cb46ed24aa4e2589da8932215791629d529e0ea0771"
+    },
+    {
+      "file": "developer-login.js",
+      "url": "https://y.qq.com/music_developer/assets/index-BBfo71Hv.js",
+      "sha256": "424b4349b6b1804929c81207a7e239de56c5f2c35f4e3593b6749eac9e03d880"
+    },
+    {
+      "file": "developer-register.js",
+      "url": "https://y.qq.com/music_developer/assets/index-D7oFBN_o.js",
+      "sha256": "96cc277ae6dd7ce0000fca00d322f48653d32272220972601dff3b266808d75a"
+    }
+  ]
+}

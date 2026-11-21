@@ -1,0 +1,25 @@
+[Unit]
+Description=Hermes Voice Profile Gateway (车载语音专用 profile)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+ExecStart=/home/sollado/Hermes-Agent/venv/bin/python -m hermes_cli.main -p voice gateway run
+WorkingDirectory=/home/sollado/.hermes
+Environment="PATH=/home/sollado/Hermes-Agent/venv/bin:/home/sollado/Hermes-Agent/node_modules/.bin:/home/sollado/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="VIRTUAL_ENV=/home/sollado/Hermes-Agent/venv"
+Environment="HERMES_HOME=/home/sollado/.hermes"
+Environment="HERMES_PROFILE=voice"
+Restart=always
+RestartSec=5
+RestartForceExitStatus=75
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=90
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

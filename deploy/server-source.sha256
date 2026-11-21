@@ -1,0 +1,10 @@
+b0173ee0ebeface30df51a77dbe68a64c5577e6d252b69587b8c5d3e63b5da6f  /home/sollado/projects/voice-gateway/app.py
+47e3a9018a34bb85c8b36b4955f5c8583e23ae13cc8beade62a47b794352ed4a  /home/sollado/projects/voice-gateway/asr.py
+66a9e89c079c9d6eb66f7daacf82d72278f70e120229199388ba0a16bcb9a123  /home/sollado/projects/voice-gateway/config.py
+78f5254f524dc365e9d7d005b9802f948d7b74ebeac261d8364df0ceba84d5c6  /home/sollado/projects/voice-gateway/hermes_client.py
+bccbbb173c33bd78f969d3787ef2e0c89de1942ae46ab3c213dd797a45aeaa93  /home/sollado/projects/voice-gateway/music.py
+265ddce30cfd72f5c6995dcffcc66e0ea8e740ca7155b3a7400d58a691bc344f  /home/sollado/projects/voice-gateway/responses.py
+57a9f9841e586e940b492ae1b733b1c197a9f489d06fc2e179475039f2b64ebe  /home/sollado/projects/voice-gateway/temporary_audio.py
+7d78ee0f7ef12676c6a579adc42d8036bd4a1bd466dda7b9c0721a00444470e1  /home/sollado/projects/voice-gateway/logging.json
+e37a7f11e48dbc13a9ce5d2cb97539342b6013ab96d678a910cf7b59e61d9130  /home/sollado/projects/voice-gateway/fetch_model.py
+7bc182d3075c0cb551f70aabd06aee6ab57211ed118da743fea3a64ada9568c1  /home/sollado/projects/voice-gateway/tests/test_contract.py

@@ -1,0 +1,18 @@
+[Unit]
+Description=Voice Gateway for Hermes (music v1)
+After=network-online.target hermes-voice.service
+Wants=hermes-voice.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/sollado/projects/voice-gateway
+ExecStart=/home/sollado/projects/voice-gateway/venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8650 --log-config /home/sollado/projects/voice-gateway/logging.json
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+UMask=0077
+
+[Install]
+WantedBy=default.target

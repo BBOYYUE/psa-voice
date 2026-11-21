@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/NousResearch/Hermes-Agent.git",
+  "commit": "3af22c0ed57710ce30a7905fcab384bd94e1f901",
+  "server_checkout_clean": true,
+  "profile": "voice",
+  "python": "3.11",
+  "source_archive": "../../vendor/Hermes-Agent-3af22c0.tar.gz",
+  "archive_sha256": "9d6cad7df83422e865eb011bd0c9be3f6612e615402422d1596b93384c74f014"
+}

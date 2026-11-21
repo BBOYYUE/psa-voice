@@ -1,0 +1,326 @@
+[
+  {
+    "method": "hi",
+    "description": "查看版本号",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "openQQMusic",
+    "description": "启动QQ音乐主界面",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "playSongMid",
+    "description": "从头开始播放指定的歌曲mid列表",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "playSongId",
+    "description": "从头开始播放指定的歌曲id列表",
+    "car_min_version": "1.12.0",
+    "async": true
+  },
+  {
+    "method": "playSongMidAtIndex",
+    "description": "从索引开始播放指定的歌曲mid列表",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "playSongIdAtIndex",
+    "description": "从索引开始播放指定的歌曲id列表",
+    "car_min_version": "1.12.0",
+    "async": true
+  },
+  {
+    "method": "playSongLocalPath",
+    "description": "播放本地路径下的歌曲列表",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "playMusic",
+    "description": "播放当前歌曲",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "stopMusic",
+    "description": "停止当前播放",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "pauseMusic",
+    "description": "暂停当前播放",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "resumeMusic",
+    "description": "恢复当前播放",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "skipToNext",
+    "description": "播放下一首",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "skipToPrevious",
+    "description": "播放上一首",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "getPlaybackState",
+    "description": "获取当前播放状态",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "getCurrentSong",
+    "description": "获取当前播放歌曲的信息",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "addToFavourite",
+    "description": "将指定歌曲添加到当前登录用户的收藏中",
+    "car_min_version": "2.0.3",
+    "async": true
+  },
+  {
+    "method": "removeFromFavourite",
+    "description": "将指定歌曲从当前登录用户的收藏中移除",
+    "car_min_version": "2.0.3",
+    "async": true
+  },
+  {
+    "method": "addLocalPathToFavourite",
+    "description": "将本地路径中的指定歌曲添加到当前登录用户的收藏中",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "removeLocalPathFromFavourite",
+    "description": "将本地路径中的指定歌曲从当前登录用户的收藏中移除",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "isFavouriteMid",
+    "description": "是否为收藏的歌曲",
+    "car_min_version": "1.9.5",
+    "async": true
+  },
+  {
+    "method": "isFavouriteLocalPath",
+    "description": "是否为收藏的本地路径下的歌曲",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "registerEventListener",
+    "description": "注册事件监听",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "unregisterEventListener",
+    "description": "取消注册事件监听",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "getTotalTime",
+    "description": "获取当前播放歌曲的总时长",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "getCurrTime",
+    "description": "获取当前播放歌曲的播放进度",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "getPlayList",
+    "description": "获取当前播放歌曲列表",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "getFolderList",
+    "description": "获取歌单、电台、排行榜等Folder数据",
+    "car_min_version": "1.12.0",
+    "async": true
+  },
+  {
+    "method": "getSongList",
+    "description": "获取Folder对应的歌曲列表",
+    "car_min_version": "1.12.0",
+    "async": true
+  },
+  {
+    "method": "search",
+    "description": "搜索歌曲",
+    "car_min_version": "1.9.5",
+    "async": true
+  },
+  {
+    "method": "getFavouriteFolderId",
+    "description": "获取我喜欢目录ID",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "getPlayMode",
+    "description": "获取播放模式",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "setPlayMode",
+    "description": "设置播放模式",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "setPlayModeWithRet",
+    "description": "设置播放模式（带有返回值）",
+    "car_min_version": "2.5.0",
+    "async": false
+  },
+  {
+    "method": "playFromChorus",
+    "description": "设置是否从高潮处播放",
+    "car_min_version": null,
+    "async": false
+  },
+  {
+    "method": "requestAuth",
+    "description": "请求授权",
+    "car_min_version": "1.9.5",
+    "async": true
+  },
+  {
+    "method": "getUserFolderList",
+    "description": "获取用户歌单",
+    "car_min_version": "1.9.5",
+    "async": true
+  },
+  {
+    "method": "getUserSongList",
+    "description": "获取用户Folder对应的歌曲列表",
+    "car_min_version": "1.12.0",
+    "async": true
+  },
+  {
+    "method": "isQQMusicForeground",
+    "description": "QQ音乐是否在前台",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "getLoginState",
+    "description": "查询登录信息",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "seekForward",
+    "description": "快进播放",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "seekBack",
+    "description": "快退播放",
+    "car_min_version": "1.9.5",
+    "async": false
+  },
+  {
+    "method": "getLyric",
+    "description": "获取歌词",
+    "car_min_version": "1.12.0",
+    "async": true
+  },
+  {
+    "method": "getLyricWithId",
+    "description": "获取歌词",
+    "car_min_version": "1.12.0",
+    "async": true
+  },
+  {
+    "method": "getLyricWithIdNew",
+    "description": "获取歌词",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "getLyricIncludeEndTime",
+    "description": "获取歌词",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "voiceShortcut",
+    "description": "捷径类播放接口",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "voicePlay",
+    "description": "捷径类播放接口",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "startPcmMode",
+    "description": "开启Pcm模式",
+    "car_min_version": null,
+    "async": true
+  },
+  {
+    "method": "stopPcmMode",
+    "description": "关闭Pcm模式",
+    "car_min_version": null,
+    "async": false
+  },
+  {
+    "method": "isNewUser",
+    "description": "是否是QQ音乐新用户",
+    "car_min_version": null,
+    "async": false
+  },
+  {
+    "method": "playFolderType",
+    "description": "一键发起播放",
+    "car_min_version": "2.0.0",
+    "async": true
+  },
+  {
+    "method": "getCurrentSongIndexInList",
+    "description": "获得当前正在播放歌曲在列表中的索引",
+    "car_min_version": null,
+    "async": false
+  },
+  {
+    "method": "seek",
+    "description": "快进到指定播放位置",
+    "car_min_version": null,
+    "async": false
+  },
+  {
+    "method": "report",
+    "description": "合作厂商上报数据",
+    "car_min_version": "3.6",
+    "async": true
+  }
+]
