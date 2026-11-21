@@ -182,14 +182,21 @@ public final class AssistantService extends Service {
     private void upload(long run, File file, String text) {
         GatewayClient client = gateway;
         String id = requestId, device = deviceId;
+        // 等待较久（多为 LLM 知识判断）时先插一句口播，避免长时间无反馈。
+        if (file != null) main.postDelayed(() -> {
+            if (valid(run) && state == State.WAITING && tts != null && tts.isReady()) {
+                tts.speak(filler());
+            }
+        }, 2500);
         io.execute(() -> {
             try {
                 GatewayClient.Result result = text == null ? client.voice(file, id, device) : client.text(text, id, device);
                 main.post(() -> {
                     if (!valid(run)) return;
-                    // 表述不清晰时不执行任何操作：语音路径播报追问并直接再录一次（仅一轮）；
+                    // 表述不清晰时不执行任何操作：播报追问并直接再录一次。
+                    // 追问不限轮次（服务端会记住最近一轮追问的上下文）；
                     // ADB 文字探针不重试，直接播报问题结束。
-                    if ("clarify".equals(result.decision) && !retried && file != null) { retry(run, result.answer); return; }
+                    if ("clarify".equals(result.decision) && file != null) { retry(run, result.answer); return; }
                     if (!"execute".equals(result.decision)) { feedback(run, result.answer); return; }
                     if (id.equals(diagnostic.getString("last_executed_id", ""))) { finish(run); return; }
                     diagnostic.edit().putString("last_executed_id", id).putString("last_action", result.type).apply();
@@ -236,6 +243,12 @@ public final class AssistantService extends Service {
         state(State.PROMPTING, message);
         if (tts != null && tts.isReady()) tts.speak(message);
         else beep(run, () -> record(run));
+    }
+
+    private static final String[] FILLERS = {"我找找。", "我想一下。"};
+    private int fillerIndex;
+    private String filler() {
+        return FILLERS[fillerIndex++ % FILLERS.length];
     }
 
     private void feedback(long run, String message) {

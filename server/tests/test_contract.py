@@ -257,6 +257,48 @@ class HttpContractTest(unittest.IsolatedAsyncioTestCase):
 class MusicLatencyTest(unittest.TestCase):
     def setUp(self):
         music._cache.clear()
+        music._clarify.clear()
+
+    def test_clarify_context_guides_follow_up_and_is_cleared_after_execute(self):
+        clarify = json.dumps({"decision": "clarify", "action": None, "answer": "您说的是周杰伦的《黑色毛衣》吗？"})
+        execute = json.dumps({"decision": "execute", "action": {"type": "music.search_play", "app": "qqmusic", "query": "周杰伦 黑色毛衣"}})
+        with patch.object(hermes_client, "ask", return_value=(clarify, 5)):
+            result, _ = music.analyze("周杰伦那首毛衣的歌叫什么来着", session_id="car-1")
+            self.assertEqual(result["decision"], "clarify")
+        with patch.object(hermes_client, "ask", return_value=(execute, 5)) as ask:
+            result, _ = music.analyze("对", session_id="car-1")
+            self.assertEqual(result["action"]["query"], "周杰伦 黑色毛衣")
+            self.assertIn("黑色毛衣", ask.call_args.kwargs["extra_instruction"])
+        # 执行后上下文清除：再说“对”不带上下文，也不命中缓存（带上下文的结果不缓存）。
+        with patch.object(hermes_client, "ask", return_value=(clarify, 5)) as ask:
+            music.analyze("对", session_id="car-1")
+            self.assertIsNone(ask.call_args.kwargs["extra_instruction"])
+
+    def test_pending_clarify_bypasses_fast_path(self):
+        clarify = json.dumps({"decision": "clarify", "action": None, "answer": "您说的是《黑色毛衣》吗？"})
+        execute = json.dumps({"decision": "execute", "action": {"type": "music.search_play", "app": "qqmusic", "query": "黑色毛衣"}})
+        with patch.object(hermes_client, "ask", return_value=(clarify, 5)):
+            music.analyze("那首歌叫什么", session_id="car-2")
+        # 回答“播放”不应被快路径直接解析成 resume，必须带上下文交给模型。
+        with patch.object(hermes_client, "ask", return_value=(execute, 5)) as ask:
+            music.analyze("播放", session_id="car-2")
+            ask.assert_called_once()
+
+    def test_clarify_context_expires_and_is_per_session(self):
+        clarify = json.dumps({"decision": "clarify", "action": None, "answer": "想听谁的歌？"})
+        with patch.object(hermes_client, "ask", return_value=(clarify, 5)), \
+                patch.object(music.time, "monotonic", return_value=100):
+            music.analyze("放点音乐", session_id="car-3")
+        # 其他设备不受影响。
+        with patch.object(hermes_client, "ask", return_value=(clarify, 5)) as ask, \
+                patch.object(music.time, "monotonic", return_value=101):
+            music.analyze("对", session_id="car-4")
+            self.assertIsNone(ask.call_args.kwargs["extra_instruction"])
+        # 超过 TTL 后不再携带旧追问。
+        with patch.object(hermes_client, "ask", return_value=(clarify, 5)) as ask, \
+                patch.object(music.time, "monotonic", return_value=101 + music._CLARIFY_TTL + 1):
+            music.analyze("对", session_id="car-3")
+            self.assertIsNone(ask.call_args.kwargs["extra_instruction"])
 
     def test_exact_controls_bypass_model_but_compound_requests_do_not(self):
         with patch.object(hermes_client, "ask") as ask:
