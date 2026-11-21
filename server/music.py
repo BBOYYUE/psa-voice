@@ -205,11 +205,15 @@ def prepare(text: str, session_id: str | None = None) -> tuple[dict | None, str 
     key = " ".join(text.strip().split()).casefold()
     now = time.monotonic()
     pending = _pending_clarify(session_id, now)
+    # 明确的快捷指令总是直接生效，即使有未完成的追问（用户已转向新指令）。
+    # 唯一例外是 resume 家族：回答追问“您说的是某首歌吗”时“播放”很可能是确认，交给模型结合上下文判断。
+    fast = _FAST.get(key.rstrip("。！!"))
+    if fast and (not pending or fast["type"] != "music.resume"):
+        if pending:
+            _clear_clarify(session_id)
+        logger.info("Music intent route=control elapsed_ms=0")
+        return {"decision": "execute", "action": {"app": "qqmusic", **fast}, "answer": ""}, None, None
     if not pending:
-        fast = _FAST.get(key.rstrip("。！!"))
-        if fast:
-            logger.info("Music intent route=control elapsed_ms=0")
-            return {"decision": "execute", "action": {"app": "qqmusic", **fast}, "answer": ""}, None, None
         with _cache_lock:
             hit = _cache.get(key)
             if hit and now - hit[0] < _CACHE_TTL:

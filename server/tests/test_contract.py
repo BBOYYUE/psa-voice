@@ -303,12 +303,21 @@ class MusicLatencyTest(unittest.TestCase):
             music.analyze("也不是", session_id="car-9")
             self.assertIsNone(ask.call_args.kwargs["extra_instruction"])
 
-    def test_pending_clarify_bypasses_fast_path(self):
+    def test_pending_clarify_keeps_fast_path_except_resume(self):
         clarify = json.dumps({"decision": "clarify", "action": None, "answer": "您说的是《黑色毛衣》吗？"})
         execute = json.dumps({"decision": "execute", "action": {"type": "music.search_play", "app": "qqmusic", "query": "黑色毛衣"}})
         with patch.object(hermes_client, "ask", return_value=(clarify, 5)):
             music.analyze("那首歌叫什么", session_id="car-2")
-        # 回答“播放”不应被快路径直接解析成 resume，必须带上下文交给模型。
+        # 明确的快捷指令不受追问影响，直接生效且清除旧追问。
+        with patch.object(hermes_client, "ask") as ask:
+            result, elapsed = music.analyze("下一首", session_id="car-2")
+            self.assertEqual(result["action"]["type"], "music.next")
+            self.assertEqual(elapsed, 0)
+            ask.assert_not_called()
+        self.assertNotIn("car-2", music._clarify)
+        # 但“播放”可能是对追问的确认，必须带上下文交给模型而不是直接 resume。
+        with patch.object(hermes_client, "ask", return_value=(clarify, 5)):
+            music.analyze("那首歌叫什么", session_id="car-2")
         with patch.object(hermes_client, "ask", return_value=(execute, 5)) as ask:
             music.analyze("播放", session_id="car-2")
             ask.assert_called_once()

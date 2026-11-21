@@ -26,6 +26,6 @@ Nginx 的读取限制见 `nginx/README.md`。
 
 ## 校验
 
-`server-source.sha256` 记录服务器 10 个核心源码及配置文件的 SHA-256，2026-11-22 部署 action=0~9 扩展（app.py、music.py、tests/test_contract.py）后已与线上重新核对一致。部署前备份在服务器 `backups/20261121T182647Z-open-page/`（含旧代码、服务单元与配置）。源码同步不包含本地新增说明文档。
+`server-source.sha256` 记录服务器 10 个核心源码及配置文件的 SHA-256。2026-11-22 第二次部署（知识派提示词、多轮追问上下文、LLM 路径流式 X-Stage 响应、追问中快捷指令仍走快路径）后已与线上重新核对一致。本次部署前备份在服务器 `backups/20261121T192950Z-knowledge-clarify/`；上一次 action=0~9 部署的备份在 `backups/20261121T182647Z-open-page/`。源码同步不包含本地新增说明文档。
 客户端构建：在项目根执行 `bash ./gradlew assembleDebug lintDebug`，需 JDK 17/21、Android SDK 34。
 服务端测试：在 server 目录执行 `venv/bin/python -m unittest discover -s tests -v`。
