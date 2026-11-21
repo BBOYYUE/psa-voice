@@ -73,7 +73,10 @@ final class MusicExecutor {
         context.startActivity(intent);
         if (!play) return new Outcome(false, "已打开搜索结果。");
         boolean heardPlaying = false;
-        long until = SystemClock.elapsedRealtime() + 20000;
+        String pendingKey = null;
+        long pendingSince = 0;
+        long waitStart = SystemClock.elapsedRealtime();
+        long until = waitStart + 20000;
         while (!cancelled && SystemClock.elapsedRealtime() < until) {
             MediaController controller = controller();
             String failure = playbackError(controller);
@@ -82,11 +85,28 @@ final class MusicExecutor {
                 heardPlaying = true;
                 String title = title(controller.getMetadata());
                 String artist = artist(controller.getMetadata());
+                String key = TrackMatcher.trackKey(title, artist);
                 TrackMatcher.Result match = TrackMatcher.match(action.query, title, artist);
                 // 严格匹配（歌名完整命中）可立即确认；宽松匹配必须等曲目真正变化，
                 // 避免旧歌曲短暂恢复时被误报为新请求成功。
-                if (match.matched && (match.strict || !TrackMatcher.trackKey(title, artist).equals(beforeKey))) {
+                if (match.matched && (match.strict || !key.equals(beforeKey))) {
                     return new Outcome(true, "正在播放" + title + "。");
+                }
+                if (!key.equals(beforeKey)) {
+                    // 已经在放一首新歌但和请求对不上：稳定约 1.5 秒就如实播报，
+                    // 用户发现歌曲不对会再次语音输入，不必空等到超时。
+                    long now = SystemClock.elapsedRealtime();
+                    if (key.equals(pendingKey) && now - pendingSince >= 1500) {
+                        if (title.isEmpty()) return new Outcome(false, "QQ音乐正在播放另一首歌曲，如果不是您要的，请再说一次。");
+                        return new Outcome(false, "QQ音乐正在播放" + title + "，如果不是您要的歌曲，请再说一次。");
+                    }
+                    if (!key.equals(pendingKey)) { pendingKey = key; pendingSince = now; }
+                } else {
+                    pendingKey = null;
+                    // 一直是之前的旧歌：自动播放很可能没有生效，不必等满超时。
+                    if (SystemClock.elapsedRealtime() - waitStart >= 8000) {
+                        return new Outcome(false, "没有检测到新的播放，请确认搜索结果。");
+                    }
                 }
             }
             Thread.sleep(300);
