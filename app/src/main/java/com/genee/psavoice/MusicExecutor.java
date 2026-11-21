@@ -72,9 +72,6 @@ final class MusicExecutor {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         if (!play) return new Outcome(false, "已打开搜索结果。");
-        boolean heardPlaying = false;
-        String pendingKey = null;
-        long pendingSince = 0;
         long waitStart = SystemClock.elapsedRealtime();
         long until = waitStart + 20000;
         while (!cancelled && SystemClock.elapsedRealtime() < until) {
@@ -82,7 +79,6 @@ final class MusicExecutor {
             String failure = playbackError(controller);
             if (failure != null) return new Outcome(false, failure);
             if (playing(controller)) {
-                heardPlaying = true;
                 String title = title(controller.getMetadata());
                 String artist = artist(controller.getMetadata());
                 String key = TrackMatcher.trackKey(title, artist);
@@ -93,27 +89,21 @@ final class MusicExecutor {
                     return new Outcome(true, "正在播放" + title + "。");
                 }
                 if (!key.equals(beforeKey)) {
-                    // 已经在放一首新歌但和请求对不上：稳定约 1.5 秒就如实播报，
-                    // 用户发现歌曲不对会再次语音输入，不必空等到超时。
-                    long now = SystemClock.elapsedRealtime();
-                    if (key.equals(pendingKey) && now - pendingSince >= 1500) {
-                        if (title.isEmpty()) return new Outcome(false, "QQ音乐正在播放另一首歌曲，如果不是您要的，请再说一次。");
-                        return new Outcome(false, "QQ音乐正在播放" + title + "，如果不是您要的歌曲，请再说一次。");
-                    }
-                    if (!key.equals(pendingKey)) { pendingKey = key; pendingSince = now; }
-                } else {
-                    pendingKey = null;
-                    // 一直是之前的旧歌：自动播放很可能没有生效，不必等满超时。
-                    if (SystemClock.elapsedRealtime() - waitStart >= 8000) {
-                        return new Outcome(false, "没有检测到新的播放，请确认搜索结果。");
-                    }
+                    // 新歌已播放但和请求对不上：立即如实播报实际曲目并结束，
+                    // 用户发现歌曲不对会再次语音输入，不必空等。
+                    if (title.isEmpty()) return new Outcome(false, "QQ音乐已开始播放，请确认是否是您要的歌曲。");
+                    return new Outcome(false, "正在播放" + title + "。");
+                }
+                // 仍是旧歌：给 QQ 约 3 秒切歌窗口，避免把旧歌恢复抢报成新结果；
+                // 超过窗口仍是旧歌则如实播报实际曲目并结束。
+                if (SystemClock.elapsedRealtime() - waitStart >= 3000) {
+                    if (title.isEmpty()) return new Outcome(false, "QQ音乐正在播放之前的歌曲，请确认搜索结果。");
+                    return new Outcome(false, "正在播放" + title + "。");
                 }
             }
             Thread.sleep(300);
         }
-        // 区分"完全没有播放迹象"（可能没搜到或可播放结果）与"播了但和请求对不上"。
-        if (!heardPlaying) return new Outcome(false, "没有检测到播放，可能没有搜到可播放的结果，请查看屏幕确认。");
-        return new Outcome(false, "已打开QQ音乐，请确认播放结果。");
+        return new Outcome(false, "没有检测到播放，可能没有搜到可播放的结果，请查看屏幕确认。");
     }
 
     private Outcome openPage(GatewayClient.Result action) throws Exception {
