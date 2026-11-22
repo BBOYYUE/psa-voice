@@ -106,7 +106,7 @@ final class CarTtsClient {
         });
         main.postDelayed(() -> {
             if (id.equals(activeId)) { stop(); finish(id, "原车播报等待超时。"); }
-        }, 20000);
+        }, Math.max(20000L, 4000L + text.length() * 300L)); // 超时随文本长度伸缩，长文（如诗词）不会被掐断
     }
     private int transact(int code, String text, String id) throws RemoteException {
         IBinder target = service;

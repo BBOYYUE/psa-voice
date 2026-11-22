@@ -89,6 +89,10 @@ Debug 构建包含一个受系统 `DUMP` 权限保护的 ADB 文字探针，普�
 ```sh
 adb shell am broadcast -n com.genee.psavoice/.DiagnosticReceiver \
   -a com.genee.psavoice.DEBUG_TEXT --es text '暂停一下'
+# 纯 TTS 探针（不经过服务端，直接让原车人声念任意文本）：
+adb shell am broadcast -n com.genee.psavoice/.DiagnosticReceiver \
+  -a com.genee.psavoice.DEBUG_SPEAK --es text '北国风光，千里冰封'
+# 聊天链路探针：DEBUG_TEXT 加 --es scene general
 ```
 
 设备最近一次交互结果在 `shared_prefs/assistant_status.xml`，不含服务 token；录音处理前台服务在交互结束后关闭，媒体访问组件由系统维持绑定。

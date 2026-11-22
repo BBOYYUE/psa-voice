@@ -52,6 +52,7 @@ public final class AssistantService extends Service {
     private String requestId;
     private String deviceId;
     private String diagnosticText;
+    private String diagnosticSpeak;
     private boolean retried;
     private volatile boolean fillerSpoken;
     // 追问已播报、正等待用户回答；交互在此期间结束要通知服务端清除追问上下文。
@@ -92,6 +93,7 @@ public final class AssistantService extends Service {
         diagnostic.edit().remove("last_action").remove("last_confirmed").remove("last_result").apply();
         long run = ++generation;
         diagnosticText = null;
+        diagnosticSpeak = null;
         retried = false;
         fillerSpoken = false;
         clarifyAwaiting = false;
@@ -100,6 +102,7 @@ public final class AssistantService extends Service {
         scene = "general".equals(requested) ? "general" : "music";
         if ((getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0 && intent != null) {
             diagnosticText = intent.getStringExtra("diagnostic_text");
+            diagnosticSpeak = intent.getStringExtra("diagnostic_speak");
         }
         deviceId = diagnostic.getString("device_id", null);
         if (deviceId == null) {
@@ -134,6 +137,11 @@ public final class AssistantService extends Service {
 
     private void begin(long run) {
         if (!valid(run) || state != State.CONNECTING) return;
+        if (diagnosticSpeak != null) {
+            // ADB 纯 TTS 探针：不录音、不问服务端，直接念给定文本（debug 构建）。
+            feedback(run, diagnosticSpeak);
+            return;
+        }
         if (diagnosticText != null) {
             state(State.WAITING, "正在测试音乐请求");
             upload(run, null, diagnosticText);
