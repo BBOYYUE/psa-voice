@@ -156,7 +156,7 @@ public final class AssistantService extends Service {
             return;
         }
         state(State.PROMPTING, "请准备说出音乐指令");
-        if (tts.isReady()) tts.speak("我在，请说。");
+        if (tts.isReady()) tts.speak("general".equals(scene) ? "想聊什么？" : "我在，请说。");
         else beep(run, () -> record(run));
     }
 
@@ -349,9 +349,8 @@ public final class AssistantService extends Service {
     }
     private boolean valid(long run) { return !destroyed && run == generation; }
     private boolean acquireFocus() {
-        // 音乐助手暂停音乐（QQ 收到焦点丢失会暂停）；语音聊天只压低音量（DUCK）。
-        int gain = "general".equals(scene) ? AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK
-                : AudioManager.AUDIOFOCUS_GAIN_TRANSIENT;
+        // 两个场景录音期间都暂停音乐：避免音乐漏进 MIC 干扰 ASR（没有硬件 AEC）。
+        int gain = AudioManager.AUDIOFOCUS_GAIN_TRANSIENT;
         if (focus == null || focusGain != gain) {
             focusGain = gain;
             focus = new AudioFocusRequest.Builder(gain)

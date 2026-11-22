@@ -89,6 +89,12 @@ def _ffmpeg_to_wav(src: Path, dst: Path) -> None:
         config.FFMPEG_BIN, "-y", "-loglevel", "error",
         "-i", str(src),
         "-vn",
+    ]
+    # 降噪 + 响度归一在转码阶段一次完成；off 时不加滤镜。
+    preprocess = (config.ASR_PREPROCESS or "").strip()
+    if preprocess and preprocess.lower() != "off":
+        cmd += ["-af", preprocess]
+    cmd += [
         "-ac", "1",
         "-ar", str(config.TARGET_SAMPLE_RATE),
         "-f", "wav",

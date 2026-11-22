@@ -49,6 +49,11 @@ ASR_MODEL_DIR = Path(
 ASR_NUM_THREADS = _int("VG_ASR_THREADS", 2)
 ASR_MAX_CONCURRENCY = _int("VG_ASR_MAX_CONCURRENCY", 1)  # 2 核机器，串行最稳
 ASR_TIMEOUT_S = _int("VG_ASR_TIMEOUT_S", 60)
+# ASR 前置信号处理（ffmpeg 滤镜，转码阶段完成，不增加额外环节）：
+# afftdn 抑制稳态噪声（路噪/空调声）；loudnorm 把人声归一到约 -18 LUFS
+# （实测小声录音 rms -58→-23.5 dBFS，dynaudnorm 几乎无效故不用）。
+# 设 VG_ASR_PREPROCESS=off 可整体关闭回退。
+ASR_PREPROCESS = os.getenv("VG_ASR_PREPROCESS", "afftdn,loudnorm=I=-18:TP=-2:LRA=11")
 
 # ---------- 音频约束 ----------
 MAX_UPLOAD_BYTES = _int("VG_MAX_UPLOAD_BYTES", 25 * 1024 * 1024)  # 25MB
