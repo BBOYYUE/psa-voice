@@ -1,6 +1,6 @@
 # AGENTS.md — PSA 车机语音音乐助手
 
-无界面车机语音音乐助手：长按方向盘音乐键 → 录音 → 公网网关转写/语义 → 控制 QQ 音乐车机版 → 原车 TTS 播报。当前版本 0.4.0。
+无界面车机语音音乐助手：长按方向盘音乐键 → 录音 → 公网网关转写/语义 → 控制 QQ 音乐车机版 → 原车 TTS 播报。当前版本 0.5.0（0.5.0 起电话键长按 = 语音聊天，scene=general）。
 
 ## 仓库结构
 
@@ -30,7 +30,7 @@ bash ./gradlew assembleDebug lintDebug   # JDK 17/21，Android SDK 34
 ## 硬性约定
 
 - 严禁提交真实 token / 凭证 / `.private/` 内容；客户端凭证在设备私有目录 `files/server.json`（权限 600），源码和 APK 均不含 token
-- 不修改工具箱或原厂 APK；音乐键长按绑定用 `setprop persist.bandwa.music.longclick com.genee.psavoice`
+- 不修改工具箱或原厂 APK；音乐键长按绑定用 `setprop persist.bandwa.music.longclick com.genee.psavoice`；电话键长按绑定语音聊天入口（0.5.0 起，用户明确选择）
 - 未确认 QQ 音乐实际状态时，只播报"指令已发送/请确认"，不宣称已播放——保持这一诚实约定
 - 录音只在交互期间使用 `cache/voice-requests/`，结束后删除；不开录音归档
 - QQ 音乐适配以实测的普通 App 方式为准（`action=8` 搜索 + Base64 UTF-8 `search_key` + `KEY_SWITCH_APP_SCENE` 刷新主场景），旧研究笔记仅供参考

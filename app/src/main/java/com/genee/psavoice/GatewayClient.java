@@ -53,11 +53,11 @@ final class GatewayClient {
             throw new IOException("服务配置无效");
         }
     }
-    Result voice(File file, String requestId, String deviceId) throws Exception {
+    Result voice(File file, String requestId, String deviceId, String scene) throws Exception {
         String boundary = "psa-" + requestId;
         StringBuilder head = new StringBuilder();
-        field(head, boundary, "scene", "music");
-        field(head, boundary, "preferred_app", "qqmusic");
+        field(head, boundary, "scene", scene);
+        if ("music".equals(scene)) field(head, boundary, "preferred_app", "qqmusic");
         field(head, boundary, "trigger", "music_key_long_press");
         field(head, boundary, "device_id", deviceId);
         field(head, boundary, "request_id", requestId);
@@ -79,20 +79,21 @@ final class GatewayClient {
                 output.write(suffix);
             }
             stage(current);
-            return result(current, requestId);
+            return result(current, requestId, scene);
         } finally { current.disconnect(); connection = null; }
     }
-    Result text(String text, String requestId, String deviceId) throws Exception {
-        byte[] body = new JSONObject().put("scene", "music").put("preferred_app", "qqmusic")
+    Result text(String text, String requestId, String deviceId, String scene) throws Exception {
+        JSONObject json = new JSONObject().put("scene", scene)
                 .put("device_id", deviceId).put("request_id", requestId)
-                .put("client_version", BuildConfig.VERSION_NAME).put("text", text)
-                .toString().getBytes(StandardCharsets.UTF_8);
+                .put("client_version", BuildConfig.VERSION_NAME).put("text", text);
+        if ("music".equals(scene)) json.put("preferred_app", "qqmusic");
+        byte[] body = json.toString().getBytes(StandardCharsets.UTF_8);
         HttpURLConnection current = open("/v1/text", "application/json; charset=utf-8");
         try {
             current.setFixedLengthStreamingMode(body.length);
             try (OutputStream output = current.getOutputStream()) { output.write(body); }
             stage(current);
-            return result(current, requestId);
+            return result(current, requestId, scene);
         } finally { current.disconnect(); connection = null; }
     }
     // 录音期间预先建立 TCP+TLS，正式上传时几乎零握手等待。
@@ -151,7 +152,7 @@ final class GatewayClient {
         current.setRequestProperty("Content-Type", contentType);
         return current;
     }
-    private Result result(HttpURLConnection current, String requestId) throws Exception {
+    private Result result(HttpURLConnection current, String requestId, String scene) throws Exception {
         int status = current.getResponseCode();
         try (InputStream input = status >= 400 ? current.getErrorStream() : current.getInputStream()) {
             JSONObject body = new JSONObject(read(input, 32768));
@@ -165,8 +166,19 @@ final class GatewayClient {
                 if (status == 401 || status == 403) throw new IOException("服务器访问凭证需要更新。");
                 throw new IOException("服务器暂时不可用，请稍后再试。");
             }
-            return parse(body, requestId);
+            return "general".equals(scene) ? parseChat(body, requestId) : parse(body, requestId);
         }
+    }
+    // 通用对话响应（v0）：只需要 request_id 匹配与一段非空回答。
+    private static Result parseChat(JSONObject body, String requestId) throws Exception {
+        if (!requestId.equals(body.optString("request_id"))) throw new IOException("服务器返回协议不匹配。");
+        Object answer = body.opt("answer");
+        if (!(answer instanceof String) || ((String) answer).trim().isEmpty()
+                || ((String) answer).length() > 4000) throw new IOException("服务器返回提示无效。");
+        Result result = new Result();
+        result.decision = "answer";
+        result.answer = ((String) answer).trim();
+        return result;
     }
     static Result parse(JSONObject body, String requestId) throws Exception {
         if (!"v1".equals(body.optString("schema")) || !"music".equals(body.optString("scene"))

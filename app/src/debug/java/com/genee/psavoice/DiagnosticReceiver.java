@@ -8,6 +8,8 @@ public final class DiagnosticReceiver extends BroadcastReceiver {
         if (!"com.genee.psavoice.DEBUG_TEXT".equals(intent.getAction())) return;
         String text = intent.getStringExtra("text");
         if (text == null || text.trim().isEmpty() || text.length() > 2000) return;
-        context.startForegroundService(new Intent(context, AssistantService.class).putExtra("diagnostic_text", text));
+        Intent service = new Intent(context, AssistantService.class).putExtra("diagnostic_text", text);
+        if ("general".equals(intent.getStringExtra("scene"))) service.putExtra("scene", "general");
+        context.startForegroundService(service);
     }
 }

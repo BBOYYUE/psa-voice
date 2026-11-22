@@ -19,6 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 语音聊天入口：无 LAUNCHER 过滤器（避免桌面出现第二个图标），由工具箱按组件名拉起 -->
+        <activity android:name=".ChatTriggerActivity" android:theme="@style/AssistantTrigger"
+            android:excludeFromRecents="true" android:noHistory="true" android:taskAffinity="" android:exported="true" />
         <service android:name=".AssistantService" android:exported="false"
             android:foregroundServiceType="microphone|mediaPlayback" />
         <service android:name=".MediaAccessService" android:exported="true"

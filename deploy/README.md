@@ -2,7 +2,7 @@
 
 根目录：`/Users/genee/my_files/my_hermes/tools/psa-voice`。
 
-- `app/`：Android 助手客户端，0.4.0，包含 Gradle 构建入口。
+- `app/`：Android 助手客户端，0.5.0，包含 Gradle 构建入口。
 - `server/`：当前部署的语音识别、音乐语义分析、Hermes HTTP 客户端、缓存与清理逻辑，含测试和 `requirements.lock.txt`。
 - `deploy/systemd/`：服务器实际使用的两个 user service 单元。
 - `deploy/hermes/`：车载 voice profile 的脱敏配置模板、SOUL.md 和运行版本信息。

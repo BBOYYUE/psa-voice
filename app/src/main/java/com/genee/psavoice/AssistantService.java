@@ -41,7 +41,9 @@ public final class AssistantService extends Service {
     private boolean destroyed;
     private AudioManager audio;
     private AudioFocusRequest focus;
+    private int focusGain;
     private boolean focused;
+    private String scene = "music";
     private CarTtsClient tts;
     private VoiceRecorder recorder;
     private GatewayClient gateway;
@@ -72,13 +74,6 @@ public final class AssistantService extends Service {
         NotificationManager notifications = getSystemService(NotificationManager.class);
         notifications.createNotificationChannel(new NotificationChannel(CHANNEL, "音乐语音助手", NotificationManager.IMPORTANCE_LOW));
         audio = (AudioManager) getSystemService(AUDIO_SERVICE);
-        focus = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
-                .setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build())
-                .setOnAudioFocusChangeListener(change -> {
-                    if ((change == AudioManager.AUDIOFOCUS_LOSS || change == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT)
-                            && state == State.RECORDING) cancelInteraction("录音被其他音频操作中断。");
-                }, main).build();
     }
 
     @Override public int onStartCommand(Intent intent, int flags, int startId) {
@@ -92,6 +87,7 @@ public final class AssistantService extends Service {
             return START_NOT_STICKY;
         }
         lastTrigger = now;
+        scene = "music";
         requestId = UUID.randomUUID().toString();
         diagnostic.edit().remove("last_action").remove("last_confirmed").remove("last_result").apply();
         long run = ++generation;
@@ -99,6 +95,9 @@ public final class AssistantService extends Service {
         retried = false;
         fillerSpoken = false;
         clarifyAwaiting = false;
+        // 入口：TriggerActivity=音乐助手（默认），ChatTriggerActivity=语音聊天。
+        String requested = intent != null ? intent.getStringExtra("scene") : null;
+        scene = "general".equals(requested) ? "general" : "music";
         if ((getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0 && intent != null) {
             diagnosticText = intent.getStringExtra("diagnostic_text");
         }
@@ -159,7 +158,7 @@ public final class AssistantService extends Service {
             feedback(run, "暂时无法录音，请结束通话后再试。");
             return;
         }
-        state(State.RECORDING, "正在听，请说出音乐指令");
+        state(State.RECORDING, "general".equals(scene) ? "我在听，请说" : "正在听，请说出音乐指令");
         File file = new File(requestDirectory, requestId + ".wav");
         VoiceRecorder capture = new VoiceRecorder();
         recorder = capture;
@@ -175,7 +174,7 @@ public final class AssistantService extends Service {
                         if (!retried) retry(run, "没听清，请再说一次。");
                         else feedback(run, "没听清，请再说一次。");
                     } else {
-                        state(State.WAITING, "正在理解音乐指令");
+                        state(State.WAITING, "general".equals(scene) ? "正在思考" : "正在理解音乐指令");
                         clarifyAwaiting = false; // 回答已发出，上下文交由服务端按响应更新
                         upload(run, file, null);
                     }
@@ -190,6 +189,7 @@ public final class AssistantService extends Service {
     private void upload(long run, File file, String text) {
         GatewayClient client = gateway;
         String id = requestId, device = deviceId;
+        final String currentScene = scene;
         // 插话只在真的慢时出现：服务端 X-Stage 头（ASR 完成、LLM 开始）后再等 2.5 秒；
         // 旧服务端没有该响应头时，从上传起盲等 3.5 秒兜底。普通速度的请求不插话。
         if (file != null) {
@@ -198,9 +198,13 @@ public final class AssistantService extends Service {
         }
         io.execute(() -> {
             try {
-                GatewayClient.Result result = text == null ? client.voice(file, id, device) : client.text(text, id, device);
+                GatewayClient.Result result = text == null
+                        ? client.voice(file, id, device, currentScene)
+                        : client.text(text, id, device, currentScene);
                 main.post(() -> {
                     if (!valid(run)) return;
+                    // 语音聊天：直接播报回答；跨按键的上下文由服务端会话保持。
+                    if ("answer".equals(result.decision)) { feedback(run, result.answer); return; }
                     // 表述不清晰时不执行任何操作：播报追问并直接再录一次。
                     // 追问不限轮次（服务端会记住最近一轮追问的上下文）；
                     // ADB 文字探针不重试，直接播报问题结束。
@@ -337,6 +341,19 @@ public final class AssistantService extends Service {
     }
     private boolean valid(long run) { return !destroyed && run == generation; }
     private boolean acquireFocus() {
+        // 音乐助手暂停音乐（QQ 收到焦点丢失会暂停）；语音聊天只压低音量（DUCK）。
+        int gain = "general".equals(scene) ? AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK
+                : AudioManager.AUDIOFOCUS_GAIN_TRANSIENT;
+        if (focus == null || focusGain != gain) {
+            focusGain = gain;
+            focus = new AudioFocusRequest.Builder(gain)
+                    .setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build())
+                    .setOnAudioFocusChangeListener(change -> {
+                        if ((change == AudioManager.AUDIOFOCUS_LOSS || change == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT)
+                                && state == State.RECORDING) cancelInteraction("录音被其他音频操作中断。");
+                    }, main).build();
+        }
         focused = audio.requestAudioFocus(focus) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
         return focused;
     }
