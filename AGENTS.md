@@ -1,11 +1,13 @@
 # AGENTS.md — PSA 车机语音音乐助手
 
-无界面车机语音音乐助手：长按方向盘音乐键 → 录音 → 公网网关转写/语义 → 控制 QQ 音乐车机版 → 原车 TTS 播报。当前版本 0.5.0（0.5.0 起电话键长按 = 语音聊天，scene=general）。
+车机语音助手：按键唤醒 → 半透明会话面板 → 实时收音/公网识别与对话 → QQ音乐操作或闲聊 → 原车TTS播报。客户端开发版本 0.6.0：统一连续会话与半透明面板（已安装，实机联调中）；0.5.x 的独立聊天/音乐链路仍用于 debug 诊断。
 
 ## 仓库结构
 
 - `app/` — Android 客户端（Java，Gradle KTS，Android SDK 34，最低 Android 9）。核心类：
-  - `AssistantService` 前台录音交互服务；`TriggerActivity`（NoDisplay）启动入口
+  - `LiveAssistantService` 连续会话前台服务；`ConversationActivity` 半透明面板；`TriggerActivity` / `ChatTriggerActivity`（NoDisplay）统一唤醒入口
+  - `LiveGateway` / `PcmRecorder`：实时WSS与内存PCM上传；`LiveProtocol` / `LiveTurn`：会话与轮次校验
+  - `AssistantService` 原有HTTP录音链路，保留供debug文字/TTS诊断使用
   - `SpeechGate` 端点检测（静音 0.8s 提交、无人声 5s 结束、最长 10s）
   - `CarTtsClient` 原车 TTS；`MusicExecutor` 音乐动作执行与 request_id 校验
   - `MediaAccessService` 通知监听，仅用于 MediaSessionManager 访问 QQ 音乐会话
@@ -20,7 +22,7 @@
 ## 构建与验证
 
 ```sh
-bash ./gradlew assembleDebug lintDebug   # JDK 17/21，Android SDK 34
+bash ./gradlew assembleDebug lintDebug testDebugUnitTest   # JDK 17/21，Android SDK 34
 ```
 
 - 测试车机 ADB：`192.168.43.8:5555`

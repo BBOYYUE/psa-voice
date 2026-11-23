@@ -1,0 +1,8 @@
+<resources>
+    <string name="conversation_title">语音助手</string>
+    <string name="conversation_end">结束</string>
+    <string name="conversation_close_description">结束对话并关闭</string>
+    <string name="conversation_preparing">准备连接</string>
+    <string name="conversation_retry">重新开始</string>
+    <string name="conversation_exit_hint">说“结束对话”，或再按唤醒键退出</string>
+</resources>

@@ -18,7 +18,11 @@ final class MusicExecutor {
     static final class Outcome {
         final boolean confirmed;
         final String message;
-        Outcome(boolean confirmed, String message) { this.confirmed = confirmed; this.message = message; }
+        final String status;
+        Outcome(boolean confirmed, String message) { this(confirmed ? "confirmed" : "sent", message); }
+        Outcome(String status, String message) {
+            this.status = status; this.confirmed = "confirmed".equals(status); this.message = message;
+        }
     }
     private static final String QQ = "com.tencent.qqmusiccar";
     private static final String DISPATCHER = QQ + ".app.activity.DispacherActivityForThird";
@@ -61,12 +65,13 @@ final class MusicExecutor {
 
     private Outcome search(GatewayClient.Result action) throws Exception {
         boolean play = action.type.equals("music.search_play");
-        String beforeKey = play ? playingTrackKey() : "";
+        String beforeKey = play ? currentTrackKey() : "";
         if (play) {
             refreshScene();
             if (cancelled) return new Outcome(false, "已取消。");
         }
         String query = Base64.encodeToString(action.query.getBytes(StandardCharsets.UTF_8), Base64.NO_WRAP);
+        if (cancelled) return new Outcome("failed", "已取消。");
         Intent intent = new Intent("com.tencent.qqmusiccar.action").setClassName(QQ, DISPATCHER)
                 .putExtra("action", 8).putExtra("search_key", query).putExtra("m1", play)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -77,7 +82,7 @@ final class MusicExecutor {
         while (!cancelled && SystemClock.elapsedRealtime() < until) {
             MediaController controller = controller();
             String failure = playbackError(controller);
-            if (failure != null) return new Outcome(false, failure);
+            if (failure != null) return new Outcome("failed", failure);
             if (playing(controller)) {
                 String title = title(controller.getMetadata());
                 String artist = artist(controller.getMetadata());
@@ -88,22 +93,13 @@ final class MusicExecutor {
                 if (match.matched && (match.strict || !key.equals(beforeKey))) {
                     return new Outcome(true, "正在播放" + title + "。");
                 }
-                if (!key.equals(beforeKey)) {
-                    // 新歌已播放但和请求对不上：立即如实播报实际曲目并结束，
-                    // 用户发现歌曲不对会再次语音输入，不必空等。
-                    if (title.isEmpty()) return new Outcome(false, "QQ音乐已开始播放，请确认是否是您要的歌曲。");
-                    return new Outcome(false, "正在播放" + title + "。");
-                }
-                // 仍是旧歌：给 QQ 约 3 秒切歌窗口，避免把旧歌恢复抢报成新结果；
-                // 超过窗口仍是旧歌则如实播报实际曲目并结束。
-                if (SystemClock.elapsedRealtime() - waitStart >= 3000) {
-                    if (title.isEmpty()) return new Outcome(false, "QQ音乐正在播放之前的歌曲，请确认搜索结果。");
-                    return new Outcome(false, "正在播放" + title + "。");
-                }
+                // QQ 刷新场景和异步搜索期间可能继续暴露旧歌或中间曲目。
+                // 不匹配时继续等待完整窗口，不能把暂态元数据当成点歌结果。
             }
             Thread.sleep(300);
         }
-        return new Outcome(false, "没有检测到播放，可能没有搜到可播放的结果，请查看屏幕确认。");
+        if (cancelled) return new Outcome(false, "已取消。");
+        return new Outcome(false, "点歌指令已发送，暂时未能确认播放结果，请查看QQ音乐。");
     }
 
     private Outcome openPage(GatewayClient.Result action) throws Exception {
@@ -121,7 +117,7 @@ final class MusicExecutor {
         while (!cancelled && SystemClock.elapsedRealtime() < until) {
             MediaController controller = controller();
             String failure = playbackError(controller);
-            if (failure != null) return new Outcome(false, failure);
+            if (failure != null) return new Outcome("failed", failure);
             if (playing(controller)) return new Outcome(true, "正在播放" + title(controller.getMetadata()) + "。");
             Thread.sleep(300);
         }
@@ -130,8 +126,9 @@ final class MusicExecutor {
 
     private Outcome mediaControl(GatewayClient.Result action) throws Exception {
         MediaController controller = controller();
-        if (controller == null) return new Outcome(false, "请先打开QQ音乐，再试一次。");
+        if (controller == null) return new Outcome("failed", "请先打开QQ音乐，再试一次。");
         String before = title(controller.getMetadata());
+        if (cancelled) return new Outcome("failed", "已取消。");
         switch (action.type) {
             case "music.pause": controller.getTransportControls().pause(); break;
             case "music.resume": controller.getTransportControls().play(); break;
@@ -156,6 +153,7 @@ final class MusicExecutor {
     // QQ 3.16 can retain a stale global scene after CLEAR_TASK.
     // Its own scene-switch entry rebuilds the UI without killing it.
     private void refreshScene() throws Exception {
+        if (cancelled) return;
         context.startActivity(new Intent().setClassName(QQ, STARTER)
                 .putExtra("KEY_SWITCH_APP_SCENE", true).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         Thread.sleep(450);
@@ -163,15 +161,17 @@ final class MusicExecutor {
 
     // 官方协议 action=0~9，mb 固定 true：返回键回 launcher（车机无界面助手场景）。
     private void launch(int code, Boolean m1) {
+        if (cancelled) return;
         Intent intent = new Intent("com.tencent.qqmusiccar.action").setClassName(QQ, DISPATCHER)
                 .putExtra("action", code).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (m1 != null) intent.putExtra("m1", m1.booleanValue()).putExtra("mb", true);
         context.startActivity(intent);
     }
 
-    private String playingTrackKey() {
+    private String currentTrackKey() {
         MediaController controller = controller();
-        if (!playing(controller)) return "";
+        // 录音前已暂停音乐，暂停会话中的旧歌元数据仍须作为基线。
+        if (controller == null) return "";
         return TrackMatcher.trackKey(title(controller.getMetadata()), artist(controller.getMetadata()));
     }
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#55000000" android:padding="16dp" android:fitsSystemWindows="true">
+    <LinearLayout android:id="@+id/conversation_panel" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:layout_gravity="center" android:orientation="vertical"
+        android:background="@drawable/conversation_panel" android:padding="20dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                android:text="@string/conversation_title" android:textColor="#B9CED7" android:textSize="16sp" />
+            <Button android:id="@+id/conversation_close" android:layout_width="80dp" android:layout_height="48dp"
+                android:text="@string/conversation_end" android:textSize="16sp" android:textColor="#FFFFFF"
+                android:backgroundTint="#39464F" android:contentDescription="@string/conversation_close_description" />
+        </LinearLayout>
+        <TextView android:id="@+id/conversation_status" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:text="@string/conversation_preparing" android:textColor="#8CE3CA"
+            android:textSize="28sp" android:textStyle="bold" android:layout_marginTop="8dp" />
+        <TextView android:id="@+id/conversation_detail" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:textColor="#B9CED7" android:textSize="15sp"
+            android:layout_marginTop="6dp" android:layout_marginBottom="14dp" />
+        <ScrollView android:id="@+id/conversation_scroll" android:layout_width="match_parent"
+            android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+            <LinearLayout android:id="@+id/conversation_messages" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="vertical" />
+        </ScrollView>
+        <Button android:id="@+id/conversation_retry" android:layout_width="match_parent"
+            android:layout_height="48dp" android:text="@string/conversation_retry" android:textColor="#FFFFFF"
+            android:backgroundTint="#285C50" android:visibility="gone" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/conversation_exit_hint" android:textColor="#91A6B2"
+            android:textSize="14sp" android:layout_marginTop="14dp" />
+    </LinearLayout>
+</FrameLayout>

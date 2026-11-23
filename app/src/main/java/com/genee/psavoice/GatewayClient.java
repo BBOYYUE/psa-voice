@@ -39,20 +39,11 @@ final class GatewayClient {
     private volatile boolean cancelled;
 
     GatewayClient(Context context) throws Exception {
-        File file = new File(context.getFilesDir(), "server.json");
-        try (FileInputStream input = new FileInputStream(file)) {
-            JSONObject config = new JSONObject(read(input, 8192));
-            base = config.getString("base_url");
-            token = config.getString("token");
-        }
-        URL endpoint = new URL(base);
-        if (!"https".equals(endpoint.getProtocol()) || !"ai.sollado.com".equals(endpoint.getHost())
-                || endpoint.getUserInfo() != null || (endpoint.getPort() != -1 && endpoint.getPort() != 443)
-                || !endpoint.getPath().isEmpty() || endpoint.getQuery() != null || endpoint.getRef() != null
-                || token.isEmpty() || token.contains("\n") || token.contains("\r")) {
-            throw new IOException("服务配置无效");
-        }
+        ServerConfig config = ServerConfig.load(context);
+        base = config.base;
+        token = config.token;
     }
+
     Result voice(File file, String requestId, String deviceId, String scene) throws Exception {
         String boundary = "psa-" + requestId;
         StringBuilder head = new StringBuilder();
@@ -210,6 +201,9 @@ final class GatewayClient {
             Object query = action.opt("query");
             if (!(query instanceof String) || ((String) query).trim().isEmpty() || ((String) query).length() > 200) throw new IOException("搜索词无效。");
             result.query = ((String) query).trim();
+            for (int i = 0; i < result.query.length(); i++) {
+                if (Character.isISOControl(result.query.charAt(i))) throw new IOException("搜索词无效。");
+            }
         }
         if (page) {
             Object name = action.opt("page");

@@ -26,6 +26,28 @@ Nginx 的读取限制见 `nginx/README.md`。
 
 ## 校验
 
-`server-source.sha256` 记录服务器 10 个核心源码及配置文件的 SHA-256。2026-11-22 第三次部署（追问上下文显式清除接口 `POST /v1/music/context/clear`）后已与线上重新核对一致。本次部署前备份在服务器 `backups/20261121T194224Z-clarify-clear/`；更早的备份在 `backups/20261121T192950Z-knowledge-clarify/`（知识派+流式）与 `backups/20261121T182647Z-open-page/`（action=0~9）。源码同步不包含本地新增说明文档。
+`server-source.sha256` 记录服务器当前 16 个源码、测试及说明文件的 SHA-256。2026-11-23 连续会话版本部署并完成公网验证后，已与线上重新核对一致。备份与回退方法见下方连续会话部署记录。
 客户端构建：在项目根执行 `bash ./gradlew assembleDebug lintDebug`，需 JDK 17/21、Android SDK 34。
 服务端测试：在 server 目录执行 `venv/bin/python -m unittest discover -s tests -v`。
+
+## 2026-11-23 连续会话服务端
+
+已部署 `/v1/live` 至原网关，公网 WSS 通过 Nginx 精确 location 转发；配置片段见 `nginx/live.location.conf`。
+服务端加载在线中英 Zipformer int8 模型，位于网关 `models/streaming-zipformer-zh-en-int8/`。
+实际 `.env` 启用 VG_LIVE_ENABLED 并指定四个模型文件，敏感配置未复制到仓库。
+启动预热后 `/health.live` 应显示 enabled/configured/ready 全为 true。
+
+部署脚本 `install-live.py` 要求已通过测试的 staging 目录和已核对的 app.py 哈希；
+替换前备份源码及 `.env`，后者仍为权限 600。不会修改 Hermes、客户端或按键绑定。
+原始版本备份：`/home/sollado/projects/voice-gateway/backups/20261123T090300Z-live`。
+Nginx 原始备份：`/etc/nginx/sites-available/ai.sollado.com.before-live-20261123T090300Z`。
+
+源码回退（服务器网关目录执行）：
+
+```sh
+venv/bin/python staging/live-20261123/install-live.py --rollback /home/sollado/projects/voice-gateway/backups/20261123T090300Z-live
+```
+
+完整回退公网路由还需以 root 恢复上述 Nginx 备份，`nginx -t` 通过后 reload。
+公网验证脚本为本地 `tools/verify_live.py`，从 VOICE_GATEWAY_TOKEN 环境变量读取凭证，只发送测试音频，不执行音乐动作。
+实际结果及当前边界见 `server/LIVE.md`。客户端半透明界面技术评估见 `docs/client/conversation-panel-plan.md`，尚未实施。

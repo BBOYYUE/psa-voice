@@ -112,3 +112,8 @@ venv/bin/python verify_chain.py
 ### 2026-11-21 延迟优化
 
 voice profile 的 `agent.reasoning_effort: none` 显式关闭 DeepSeek 思考模式；`providers.deepseek.request_timeout_seconds` 和 `stale_timeout_seconds` 为 12 秒，`agent.api_max_retries: 1`。音乐精确控制指令直接解析，复合指令仍走 Hermes；成功解析结果使用 128 条、10 分钟内存 LRU 缓存，不保存音频，服务重启清空。快路径和缓存返回 `hermes_ms=0`；日志记录 route、request_id、ASR 和语义耗时。11 项契约及缓存检查通过。
+
+## 实时连续会话（实验）
+
+新增 opt-in `WebSocket /v1/live`，支持在线音频帧、增量转写、多轮聊天/音乐、逐句回答与取消。
+配置、测试入口和当前边界见 [LIVE.md](LIVE.md)。现有客户端继续使用原 HTTP 接口。

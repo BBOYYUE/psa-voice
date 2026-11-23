@@ -137,6 +137,12 @@ final class CarTtsClient {
         if (activeId == null || closed) return;
         rpc.execute(() -> { try { transact(4, null, null); } catch (Exception ignored) { } });
     }
+    void cancelSpeech() {
+        String id = activeId;
+        activeId = null;
+        if (id == null || closed) return;
+        rpc.execute(() -> { try { transact(4, null, null); } catch (Exception ignored) { } });
+    }
     void close() {
         stop();
         closed = true;

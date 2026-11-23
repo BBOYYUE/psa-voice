@@ -10,7 +10,7 @@ import re
 import uuid
 from typing import Optional
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Request, WebSocket
 from fastapi.responses import JSONResponse, StreamingResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.formparsers import MultiPartException
@@ -19,6 +19,8 @@ import asr
 import config
 import hermes_client
 import music
+import live_session
+import live_asr
 import responses
 import temporary_audio
 
@@ -27,6 +29,15 @@ logging.basicConfig(level=getattr(logging, config.LOG_LEVEL.upper(), logging.INF
 logger = logging.getLogger("vg")
 app = FastAPI(title="Voice Gateway for Hermes", version="0.2.0", docs_url=None, redoc_url=None)
 _cleanup_task = None
+_live_warmup_task = None
+
+
+async def _warm_live():
+    try:
+        await asyncio.to_thread(live_asr.recognizer)
+        logger.info('Online ASR warmup ready')
+    except Exception as exc:
+        logger.error('Online ASR warmup failed: %s', type(exc).__name__)
 
 
 class UploadLimitMiddleware:
@@ -64,14 +75,19 @@ async def _cleanup_loop():
 
 @app.on_event("startup")
 async def _startup():
-    global _cleanup_task
+    global _cleanup_task, _live_warmup_task
     _cleanup_task = asyncio.create_task(_cleanup_loop())
     if (config.ASR_MODEL_DIR / "tokens.txt").exists():
         asyncio.create_task(asyncio.to_thread(asr.warmup))
+    if live_asr.enabled():
+        _live_warmup_task = asyncio.create_task(_warm_live())
 
 
 @app.on_event("shutdown")
 async def _shutdown():
+    if _live_warmup_task:
+        with contextlib.suppress(Exception):
+            await _live_warmup_task
     if _cleanup_task:
         _cleanup_task.cancel()
         with contextlib.suppress(asyncio.CancelledError):
@@ -109,6 +125,7 @@ async def health():
     return {"ok": True, "service": "voice-gateway", "schema": responses.SCHEMA_VERSION,
             "music_schema": "v1",
             "asr": {"model_dir": str(config.ASR_MODEL_DIR), "ready": (config.ASR_MODEL_DIR / "tokens.txt").exists()},
+            "live": live_asr.status(),
             "hermes": {"base_url": config.HERMES_BASE_URL, "reachable": await asyncio.to_thread(hermes_client.health)}}
 
 
@@ -363,6 +380,16 @@ async def text_endpoint(request: Request):
     if not text.strip():
         return _fail(rid, "empty_text", "text 不能为空", 400, scene=fields["scene"])
     return await _analyze(rid, text.strip(), fields)
+
+
+
+
+
+# Separate opt-in protocol; existing APK HTTP contracts are unchanged.
+
+@app.websocket('/v1/live')
+async def live_conversation(websocket: WebSocket):
+    await live_session.serve(websocket)
 
 
 if __name__ == "__main__":
