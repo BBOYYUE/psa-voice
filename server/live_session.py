@@ -99,6 +99,8 @@ async def serve(ws: WebSocket):
                 fast = None  # '播放' can confirm an earlier suggestion
             async with asyncio.timeout(AGENT_TIMEOUT_S):
                 result = fast or await live_agent.run(text, history[-16:], progress, speech)
+            if result['decision'] == 'exit':
+                return 'voice_exit'
             action = result.get('action')
             if action and not music.client_supports(action['type'], client_version):
                 result = {'decision': 'unsupported', 'action': None, 'answer': '请升级客户端后再试。'}
@@ -154,12 +156,12 @@ async def serve(ws: WebSocket):
                 reason = 'execution_timeout'
             elif mode == 'awaiting_resume' and now - phase_started > RESUME_TIMEOUT_S:
                 reason = 'resume_timeout'
+            if not reason and task and task.done() and not task.cancelled():
+                reason = task.result()
             if reason:
                 mode = 'ended'
                 await send('ended', reason=reason)
                 break
-            if task and task.done() and not task.cancelled() and task.exception():
-                raise task.exception()
             if heartbeat.done():
                 heartbeat.result()
             try:
@@ -188,6 +190,7 @@ async def serve(ws: WebSocket):
                     if incomplete and decoder.samples < 16000 * 8:
                         continue
                     audio_ms = decoder.samples * 1000 // 16000
+                    text = await live_asr.refine_repetitions(text, decoder.pcm)
                     decoder.reset()
                     last_text = ''
                     if not text:

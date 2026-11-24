@@ -42,6 +42,11 @@ Nginx 的读取限制见 `nginx/README.md`。
 原始版本备份：`/home/sollado/projects/voice-gateway/backups/20261123T090300Z-live`。
 Nginx 原始备份：`/etc/nginx/sites-available/ai.sollado.com.before-live-20261123T090300Z`。
 
+语义退出与最终转写重字复核的发布前源码备份为 `/home/sollado/projects/voice-gateway/backups/20261123T142629Z-exit-asr`。
+公网验收覆盖自然退出、带后续请求的继续对话、重字复核和原 HTTP 转写接口。
+2026-11-24 两次连续重字也进入离线复核；服务器 40 项测试及公网 WSS 回归通过。
+发布前备份为 `/home/sollado/projects/voice-gateway/backups/20261124T131709Z-double-repeat`。
+
 源码回退（服务器网关目录执行）：
 
 ```sh

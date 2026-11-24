@@ -8,8 +8,10 @@
 from __future__ import annotations
 
 import asyncio
+import array
 import logging
 import subprocess
+import sys
 import tempfile
 import time
 import wave
@@ -114,8 +116,6 @@ def _ffmpeg_to_wav(src: Path, dst: Path) -> None:
 
 
 def _read_wav(path: Path) -> Tuple[list, int]:
-    import array
-
     with wave.open(str(path), "rb") as wf:
         if wf.getnchannels() != 1 or wf.getsampwidth() != 2:
             raise ASRError("转码后音频格式异常")
@@ -124,6 +124,34 @@ def _read_wav(path: Path) -> Tuple[list, int]:
     samples = array.array("h")
     samples.frombytes(frames)
     return [s / 32768.0 for s in samples], sr
+
+
+def _decode_waveform(rec, samples, sample_rate: int) -> str:
+    stream = rec.create_stream()
+    stream.accept_waveform(sample_rate=sample_rate, waveform=samples)
+    rec.decode_stream(stream)
+    return (stream.result.text or "").strip()
+
+
+async def recheck_live_pcm(pcm: bytearray) -> str:
+    """Use the warm batch model if it is free. The input stays in memory."""
+    if _recognizer is None or _sem.locked():
+        return ""
+    async with _sem:
+        def decode():
+            samples = array.array("h")
+            samples.frombytes(pcm)
+            if sys.byteorder != "little":
+                samples.byteswap()
+            return _decode_waveform(_recognizer, [s / 32768.0 for s in samples], 16000)
+
+        job = asyncio.create_task(asyncio.to_thread(decode))
+        try:
+            return await asyncio.shield(job)
+        except asyncio.CancelledError:
+            # Keep the shared recognizer reserved until its worker has finished.
+            await asyncio.gather(job, return_exceptions=True)
+            raise
 
 
 # ---------------------------------------------------------------- 主入口
@@ -153,14 +181,8 @@ async def transcribe_file(src: Path) -> Tuple[str, int, float]:
         if max(abs(s) for s in samples) < 64 / 32768 or sum(s * s for s in samples) / len(samples) < 10 ** (-65 / 10):
             return "", 0, duration_s
 
-        def _run():
-            stream = rec.create_stream()
-            stream.accept_waveform(sample_rate=sr, waveform=samples)
-            rec.decode_stream(stream)
-            return (stream.result.text or "").strip()
-
         t0 = time.time()
-        text = await asyncio.to_thread(_run)
+        text = await asyncio.to_thread(_decode_waveform, rec, samples, sr)
         elapsed_ms = int((time.time() - t0) * 1000)
         logger.info("ASR 完成 %.1fs 音频 → %dms, %d 字", duration_s, elapsed_ms, len(text))
         return text, elapsed_ms, duration_s

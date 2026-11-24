@@ -10,6 +10,7 @@ import config
 class Decoder:
     samples = 0
     def feed(self, data):
+        self.pcm = bytearray(data)
         return data.decode('utf-16le'), True
     def reset(self):
         pass
@@ -55,6 +56,57 @@ class LiveTest(unittest.TestCase):
             self.until(ws, 'listening')
             ws.send_bytes('结束对话'.encode('utf-16le'))
             self.assertEqual(self.until(ws, 'ended')['reason'], 'voice_exit')
+
+    def test_semantic_exit_ends_session_without_speech_or_action(self):
+        decision = {'decision': 'exit', 'action': None, 'answer': ''}
+        for phrase in ('没事儿', '退下吧'):
+            with self.subTest(phrase=phrase), patch('live_agent.run', return_value=decision) as agent:
+                with self.connect() as ws:
+                    self.start(ws)
+                    ws.send_bytes(phrase.encode('utf-16le'))
+                    events = []
+                    for _ in range(10):
+                        events.append(ws.receive_json())
+                        if events[-1]['event'] == 'ended':
+                            break
+                    self.assertEqual(events[-1]['event'], 'ended')
+                    self.assertEqual(events[-1]['reason'], 'voice_exit')
+                    self.assertEqual(events[-1]['state'], 'ended')
+                    self.assertNotIn('result', [event['event'] for event in events])
+                    self.assertNotIn('speech', [event['event'] for event in events])
+                self.assertEqual(agent.await_args.args[0], phrase)
+
+    def test_final_transcript_checks_repetitions_with_second_recognizer(self):
+        cases = [
+            ('播播放黑色毛衣', '播放黑色毛衣', '播放黑色毛衣'),
+            ('播放黑色毛毛', '播放黑色毛', '播放黑色毛'),
+            ('播播放黑色毛毛毛衣', '播放黑色毛衣', '播放黑色毛衣'),
+            ('播播放黑色毛毛毛衣', '播放白色毛衣', '播播放黑色毛毛毛衣'),
+            ('播播放黑色毛毛毛衣', '播放黑色色毛衣', '播播放黑色毛毛毛衣'),
+            ('播播放黑色毛毛毛衣', '', '播播放黑色毛毛毛衣'),
+            ('播放甜蜜蜜', '播放甜蜜蜜', '播放甜蜜蜜'),
+            ('帮我念念一下沁庆沁沁沁园园春春雪', '帮我念一下沁园春雪', '帮我念一下沁园春雪'),
+            ('介绍一下沁沁沁沁沁园原春雪这首词', '介绍一下沁园春雪这首词', '介绍一下沁园春雪这首词'),
+            ('帮我念念一下沁庆沁沁沁园园春春雪', '播放沁园春雪', '帮我念念一下沁庆沁沁沁园园春春雪'),
+            ('问问问一下怎么暂停播放这首诗', '问一下怎么播放这首诗', '问问问一下怎么暂停播放这首诗'),
+            ('哈哈哈', '哈哈哈', '哈哈哈'),
+        ]
+        for online, offline, expected in cases:
+            with self.subTest(online=online, offline=offline):
+                reply = {'decision': 'answer', 'action': None, 'answer': '好的。'}
+                with patch('asr.recheck_live_pcm', return_value=offline) as recheck, patch('live_agent.run', return_value=reply):
+                    with self.connect() as ws:
+                        self.start(ws)
+                        ws.send_bytes(online.encode('utf-16le'))
+                        partial = self.until(ws, 'transcript')
+                        final = self.until(ws, 'transcript')
+                        self.assertFalse(partial['final'])
+                        self.assertEqual(partial['text'], online)
+                        self.assertTrue(final['final'])
+                        self.assertEqual(final['text'], expected)
+                        ws.send_json({'event': 'cancel'})
+                        self.until(ws, 'ended')
+                    self.assertEqual(recheck.await_count, 1)
     def test_chat_context_and_echo_discard(self):
         seen=[]
         async def agent(text, history, progress, speech=None):
@@ -123,7 +175,8 @@ class LiveTest(unittest.TestCase):
         for limit,reason,action in [('PACKET_TIMEOUT_S','connection_timeout',False),
                                     ('IDLE_TIMEOUT_S','idle_timeout',False),
                                     ('EXECUTION_TIMEOUT_S','execution_timeout',True)]:
-            with self.subTest(limit=limit),patch.object(live_session,limit,.03),patch.object(live_session,'TICK_S',.01):
+            # Leave room for TestClient and the server to exchange frames on Windows.
+            with self.subTest(limit=limit),patch.object(live_session,limit,.2),patch.object(live_session,'TICK_S',.05):
                 with self.connect() as ws:
                     self.start(ws)
                     if action:
@@ -216,6 +269,20 @@ class AgentTest(unittest.IsolatedAsyncioTestCase):
             'type':'music.search_play','app':'qqmusic','query':'T-ARA "answer": "你好。"'},'answer':''}))
         self.assertEqual(result['decision'],'execute')
         speech.assert_not_awaited()
+
+    async def test_exit_requires_empty_answer_and_no_action_or_streamed_speech(self):
+        import json
+        decision = {'decision': 'exit', 'action': None, 'answer': ''}
+        result, speech = await self.invoke(json.dumps(decision))
+        self.assertEqual(result, decision)
+        speech.assert_not_awaited()
+        for raw in (
+            json.dumps({**decision, 'answer': '再见。'}),
+            json.dumps({**decision, 'action': {'type': 'music.close', 'app': 'qqmusic'}}),
+            '{"event":"speech","text":"再见。"}\n' + json.dumps(decision),
+        ):
+            with self.subTest(raw=raw), self.assertRaises(ValueError):
+                await self.invoke(raw)
 
     async def test_partial_answer_unicode_and_escape_boundaries(self):
         import json

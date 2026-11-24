@@ -1,5 +1,5 @@
 8b9a64b2865f42dd201b3d1a171a817137e3e685a0980905ab3d503fc472c877  /home/sollado/projects/voice-gateway/app.py
-5da394aafdd2bc7515782ffb26ffa3129064bda4301d4d09c88e0244c7cd8065  /home/sollado/projects/voice-gateway/asr.py
+5f6994fdecea4402e451151912014226b691a1ac1a6761c096816d46b4a019a4  /home/sollado/projects/voice-gateway/asr.py
 31fa2c03194b627dea18ba5be684d7ba4cc94cfefb8a3fd702ed1536d2fb750d  /home/sollado/projects/voice-gateway/config.py
 78f5254f524dc365e9d7d005b9802f948d7b74ebeac261d8364df0ceba84d5c6  /home/sollado/projects/voice-gateway/hermes_client.py
 9fd2c23d4a6a269f0c45aa4fb28d448b10e4e736cad7df96f4524046d5d489ef  /home/sollado/projects/voice-gateway/music.py
@@ -8,9 +8,9 @@
 7d78ee0f7ef12676c6a579adc42d8036bd4a1bd466dda7b9c0721a00444470e1  /home/sollado/projects/voice-gateway/logging.json
 e37a7f11e48dbc13a9ce5d2cb97539342b6013ab96d678a910cf7b59e61d9130  /home/sollado/projects/voice-gateway/fetch_model.py
 cbcfa4a738ae8b091e21449f8943c25990525f246a25216149b783a4007168f8  /home/sollado/projects/voice-gateway/tests/test_contract.py
-8a4a73a9ccc4cbfac216045952b1dda6dc14e67ce081db2312a1d18dfb812d98  /home/sollado/projects/voice-gateway/live_agent.py
-2c0890845ed064c36951a7471ca4c26a4725f6ca57ef732de649b059acd142e1  /home/sollado/projects/voice-gateway/live_asr.py
-93c4a86449fb605fae4367f59c73e35d66f5ed5977022c471ca81929aea33c41  /home/sollado/projects/voice-gateway/live_session.py
-ca3f9b73500fcff82ebd0f58945d45f7f71ea1520051011a6e44c980d17ca1b2  /home/sollado/projects/voice-gateway/tests/test_live.py
+883387e7c951018030180130e0240547fbae4a5734f9bfd2bb50a460378ed1f9  /home/sollado/projects/voice-gateway/live_agent.py
+0f37ead97305233710c354e90702e75f13e284f357ce13b1abd0a81eef2225a8  /home/sollado/projects/voice-gateway/live_asr.py
+30a16090c185bc7c6f395767d9f0e88591580c6e745d790abaae404a71ca6e1a  /home/sollado/projects/voice-gateway/live_session.py
+cc9c661bb3231943f1b48669c5c5d9b1afeb69f54889bb157331d05b61c9f491  /home/sollado/projects/voice-gateway/tests/test_live.py
 e7bcdab4fa88d4ef4515027a9592d6a6bcb754c52a1d876b09e072db9f81756d  /home/sollado/projects/voice-gateway/LIVE.md
 5db0626e09cd175cb7ff895accb21618587ab0183a1c9c98e9a9ba2db18f4271  /home/sollado/projects/voice-gateway/README.md

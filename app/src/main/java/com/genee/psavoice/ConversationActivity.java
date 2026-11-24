@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.ViewTreeObserver;
@@ -17,19 +18,23 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /** A translucent ordinary Activity, not a system overlay. Service owns the conversation. */
 public final class ConversationActivity extends Activity {
     static final String SHOW = "com.genee.psavoice.SHOW_CONVERSATION";
     private static final int AUDIO_PERMISSION = 81;
+    private static final Pattern PARTIAL_REPETITIONS =
+            Pattern.compile("(?![哈啊嗯呃哦呵喔唉嘿哇])([\\u3400-\\u9fff])\\1{2,}");
     private final Runnable observer = this::render;
     private TextView status;
     private TextView detail;
     private LinearLayout messages;
     private ScrollView scroll;
     private Button retry;
+    private View empty;
     private boolean pendingPermission;
-    private String rendered = "";
+    private String rendered;
 
     @Override public void onCreate(Bundle saved) {
         super.onCreate(saved);
@@ -43,6 +48,7 @@ public final class ConversationActivity extends Activity {
         messages = findViewById(R.id.conversation_messages);
         scroll = findViewById(R.id.conversation_scroll);
         retry = findViewById(R.id.conversation_retry);
+        empty = findViewById(R.id.conversation_empty);
         findViewById(R.id.conversation_close).setOnClickListener(view -> leave());
         retry.setOnClickListener(view -> startOrCancel());
         View panel = findViewById(R.id.conversation_panel);
@@ -51,8 +57,8 @@ public final class ConversationActivity extends Activity {
                 if (panel.getWidth() <= 0 || panel.getHeight() <= 0) return;
                 panel.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 FrameLayout.LayoutParams layout = (FrameLayout.LayoutParams) panel.getLayoutParams();
-                layout.width = Math.min(panel.getWidth(), dp(760));
-                layout.height = Math.min(panel.getHeight(), dp(560));
+                layout.width = Math.min(panel.getWidth(), getResources().getDimensionPixelSize(R.dimen.conversation_panel_max_width));
+                layout.height = Math.min(panel.getHeight(), getResources().getDimensionPixelSize(R.dimen.conversation_panel_max_height));
                 panel.setLayoutParams(layout);
             }
         });
@@ -103,37 +109,53 @@ public final class ConversationActivity extends Activity {
         detail.setText(ConversationStore.detail);
         retry.setVisibility(ConversationStore.failed ? View.VISIBLE : View.GONE);
         ArrayList<ConversationStore.Turn> turns = ConversationStore.history();
+        if (empty != null) empty.setVisibility(turns.isEmpty() && !ConversationStore.failed ? View.VISIBLE : View.GONE);
         StringBuilder key = new StringBuilder();
         for (ConversationStore.Turn turn : turns) key.append(turn.id).append('\0').append(turn.user)
                 .append('\0').append(turn.finalText).append('\0').append(turn.assistant).append('\0').append(turn.action);
-        if (key.toString().equals(rendered) && messages.getChildCount() > 0) return;
+        if (key.toString().equals(rendered)) return;
         rendered = key.toString();
         boolean follow = scroll.getChildCount() == 0 || scroll.getScrollY() + scroll.getHeight() >= messages.getHeight() - dp(70);
         messages.removeAllViews();
-        if (turns.isEmpty()) bubble("随时开口", "可以点歌，也可以聊聊。", false, true);
+        if (empty == null && turns.isEmpty()) bubble("随时开口", "可以点歌，也可以聊聊。", false, true);
         for (ConversationStore.Turn turn : turns) {
-            if (!turn.user.isEmpty()) bubble(turn.finalText ? "你" : "你 · 正在识别", turn.user, true, !turn.finalText);
+            if (!turn.user.isEmpty()) {
+                String text = turn.finalText ? turn.user : PARTIAL_REPETITIONS.matcher(turn.user).replaceAll("$1");
+                bubble(turn.finalText ? "你" : "你 · 正在识别", text, true, !turn.finalText);
+            }
             if (!turn.assistant.isEmpty()) bubble("助手", turn.assistant, false, false);
             if (!turn.action.isEmpty()) bubble("音乐", turn.action, false, true);
         }
         if (follow) scroll.post(() -> scroll.fullScroll(View.FOCUS_DOWN));
     }
     private void bubble(String label, String text, boolean user, boolean muted) {
+        boolean wide = empty != null;
         LinearLayout box = new LinearLayout(this);
         box.setOrientation(LinearLayout.VERTICAL);
-        box.setPadding(dp(16), dp(12), dp(16), dp(14));
+        int padding = dp(wide ? 18 : 16);
+        box.setPadding(padding, dp(wide ? 10 : 12), padding, dp(wide ? 12 : 14));
         GradientDrawable background = new GradientDrawable();
-        background.setCornerRadius(dp(16));
-        background.setColor(Color.parseColor(user ? "#553B7967" : "#303F5260"));
+        background.setCornerRadius(dp(wide ? 14 : 16));
+        if (wide) {
+            background.setColor(Color.parseColor(user ? "#234439" : "#1F303E"));
+            background.setStroke(dp(1), Color.parseColor(user ? "#386254" : "#324756"));
+        } else {
+            background.setColor(Color.parseColor(user ? "#553B7967" : "#303F5260"));
+        }
         box.setBackground(background);
-        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(-1, -2);
-        layout.setMargins(user ? dp(44) : 0, 0, user ? 0 : dp(32), dp(12));
+        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(
+                wide ? LinearLayout.LayoutParams.WRAP_CONTENT : LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        layout.gravity = user ? Gravity.END : Gravity.START;
+        if (wide) layout.bottomMargin = dp(8);
+        else layout.setMargins(user ? dp(44) : 0, 0, user ? 0 : dp(32), dp(12));
         messages.addView(box, layout);
         TextView role = new TextView(this);
-        role.setText(label); role.setTextSize(13); role.setTextColor(Color.parseColor("#A6C7D0"));
+        role.setText(label); role.setTextSize(wide ? 15 : 13); role.setTextColor(Color.parseColor("#A6C7D0"));
         box.addView(role);
         TextView body = new TextView(this);
-        body.setText(text); body.setTextSize(21); body.setLineSpacing(dp(3), 1);
+        body.setText(text); body.setTextSize(wide ? 23 : 21); body.setLineSpacing(dp(3), 1);
+        if (wide) body.setMaxWidth(dp(650));
         body.setTextColor(Color.parseColor(muted ? "#B9CED7" : "#F1F7FA"));
         if (user && muted) body.setTypeface(null, Typeface.ITALIC);
         body.setPadding(0, dp(5), 0, 0);

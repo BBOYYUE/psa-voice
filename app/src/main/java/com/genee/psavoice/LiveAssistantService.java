@@ -125,7 +125,7 @@ public final class LiveAssistantService extends Service {
         return START_NOT_STICKY;
     }
     private void greet(long run) {
-        if (!focus(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)) { end("请结束通话后再试。", true); return; }
+        if (!requestDuckingFocus()) { end("请结束通话后再试。", true); return; }
         greetingStarted = true;
         speaking = true;
         state("我在", "正在播报唤醒提示");
@@ -224,13 +224,13 @@ public final class LiveAssistantService extends Service {
     private void startListening(long run) {
         if (!valid(run) || !ready || !greetingDone || speaking || listening || turn == null || turn.finalText) return;
         if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) { end("麦克风权限已失效。", true); return; }
-        if (!focus(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)) { end("麦克风交互被其他音频占用。", true); return; }
+        if (!requestDuckingFocus()) { end("麦克风交互被其他音频占用。", true); return; }
         final PcmRecorder capture = new PcmRecorder();
         final LiveGateway client = gateway;
         final LiveTurn current = turn;
         recorder = capture;
         listening = true;
-        state("正在听", "说出点歌指令，或聊点别的；说“结束对话”退出");
+        state("正在听", "说完后会自动处理");
         captureWorker.execute(() -> {
             try { capture.record(this, client::audio); }
             catch (Exception e) { main.post(() -> {
@@ -254,7 +254,7 @@ public final class LiveAssistantService extends Service {
         if (speechQueue.isEmpty()) { complete(run); return; }
         if (!tts.isReady()) { speechQueue.clear(); complete(run); return; }
         stopCapture();
-        if (!focus(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)) { end("语音交互被其他音频占用。", true); return; }
+        if (!requestDuckingFocus()) { end("语音交互被其他音频占用。", true); return; }
         speaking = true;
         state("正在播报", "助手说完后会继续听");
         tts.speak(speechQueue.remove());
@@ -336,17 +336,31 @@ public final class LiveAssistantService extends Service {
             default: return "正在发送音乐操作";
         }
     }
-    private boolean focus(int gain) {
-        releaseFocus();
-        final long epoch = ++focusEpoch;
-        focus = new AudioFocusRequest.Builder(gain)
-                .setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build())
-                .setOnAudioFocusChangeListener(change -> {
-                    if (epoch == focusEpoch && listening && (change == AudioManager.AUDIOFOCUS_LOSS || change == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT))
-                        end("语音交互被其他音频操作中断。", true);
-                }, main).build();
+    private boolean requestDuckingFocus() {
+        if (focus == null) {
+            final long epoch = focusEpoch;
+            focus = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
+                    .setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build())
+                    .setOnAudioFocusChangeListener(change -> focusChanged(epoch, change), main).build();
+        }
+        // Use the same focus owner across speaking and listening.
         return audio.requestAudioFocus(focus) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
+    }
+    private void focusChanged(long epoch, int change) {
+        if (epoch != focusEpoch || !listening) return;
+        if (change == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
+                || (change == AudioManager.AUDIOFOCUS_LOSS && audio.getMode() != AudioManager.MODE_NORMAL)) {
+            end("语音交互被其他音频操作中断。", true);
+        } else if (change == AudioManager.AUDIOFOCUS_LOSS) {
+            // QQ may request focus before updating MediaSession on a track change.
+            main.postDelayed(() -> {
+                if (epoch != focusEpoch || !listening) return;
+                if (audio.getMode() == AudioManager.MODE_NORMAL && new MusicExecutor(this).isPlaybackActive())
+                    releaseFocus();
+                else end("语音交互被其他音频操作中断。", true);
+            }, 250);
+        }
     }
     private void releaseFocus() {
         focusEpoch++;

@@ -5,4 +5,8 @@
     <string name="conversation_preparing">准备连接</string>
     <string name="conversation_retry">重新开始</string>
     <string name="conversation_exit_hint">说“结束对话”，或再按唤醒键退出</string>
+    <string name="conversation_history">对话</string>
+    <string name="conversation_end_wide">结束对话</string>
+    <string name="conversation_empty_title">可以点歌，也可以聊聊</string>
+    <string name="conversation_empty_examples">试着说“播放周杰伦的晴天”或“介绍一下上海”</string>
 </resources>

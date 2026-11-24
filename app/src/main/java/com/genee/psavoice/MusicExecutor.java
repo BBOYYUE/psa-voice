@@ -44,6 +44,13 @@ final class MusicExecutor {
     MusicExecutor(Context context) { this.context = context; }
     void cancel() { cancelled = true; }
 
+    boolean isPlaybackActive() {
+        MediaController controller = controller();
+        PlaybackState state = controller == null ? null : controller.getPlaybackState();
+        return state != null && (state.getState() == PlaybackState.STATE_PLAYING
+                || state.getState() == PlaybackState.STATE_BUFFERING);
+    }
+
     Outcome execute(GatewayClient.Result action) throws Exception {
         if (cancelled) return new Outcome(false, "已取消。");
         switch (action.type) {

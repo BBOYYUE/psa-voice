@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#30060C12" android:fitsSystemWindows="true" android:padding="24dp">
+
+    <RelativeLayout
+        android:id="@+id/conversation_panel"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/conversation_wide_panel" android:padding="20dp">
+
+        <LinearLayout
+            android:id="@+id/conversation_status_column"
+            android:layout_width="352dp" android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical" android:background="@drawable/conversation_wide_status"
+            android:padding="28dp" tools:ignore="InconsistentLayout">
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/conversation_title" android:textColor="#E5F1F4"
+                android:textSize="23sp" android:textStyle="bold" />
+
+            <Space android:layout_width="1dp" android:layout_height="0dp" android:layout_weight="1" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView android:layout_width="68dp" android:layout_height="68dp"
+                    android:src="@drawable/conversation_waveform" android:importantForAccessibility="no"
+                    android:contentDescription="@null" />
+                <TextView android:id="@+id/conversation_status"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" android:text="@string/conversation_preparing"
+                    android:textColor="#8CE3CA" android:textSize="36sp" android:textStyle="bold" />
+                <TextView android:id="@+id/conversation_detail"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp" android:textColor="#C1D3DB" android:textSize="19sp" />
+            </LinearLayout>
+
+            <Space android:layout_width="1dp" android:layout_height="0dp" android:layout_weight="1" />
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:text="@string/conversation_exit_hint"
+                android:textColor="#ABC0CC" android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:layout_toEndOf="@id/conversation_status_column" android:layout_alignParentEnd="true"
+            android:layout_marginStart="28dp" android:orientation="vertical">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:gravity="center_vertical" android:orientation="horizontal">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="@string/conversation_history"
+                    android:textColor="#F1F7FA" android:textSize="25sp" android:textStyle="bold" />
+                <Button android:id="@+id/conversation_retry"
+                    android:layout_width="wrap_content" android:layout_height="56dp"
+                    android:layout_marginEnd="12dp" android:minWidth="144dp"
+                    android:background="@drawable/conversation_wide_button"
+                    android:text="@string/conversation_retry" android:textColor="#A4ECD7"
+                    android:textSize="19sp" android:visibility="gone" />
+                <Button android:id="@+id/conversation_close"
+                    android:layout_width="wrap_content" android:layout_height="56dp" android:minWidth="144dp"
+                    android:background="@drawable/conversation_wide_button"
+                    android:text="@string/conversation_end_wide" android:textColor="#F1F7FA"
+                    android:textSize="19sp" android:contentDescription="@string/conversation_close_description" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp"
+                android:layout_marginTop="14dp" android:background="#354B5A" />
+
+            <FrameLayout android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_marginTop="14dp" android:layout_weight="1">
+
+                <ScrollView android:id="@+id/conversation_scroll"
+                    android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:clipToPadding="false" android:paddingHorizontal="4dp">
+                    <LinearLayout android:id="@+id/conversation_messages"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </ScrollView>
+
+                <LinearLayout android:id="@+id/conversation_empty"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_gravity="center" android:orientation="vertical" android:padding="16dp"
+                    tools:ignore="InconsistentLayout">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:gravity="center" android:text="@string/conversation_empty_title"
+                        android:textColor="#EDF6F8" android:textSize="28sp" android:textStyle="bold" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" android:gravity="center"
+                        android:text="@string/conversation_empty_examples"
+                        android:textColor="#ACC2CE" android:textSize="19sp" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>
