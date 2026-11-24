@@ -47,7 +47,7 @@ JAVA_HOME=/opt/homebrew/opt/openjdk@17 bash ./gradlew assembleDebug lintDebug te
 
 ```sh
 PSA_LIVE_INTEGRATION=1 PSA_TEST_WAV=/absolute/path/mono-16k.wav \
-JAVA_HOME=/opt/homebrew/opt/openjdk@17 bash ./gradlew testDebugUnitTest --tests com.genee.psavoice.LiveGatewayIntegrationTest --no-daemon
+JAVA_HOME=/opt/homebrew/opt/openjdk@17 bash ./gradlew testDebugUnitTest --tests com.sollado.psavoice.LiveGatewayIntegrationTest --no-daemon
 ```
 
 VOICE_GATEWAY_TOKEN 应提前安全注入，不直接写在命令或日志中。
@@ -57,7 +57,7 @@ APK：app/build/outputs/apk/debug/app-debug.apk；同包名更新保留files/ser
 
 ```sh
 adb install -r app/build/outputs/apk/debug/app-debug.apk
-adb shell am start -n com.genee.psavoice/.TriggerActivity
+adb shell am start -n com.sollado.psavoice/.TriggerActivity
 ```
 
 再次执行最后一条会结束当前会话。

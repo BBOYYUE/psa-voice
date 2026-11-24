@@ -1,0 +1,9 @@
+COMMAND: getprop | grep -i bandwa; settings get secure voice_interaction_service; settings get secure voice_recognition_service; settings get secure tts_default_synth; settings get secure location_mode
+EXIT: 0
+[persist.bandwa.card.alpha]: [0.9]
+[persist.bandwa.music.longclick]: [com.genee.psavoice]
+[persist.bandwa.music.shortclick]: [com.tencent.qqmusiccar]
+null
+null
+null
+null

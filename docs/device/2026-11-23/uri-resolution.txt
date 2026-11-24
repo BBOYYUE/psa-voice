@@ -1,0 +1,4 @@
+COMMAND: cmd package resolve-activity --brief -a android.intent.action.VIEW -d "androidamap://route"; cmd package resolve-activity --brief -a android.intent.action.VIEW -d "geo:0,0?q=test"
+EXIT: 0
+No activity found
+No activity found

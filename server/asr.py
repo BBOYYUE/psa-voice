@@ -23,6 +23,7 @@ import temporary_audio
 
 logger = logging.getLogger("vg.asr")
 
+LIVE_RECHECK_TIMEOUT_S = 1.5
 _recognizer = None
 _load_lock = asyncio.Lock()
 _sem = asyncio.Semaphore(config.ASR_MAX_CONCURRENCY)
@@ -137,21 +138,26 @@ async def recheck_live_pcm(pcm: bytearray) -> str:
     """Use the warm batch model if it is free. The input stays in memory."""
     if _recognizer is None or _sem.locked():
         return ""
-    async with _sem:
-        def decode():
-            samples = array.array("h")
-            samples.frombytes(pcm)
-            if sys.byteorder != "little":
-                samples.byteswap()
-            return _decode_waveform(_recognizer, [s / 32768.0 for s in samples], 16000)
+    await _sem.acquire()
+    audio = bytes(pcm)  # The caller may reset its decoder after our deadline.
+    def decode():
+        samples = array.array("h")
+        samples.frombytes(audio)
+        if sys.byteorder != "little":
+            samples.byteswap()
+        return _decode_waveform(_recognizer, [s / 32768.0 for s in samples], 16000)
 
-        job = asyncio.create_task(asyncio.to_thread(decode))
-        try:
-            return await asyncio.shield(job)
-        except asyncio.CancelledError:
-            # Keep the shared recognizer reserved until its worker has finished.
-            await asyncio.gather(job, return_exceptions=True)
-            raise
+    job = asyncio.create_task(asyncio.to_thread(decode))
+    def finished(task):
+        _sem.release()
+        if not task.cancelled():
+            task.exception()  # Observe late failures after timeout/caller cancellation.
+    job.add_done_callback(finished)
+    try:
+        return await asyncio.wait_for(asyncio.shield(job), LIVE_RECHECK_TIMEOUT_S)
+    except asyncio.TimeoutError:
+        logger.warning("Live ASR repeat check timed out; using online transcript")
+        return ""
 
 
 # ---------------------------------------------------------------- 主入口

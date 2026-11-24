@@ -1,4 +1,4 @@
-package com.genee.psavoice;
+package com.sollado.psavoice;
 public final class SpeechGateCheck {
  public static void main(String[] args) {
   SpeechGate quiet = new SpeechGate();

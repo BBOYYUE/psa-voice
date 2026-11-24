@@ -1,9 +1,9 @@
 plugins { id("com.android.application") }
 android {
-    namespace = "com.genee.psavoice"
+    namespace = "com.sollado.psavoice"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.genee.psavoice"
+        applicationId = "com.sollado.psavoice"
         minSdk = 28
         targetSdk = 34
         versionCode = 13

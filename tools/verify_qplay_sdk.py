@@ -48,6 +48,6 @@ for method in ['voicePlay', 'voiceShortcut', 'playSongMidAtIndex']:
 with tempfile.TemporaryDirectory(prefix='qplay-compile-') as build:
     subprocess.run([str(jdk / 'bin/javac'), '-encoding', 'UTF-8', '-cp',
         str(SDK / 'classes.jar') + os.pathsep + str(android / 'platforms/android-34/android.jar'),
-        '-d', build, str(ROOT / 'experiments/qplay-ipc/src/com/genee/psavoice/qplay/QplayCarCalls.java')], check=True)
+        '-d', build, str(ROOT / 'experiments/qplay-ipc/src/com/sollado/psavoice/qplay/QplayCarCalls.java')], check=True)
 print(f'PASS: SDK digest, embedded classes, protocol constants, {len(matrix)} documented methods, and offline adapter compilation.')
 print('NOT TESTED: binding, caller identity, user authorization, callbacks, data payloads, and car execution.')

@@ -1,0 +1,4 @@
+COMMAND: cmd package resolve-activity --brief -a android.intent.action.VIEW -d "androidauto://navi"; cmd package resolve-activity --brief -a android.intent.action.VIEW -d "androidauto://search"
+priority=0 preferredOrder=0 match=0x308000 specificIndex=-1 isDefault=true
+com.autonavi.amapauto/.MainMapActivity
+No activity found

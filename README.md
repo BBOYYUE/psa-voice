@@ -1,6 +1,6 @@
 # PSA 音乐语音助手
 
-Android 9 车机上的无界面音乐助手，包名 `com.genee.psavoice`，客户端版本 `0.6.0`（已安装到车机，实机联调中）。
+Android 9 车机上的无界面音乐助手，包名 `com.sollado.psavoice`，客户端版本 `0.6.0`（已安装到车机，实机联调中）。
 
 ## 0.6.0 客户端（实机联调中）
 
@@ -30,7 +30,7 @@ Android 9 车机上的无界面音乐助手，包名 `com.genee.psavoice`，客�
 工具箱 `com.bandwa.openadb 5.3.4` 已提供音乐键长按启动 App 的配置：
 
 ```sh
-adb shell setprop persist.bandwa.music.longclick com.genee.psavoice
+adb shell setprop persist.bandwa.music.longclick com.sollado.psavoice
 ```
 
 原绑定为 `com.tencent.qqmusiccar`；回退按键时将值改回即可。没有修改工具箱或原厂 APK。
@@ -48,8 +48,8 @@ adb shell setprop persist.bandwa.music.longclick com.genee.psavoice
 必要权限：
 
 ```sh
-adb shell pm grant com.genee.psavoice android.permission.RECORD_AUDIO
-adb shell cmd notification allow_listener com.genee.psavoice/.MediaAccessService
+adb shell pm grant com.sollado.psavoice android.permission.RECORD_AUDIO
+adb shell cmd notification allow_listener com.sollado.psavoice/.MediaAccessService
 ```
 
 通知监听组件仅用于授权 MediaSessionManager 访问 QQ 音乐会话，不读取或上传通知内容。
@@ -71,8 +71,8 @@ adb shell cmd notification allow_listener com.genee.psavoice/.MediaAccessService
 搜索播放的结果确认使用独立的纯 Java 匹配器（`TrackMatcher`）：NFKC 归一化后按词匹配歌名/歌手；歌名被查询完整覆盖的严格匹配可立即确认，仅命中歌手或歌名只是更长标题子串的宽松匹配必须等曲目真正变化才确认，避免旧歌曲短暂恢复时误报新请求成功。本地检查见 `tests/TrackMatcherCheck.java`：
 
 ```sh
-javac -encoding UTF-8 -d /tmp/psa-check app/src/main/java/com/genee/psavoice/TrackMatcher.java tests/TrackMatcherCheck.java
-java -cp /tmp/psa-check com.genee.psavoice.TrackMatcherCheck
+javac -encoding UTF-8 -d /tmp/psa-check app/src/main/java/com/sollado/psavoice/TrackMatcher.java tests/TrackMatcherCheck.java
+java -cp /tmp/psa-check com.sollado.psavoice.TrackMatcherCheck
 ```
 
 后台会话控制使用 QQ 音乐的 MediaController，限定包名为 `com.tencent.qqmusiccar`。
@@ -95,11 +95,11 @@ Android 9 上运行前台麦克风服务；较新 Android 的后台启动限制�
 Debug 构建包含一个受系统 `DUMP` 权限保护的 ADB 文字探针，普通 App 不能使用，release 构建不包含：
 
 ```sh
-adb shell am broadcast -n com.genee.psavoice/.DiagnosticReceiver \
-  -a com.genee.psavoice.DEBUG_TEXT --es text '暂停一下'
+adb shell am broadcast -n com.sollado.psavoice/.DiagnosticReceiver \
+  -a com.sollado.psavoice.DEBUG_TEXT --es text '暂停一下'
 # 纯 TTS 探针（不经过服务端，直接让原车人声念任意文本）：
-adb shell am broadcast -n com.genee.psavoice/.DiagnosticReceiver \
-  -a com.genee.psavoice.DEBUG_SPEAK --es text '北国风光，千里冰封'
+adb shell am broadcast -n com.sollado.psavoice/.DiagnosticReceiver \
+  -a com.sollado.psavoice.DEBUG_SPEAK --es text '北国风光，千里冰封'
 # 聊天链路探针：DEBUG_TEXT 加 --es scene general
 ```
 
@@ -124,7 +124,7 @@ adb shell am broadcast -n com.genee.psavoice/.DiagnosticReceiver \
 
 0.3.0：按 QQ 音乐车机版官方外部拉起协议接入 action=0~9。新增 music.open、music.close、music.open_page（page 枚举：recent/local/favorite/car_playlist/radio/rank/my_playlist，autoplay 对应协议 m1），两端严格校验，LLM 不能指定协议数字或 Activity。常用“打开XX”精确指令走快路径直接解析。客户端请求新增 client_version 字段，服务端对 0.2.3 及更早客户端把新动作降级为升级提示，保持兼容。播放结果确认逻辑抽出为纯 Java `TrackMatcher`，修复“歌名是更长标题子串（如晴天/晴天娃娃）”和“旧歌曲短暂恢复”两类误确认，本地检查覆盖中文、英文多词、全角字符、标点与含字母 s/p 的词。已核对此前怀疑的正则多转义问题：源码 `split("\\s+")`、`replaceAll("[\\s\\p{Punct}]", "")` 转义正确，实际缺陷在匹配逻辑而非正则。action=0、1、2~7、9 的发送与播报文案已就绪，页面实际打开与 m1 自动播放效果待车机连接后实测。
 
-0.5.0：新增语音聊天（电话键长按 → `ChatTriggerActivity` → 同一 AssistantService 以 scene=general 运行）。聊天走服务端既有通用对话通道（Hermes 按 device_id 保持会话，跨按键追问如"那夏天呢"可续上；回答约束为 80 字以内口语化）。聊天时音乐只压低不暂停（AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK），音乐助手仍保持"暂停→人声→录音"顺序。聊天入口无 LAUNCHER 过滤器（桌面不出现第二个图标），由工具箱按组件名 `com.genee.psavoice/.ChatTriggerActivity` 拉起；若工具箱只支持包名绑定，则需要拆一个独立包名的 chat 构建变体（待车机查 `getprop | grep -i bandwa` 确认电话键属性后决定）。ADB 文字探针支持 `--es scene general` 测试聊天链路。服务端无需改动。
+0.5.0：新增语音聊天（电话键长按 → `ChatTriggerActivity` → 同一 AssistantService 以 scene=general 运行）。聊天走服务端既有通用对话通道（Hermes 按 device_id 保持会话，跨按键追问如"那夏天呢"可续上；回答约束为 80 字以内口语化）。聊天时音乐只压低不暂停（AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK），音乐助手仍保持"暂停→人声→录音"顺序。聊天入口无 LAUNCHER 过滤器（桌面不出现第二个图标），由工具箱按组件名 `com.sollado.psavoice/.ChatTriggerActivity` 拉起；若工具箱只支持包名绑定，则需要拆一个独立包名的 chat 构建变体（待车机查 `getprop | grep -i bandwa` 确认电话键属性后决定）。ADB 文字探针支持 `--es scene general` 测试聊天链路。服务端无需改动。
 
 0.4.0：异常情况处理优化。表述不清晰时客户端不执行任何操作，播报服务端追问并直接再录一次；追问不限轮次，服务端为每台车机记住最近 4 轮“用户转写 + 追问”对话（TTL 120 秒、按设备隔离，仅用于让“对/不是”这类回答对应此前猜测，不 replay 旧指令，历史由服务端保存、不经客户端回传），追问与再录音之间保持音频焦点、音乐不恢复；ADB 文字探针不重试。有未完成追问时，明确的快捷指令（暂停/下一首/打开页面等）仍直接走快路径并清除旧追问，仅“播放/继续”这类可能是确认回答的词交给模型结合上下文判断；用户没有回答追问或取消交互时，客户端会尽力调用 `POST /v1/music/context/clear` 显式清除挂起的追问上下文（TTL 120 秒为兜底）。没听到人声或服务端返回“没听清”时自动再录一次（仅一次，防止无人时循环录音）。等待 LLM 期间只在真的慢时插话：服务端在 LLM 路径流式响应、ASR 完成即刷出 `X-Stage: analyzing` 响应头（含 `X-Accel-Buffering: no` 穿透 nginx 缓冲），客户端以此为计时锚点再观察约 2.5 秒未出结果才插一句“我想一下”；旧服务端无该响应头时盲等约 3.5 秒兜底；快路径指令和普通速度的请求不插话。录音一开始就在后台预热到网关的 TCP+TLS 连接，正式上传几乎零握手等待。凭线索找歌走知识派：LLM 运用音乐知识判断最可能的歌曲，有把握直接 search_play，把握不足时说出猜测向用户确认（如“您说的是《黑色毛衣》吗？”）；不支持哼唱识别（哼唱转写无有效文字，引导用户改说歌词或歌名）。播放结果等待期间检测 QQ 会话 STATE_ERROR：错误文案含“版权”时播报“因版权原因暂时无法播放”，否则播报“暂时无法播放”。搜索后已在播放时不再空等：匹配即确认“正在播放某歌”；新曲目与请求对不上时立即如实播报实际曲目（“正在播放某歌”，不确认匹配）并结束，用户会再次语音纠正；仍是旧歌时保留约 3 秒切歌窗口防止抢报，之后同样如实播报并结束；始终无播放才等到 20 秒并报“可能没有搜到可播放的结果”。交互入口与录音参数不变，依然可随时长按取消。
 
@@ -137,3 +137,7 @@ adb shell am broadcast -n com.genee.psavoice/.DiagnosticReceiver \
 官方 SDK 1.1.6、Demo、车载能力矩阵与授权/接入计划见 [docs/qplay-ipc/README.md](docs/qplay-ipc/README.md)。普通 IPC 支持的功能和语音捷径的 car=null 限制已分开记录；离线封装未接入生产客户端。
 
 0.5.1：修复 QQ 音乐异步切歌时过早播报旧歌或中间曲目。搜索播放保留完整 20 秒确认窗口，不匹配时继续等待；超时仅提示指令已发送、尚未确认播放结果。旧曲目基线也读取暂停会话，避免录音前暂停后误判曲目变化。
+
+### Sollado 包名迁移
+
+主助手当前包名为 `com.sollado.psavoice`。旧车机安装的 `com.genee.psavoice` 是另一个应用，不能用新版 APK 原地覆盖；新版需要重新配置设备私有的 `files/server.json`、麦克风权限和通知访问权限，并在验收时把按键绑定切换到新包名。不要在配置迁移前卸载旧版；不得将凭证写入源码或 APK。本轮仅构建，未修改车机配置或绑定。旧版本验证笔记和设备采集中的旧包名保留为历史证据。

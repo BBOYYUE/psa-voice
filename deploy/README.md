@@ -56,3 +56,11 @@ venv/bin/python staging/live-20261123/install-live.py --rollback /home/sollado/p
 完整回退公网路由还需以 root 恢复上述 Nginx 备份，`nginx -t` 通过后 reload。
 公网验证脚本为本地 `tools/verify_live.py`，从 VOICE_GATEWAY_TOKEN 环境变量读取凭证，只发送测试音频，不执行音乐动作。
 实际结果及当前边界见 `server/LIVE.md`。客户端半透明界面技术评估见 `docs/client/conversation-panel-plan.md`，尚未实施。
+
+## 2026-11-24 审查修复部署
+
+已部署整段 ASR 复核 1.5 秒等待预算，超时回退流式转写；后台识别结束前继续占用模型信号量，音频使用独立内存快照。此次服务器只更新 asr.py 和 tests/test_recheck_deadline.py，未修改配置、模型、Hermes 或 Nginx。
+
+服务器隔离目录运行完整 42 项测试通过后部署。备份：`/home/sollado/projects/voice-gateway/backups/20261124T135858Z-review-fixes`。首次等待窗口不足导致自动回滚，日志确认模型预热需约 40 秒；将就绪等待扩大至 120 秒后重新发布成功。网关 active，公网 health 的 ASR/live 均 ready，Hermes reachable；公网 WSS start/ready、静音音频帧、cancel/ended 验证通过，未执行音乐动作。线上 asr.py SHA-256 已与本地核对一致。
+
+客户端播报焦点中断修复、探针超时失效修复已完成构建与 Lint，分别通过 17 项及 1 项 JVM 测试。ADB 车机离线，两个 Sollado APK 尚未安装，实机来电抢占与 Binder 超时仍待验证。

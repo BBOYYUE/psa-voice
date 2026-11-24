@@ -1,0 +1,83 @@
+COMMAND: getprop ro.build.display.id; getprop ro.build.version.release; getprop ro.build.version.sdk; getprop ro.build.version.security_patch; getprop ro.product.model; getprop ro.hardware; getprop ro.board.platform; getprop ro.product.cpu.abilist; cat /proc/meminfo | head -3; df -h /data; wm size; wm density; pm list features
+EXIT: 0
+3VS222_SW6.0.8_20260819001253
+9
+28
+2020-11-05
+3VS121
+mt8666
+mt6771
+arm64-v8a,armeabi-v7a,armeabi
+MemTotal:        3918208 kB
+MemFree:          107440 kB
+MemAvailable:    1186820 kB
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/block/mmcblk0p49 8.0G  6.2G  1.6G  80% /data
+Physical size: 1920x720
+Physical density: 213
+feature:reqGlEsVersion=0x30002
+feature:android.hardware.audio.low_latency
+feature:android.hardware.audio.output
+feature:android.hardware.bluetooth
+feature:android.hardware.bluetooth_le
+feature:android.hardware.broadcastradio
+feature:android.hardware.camera
+feature:android.hardware.camera.any
+feature:android.hardware.camera.autofocus
+feature:android.hardware.camera.capability.manual_post_processing
+feature:android.hardware.camera.capability.manual_sensor
+feature:android.hardware.camera.capability.raw
+feature:android.hardware.camera.flash
+feature:android.hardware.camera.front
+feature:android.hardware.camera.level.full
+feature:android.hardware.ethernet
+feature:android.hardware.faketouch
+feature:android.hardware.location
+feature:android.hardware.location.gps
+feature:android.hardware.location.network
+feature:android.hardware.microphone
+feature:android.hardware.opengles.aep
+feature:android.hardware.ram.normal
+feature:android.hardware.screen.landscape
+feature:android.hardware.screen.portrait
+feature:android.hardware.sensor.accelerometer
+feature:android.hardware.sensor.barometer
+feature:android.hardware.sensor.compass
+feature:android.hardware.sensor.gyroscope
+feature:android.hardware.sensor.hifi_sensors
+feature:android.hardware.sensor.light
+feature:android.hardware.sensor.proximity
+feature:android.hardware.sensor.stepcounter
+feature:android.hardware.sensor.stepdetector
+feature:android.hardware.touchscreen
+feature:android.hardware.touchscreen.multitouch
+feature:android.hardware.touchscreen.multitouch.distinct
+feature:android.hardware.touchscreen.multitouch.jazzhand
+feature:android.hardware.type.automotive
+feature:android.hardware.usb.accessory
+feature:android.hardware.usb.host
+feature:android.hardware.vulkan.compute
+feature:android.hardware.vulkan.level=1
+feature:android.hardware.vulkan.version=4194307
+feature:android.hardware.wifi
+feature:android.hardware.wifi.direct
+feature:android.software.activities_on_secondary_displays
+feature:android.software.adoptable_storage
+feature:android.software.app_widgets
+feature:android.software.autofill
+feature:android.software.backup
+feature:android.software.cant_save_state
+feature:android.software.companion_device_setup
+feature:android.software.connectionservice
+feature:android.software.cts
+feature:android.software.device_admin
+feature:android.software.home_screen
+feature:android.software.input_methods
+feature:android.software.live_wallpaper
+feature:android.software.managed_users
+feature:android.software.midi
+feature:android.software.picture_in_picture
+feature:android.software.print
+feature:android.software.verified_boot
+feature:android.software.voice_recognizers
+feature:android.software.webview

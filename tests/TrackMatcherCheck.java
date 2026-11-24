@@ -1,4 +1,4 @@
-package com.genee.psavoice;
+package com.sollado.psavoice;
 public final class TrackMatcherCheck {
   public static void main(String[] args) {
     // 中文歌手+歌名：全匹配且严格。

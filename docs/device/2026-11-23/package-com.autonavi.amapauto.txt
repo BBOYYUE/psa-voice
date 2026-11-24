@@ -1,0 +1,3168 @@
+COMMAND: dumpsys package com.autonavi.amapauto
+EXIT: 0
+Activity Resolver Table:
+  Schemes:
+      androidauto:
+        cc2986 com.autonavi.amapauto/.MainMapActivity filter 446af39
+          Action: "android.intent.action.VIEW"
+          Category: "android.intent.category.DEFAULT"
+          Category: "android.intent.category.BROWSABLE"
+          Scheme: "androidauto"
+          Authority: "launch": -1
+          Authority: "poi": -1
+          Authority: "showTraffic": -1
+          Authority: "myLocation": -1
+          Authority: "rootmap": -1
+          Authority: "rootmap_park": -1
+          Authority: "route": -1
+          Authority: "viewReGeo": -1
+          Authority: "viewGeo": -1
+          Authority: "arroundpoi": -1
+          Authority: "keywordNavi": -1
+          Authority: "navi": -1
+          Authority: "viewMap": -1
+          Authority: "mapOpera": -1
+          Authority: "navi2SpecialDest": -1
+          Authority: "naviPreview": -1
+          Authority: "naviRoutePrefer": -1
+          Authority: "naviRoutePreferEx": -1
+          Authority: "naviExit": -1
+          Authority: "appExit": -1
+          Authority: "openFavorite": -1
+          Authority: "setting": -1
+          Authority: "offline_data": -1
+          Authority: "offline_tts": -1
+          Authority: "naviSetting": -1
+          Authority: "citySelect": -1
+          Authority: "searchBase": -1
+          Authority: "searchReasultMap": -1
+          Authority: "searchAround": -1
+          Authority: "searchCategory": -1
+          Authority: "userLogin": -1
+          Authority: "launch_do_nothing": -1
+          Authority: "derectSimuNavi": -1
+          Authority: "voiceOper": -1
+          Authority: "aloneSearch": -1
+          Authority: "settingHomeOrCompany": -1
+          Authority: "trafficReport": -1
+          Authority: "userMessage": -1
+          Authority: "userTrace": -1
+          Authority: "openOfflinedata": -1
+          Authority: "openUsbguide": -1
+          Authority: "colombo": -1
+
+  Non-Data Actions:
+      com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentCreate4323:
+        f38b247 com.autonavi.amapauto/com.alibaba.wireless.security.open.middletier.fc.ui.ContainerActivity filter a92297e
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentResult4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentCreate4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentLog4323"
+          Category: "android.intent.category.DEFAULT"
+        b5fba74 com.autonavi.amapauto/com.alibaba.wireless.security.open.middletier.fc.ui.ExtContainerActivity filter e543edf
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentResult4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentCreate4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentLog4323"
+          Category: "android.intent.category.DEFAULT"
+      android.intent.action.MAIN:
+        c49eb9d com.autonavi.amapauto/com.autonavi.auto.remote.fill.UsbFillActivity filter d651b00
+          Action: "android.intent.action.MAIN"
+          Category: "android.intent.category.LAUNCHER"
+          Category: "android.intent.category.APP_MAPS"
+          Category: "android.intent.category.DEFAULT"
+      com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentResult4323:
+        f38b247 com.autonavi.amapauto/com.alibaba.wireless.security.open.middletier.fc.ui.ContainerActivity filter a92297e
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentResult4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentCreate4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentLog4323"
+          Category: "android.intent.category.DEFAULT"
+        b5fba74 com.autonavi.amapauto/com.alibaba.wireless.security.open.middletier.fc.ui.ExtContainerActivity filter e543edf
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentResult4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentCreate4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentLog4323"
+          Category: "android.intent.category.DEFAULT"
+      com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentLog4323:
+        f38b247 com.autonavi.amapauto/com.alibaba.wireless.security.open.middletier.fc.ui.ContainerActivity filter a92297e
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentResult4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentCreate4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentLog4323"
+          Category: "android.intent.category.DEFAULT"
+        b5fba74 com.autonavi.amapauto/com.alibaba.wireless.security.open.middletier.fc.ui.ExtContainerActivity filter e543edf
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentResult4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentCreate4323"
+          Action: "com.alibaba.wireless.security.open.middletier.fc.ui.BXIntentLog4323"
+          Category: "android.intent.category.DEFAULT"
+
+Receiver Resolver Table:
+  Schemes:
+      package:
+        9b15812 com.autonavi.amapauto/.framework.AutoAppStateReceiver filter d37f994
+          Action: "android.intent.action.PACKAGE_ADDED"
+          Action: "android.intent.action.PACKAGE_REPLACED"
+          Action: "android.intent.action.PACKAGE_REMOVED"
+          Scheme: "package"
+
+  Non-Data Actions:
+      com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      svautomotive.3partymanager.navigation.MESSAGE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      FLY.ANDROID.NAVI.MSG.SENDER:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.user.al.action.HANDLE_PUSH_MSG:
+        edea499 com.autonavi.amapauto/.user.PushServiceReceiver filter 99bf9e7
+          Action: "com.autonavi.amapauto.user.al.action.HANDLE_PUSH_MSG"
+      action_auto_screen_fps:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.incall.action.SCREEN_STATUS:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.tian.navi.INERTIAL_GUIDANCE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      android.Navi.TncReceiver:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.action.REQUEST_VERSION:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.incall.action.SCREEN_MODE_CHANGE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.chinatsp.headlights.change:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.borqs.civia.acc.on:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      AUTO_STATUS_FOR_INTERNAL_WIDGET:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO:
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      AUTONAVI_START_BACKGROUND:
+        a03e40c com.autonavi.amapauto/.controller.AutoStartupReceiver filter e4056e8
+          Action: "android.intent.action.BOOT_COMPLETED"
+          Action: "AUTONAVI_START_BACKGROUND"
+          Category: "android.intent.category.LAUNCHER"
+      com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      android.intent.action.POWER_ON:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.incall.action.carmodechange:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_GO_HOME:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      android.intent.action.POWER_OFF:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.tian.navi.TBT_START:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.incall.action.INSTRUMENTATION_THEME_CHANGE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.tian.key.ROTATE_LEFT:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.incall.action.CLUSTER_TBT_SHOW:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.tian.navi.RESIDUAL_MILEAGE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.tian.navi.NAVITO:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET:
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      android.intent.action.LOCALE_CHANGED:
+        6bf155 com.autonavi.amapauto/.common.LanguageChangeReceiver filter b4fe101
+          Action: "android.intent.action.LOCALE_CHANGED"
+          mPriority=1000, mOrder=0, mHasPartialTypes=false
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.incall.action.REQUEST_MAP_STATUS:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.APPWIDGET_UPDATE:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.tian.navi.TBT_STOP:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.xm.action.NAVIGATE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.incall.action.IACCMODE_CHANGE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.stcloud.drive.EVT_ACC_STATUS:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION:
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.neusoft.action.carmodechange:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      action_internal_widget_auto_bitmap:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      android.intent.action.BOOT_COMPLETED:
+        a03e40c com.autonavi.amapauto/.controller.AutoStartupReceiver filter e4056e8
+          Action: "android.intent.action.BOOT_COMPLETED"
+          Action: "AUTONAVI_START_BACKGROUND"
+          Category: "android.intent.category.LAUNCHER"
+      com.borqs.civia.acc.off:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.hsae.auto.EXTRA_ACC_STATE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.tian.key.DOWN:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.tian.key.LEFT:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      autonavi.action.BITMAP_UPDATE:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      ime.smart.driving.recorder.preview.slide.mode:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      action_auto_screen_enable:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_PARK:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.hsae.auto.ACTION_ACC_STATE:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.tian.key.ROTATE_RIGHT:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      carplay_navigation_activated:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.tian.key.UP:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      android.appwidget.action.APPWIDGET_UPDATE:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.autonavi.amapauto.receiver_test:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH:
+        9442be3 com.autonavi.amapauto/.widget.framework.AutoWidgetReceiver filter 8244d83
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_SET_DESTINATION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ADD_OIL"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_PARK"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_GO_HOME_OR_COMPANY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_IN"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_ZOOM_OUT"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_MAIN_MAP"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_LOGIC_SWITCH"
+          Action: "AUTO_KEY_WORDS_SEARCH_FOR_INTERNAL_WIDGETP"
+          Action: "AUTO_AROUND_SEARCH_FOR_INTERNAL_WIDGET"
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.tian.key.RIGHT:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE:
+        248e35e com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProvider filter b588c3d
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+        703a33f com.autonavi.amapauto/com.autonavi.autowidget.AutoWidgetProviderTwoXThree filter 39c7c32
+          Action: "android.appwidget.action.APPWIDGET_UPDATE"
+          Action: "com.autonavi.amapauto.APPWIDGET_UPDATE"
+          Action: "action_internal_widget_auto_bitmap"
+          Action: "AUTO_STATUS_FOR_INTERNAL_WIDGET"
+          Action: "AUTO_GUIDE_INFO_FOR_INTERNAL_WIDGET"
+          Action: "autonavi.action.BITMAP_UPDATE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_BITMAP_DISPLAY"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_CONTROLL_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_AUDIO_UI_SWITCH"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_OIL_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_PARK_DISTANCE"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_HOME_COMPANY_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_WEATHER_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_GPS_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAR_DIRECTION"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_ROAD_NAME_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_CAMERA_INFO"
+          Action: "com.autonavi.amapauto.AUTO_WIDGET_UPDATE_SILENCE_ROADNAME_INFO"
+      AUTONAVI_STANDARD_BROADCAST_RECV:
+        bf809e0 com.autonavi.amapauto/.adapter.internal.AmapAutoBroadcastReceiver filter f574ba6
+          Action: "com.autonavi.amapauto.receiver_test"
+          Action: "AUTONAVI_STANDARD_BROADCAST_RECV"
+          Action: "FLY.ANDROID.NAVI.MSG.SENDER"
+          Action: "com.neusoft.action.carmodechange"
+          Action: "com.incall.action.carmodechange"
+          Action: "com.autonavi.xm.action.NAVIGATE"
+          Action: "android.intent.action.POWER_OFF"
+          Action: "android.intent.action.POWER_ON"
+          Action: "carplay_navigation_activated"
+          Action: "svautomotive.3partymanager.navigation.MESSAGE"
+          Action: "android.Navi.TncReceiver"
+          Action: "ime.smart.driving.recorder.preview.slide.mode"
+          Action: "action_auto_screen_fps"
+          Action: "action_auto_screen_enable"
+          Action: "android.mcuhw.MCUHW_PROTOCOL_2F_DAYNIGHTMODE"
+          Action: "com.stcloud.drive.EVT_ACC_STATUS"
+          Action: "com.tian.navi.NAVITO"
+          Action: "com.tian.key.UP"
+          Action: "com.tian.key.DOWN"
+          Action: "com.tian.key.LEFT"
+          Action: "com.tian.key.RIGHT"
+          Action: "com.tian.key.ROTATE_LEFT"
+          Action: "com.tian.key.ROTATE_RIGHT"
+          Action: "com.tian.navi.RESIDUAL_MILEAGE"
+          Action: "com.tian.navi.TBT_START"
+          Action: "com.tian.navi.TBT_STOP"
+          Action: "com.tian.navi.INERTIAL_GUIDANCE"
+          Action: "com.chinatsp.headlights.change"
+          Action: "com.borqs.civia.acc.off"
+          Action: "com.borqs.civia.acc.on"
+          Action: "com.autonavi.action.REQUEST_VERSION"
+          Action: "com.hsae.auto.ACTION_ACC_STATE"
+          Action: "com.hsae.auto.EXTRA_ACC_STATE"
+          Action: "com.incall.action.SCREEN_STATUS"
+          Action: "com.incall.action.INSTRUMENTATION_THEME_CHANGE"
+          Action: "com.incall.action.IACCMODE_CHANGE"
+          Action: "com.incall.action.SCREEN_MODE_CHANGE"
+          Action: "com.incall.action.REQUEST_MAP_STATUS"
+          Action: "com.incall.action.CLUSTER_TBT_SHOW"
+
+Service Resolver Table:
+  Non-Data Actions:
+      com.similar.widget.view.service:
+        e3bd76a com.autonavi.amapauto/.adapter.internal.widget.AutoSimilarWidgetService filter 948e80b
+          Action: "com.similar.widget.view.service"
+      com.autonavi.amapauto.protocolService:
+        119345b com.autonavi.amapauto/.protocol.service.ProtocolService filter b667bef
+          Action: "com.autonavi.amapauto.protocolService"
+          Category: "android.intent.category.DEFAULT"
+      com.autonavi.amapauto.aidl.json_protocol_service:
+        f1134f8 com.autonavi.amapauto/.protocol.service.JsonProtocolService filter e3fc6fc
+          Action: "com.autonavi.amapauto.aidl.json_protocol_service"
+          Category: "android.intent.category.DEFAULT"
+      com.amapauto.carteamservice:
+        8474dd1 com.autonavi.amapauto/.adapter.internal.CarTeamService filter d304bda
+          Action: "com.amapauto.carteamservice"
+      com.iflytek.navigationservice.NavigationService:
+        b80036 com.autonavi.amapauto/com.iflytek.navigationservice.NavigationService filter 2b0b185
+          Action: "com.iflytek.navigationservice.NavigationService"
+      com.autonavi.amapauto.aidl:
+        e2cbb37 com.autonavi.amapauto/.adapter.internal.AmapAutoService filter 906c1c9
+          Action: "com.autonavi.amapauto.aidl"
+          Category: "android.intent.category.DEFAULT"
+      com.autonavi.action.autostart:
+        da0a8a4 com.autonavi.amapauto/.background.AutoBackgroundService filter 161f0ce
+          Action: "com.autonavi.action.autostart"
+
+Permissions:
+  Permission [com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER] (3a1f60d):
+    sourcePackage=com.autonavi.amapauto
+    uid=1000 gids=null type=0 prot=normal
+    perm=Permission{ffbe9c2 com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER}
+    packageSetting=PackageSetting{739c6d1 com.autonavi.amapauto/1000}
+
+Registered ContentProviders:
+  com.autonavi.amapauto/com.autonavi.adiu.storage.AdiuContentProvider:
+    Provider{d87d3d3 com.autonavi.amapauto/com.autonavi.adiu.storage.AdiuContentProvider}
+  com.autonavi.amapauto/com.autonavi.auto.search.provider.ThirdPartSearchProvider:
+    Provider{d91ab10 com.autonavi.amapauto/com.autonavi.auto.search.provider.ThirdPartSearchProvider}
+  com.autonavi.amapauto/androidx.core.content.FileProvider:
+    Provider{784e609 com.autonavi.amapauto/androidx.core.content.FileProvider}
+  com.autonavi.amapauto/.socol.SocolParamsProvider:
+    Provider{5a2e00e com.autonavi.amapauto/.socol.SocolParamsProvider}
+
+ContentProvider Authorities:
+  [com.autonavi.amapauto.provider.search]:
+    Provider{d91ab10 com.autonavi.amapauto/com.autonavi.auto.search.provider.ThirdPartSearchProvider}
+      applicationInfo=ApplicationInfo{f71da2f com.autonavi.amapauto}
+  [com.autonavi.amapautolite.provider.socol]:
+    Provider{5a2e00e com.autonavi.amapauto/.socol.SocolParamsProvider}
+      applicationInfo=ApplicationInfo{f71da2f com.autonavi.amapauto}
+  [com.autonavi.amapauto.adiuprovider]:
+    Provider{d87d3d3 com.autonavi.amapauto/com.autonavi.adiu.storage.AdiuContentProvider}
+      applicationInfo=ApplicationInfo{f71da2f com.autonavi.amapauto}
+  [com.autonavi.amapauto.bootstrap.fileProvider]:
+    Provider{784e609 com.autonavi.amapauto/androidx.core.content.FileProvider}
+      applicationInfo=ApplicationInfo{f71da2f com.autonavi.amapauto}
+
+Key Set Manager:
+  [com.autonavi.amapauto]
+      Signing KeySets: 1
+
+Packages:
+  Package [com.autonavi.amapauto] (739c6d1):
+    userId=1000
+    sharedUser=SharedUserSetting{34e683c android.uid.system/1000}
+    pkg=Package{68cd9c5 com.autonavi.amapauto}
+    codePath=/data/app/com.autonavi.amapauto-H7qxfimLK2z_RB3_IYc67A==
+    resourcePath=/data/app/com.autonavi.amapauto-H7qxfimLK2z_RB3_IYc67A==
+    legacyNativeLibraryDir=/data/app/com.autonavi.amapauto-H7qxfimLK2z_RB3_IYc67A==/lib
+    primaryCpuAbi=armeabi-v7a
+    secondaryCpuAbi=null
+    versionCode=21000001 minSdk=15 targetSdk=23
+    versionName=7.5.0.600082
+    splits=[base]
+    apkSigningVersion=3
+    applicationInfo=ApplicationInfo{f71da2f com.autonavi.amapauto}
+    flags=[ SYSTEM HAS_CODE ALLOW_CLEAR_USER_DATA UPDATED_SYSTEM_APP ]
+    privateFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE ]
+    dataDir=/data/user/0/com.autonavi.amapauto
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    usesOptionalLibraries:
+      org.apache.http.legacy
+    usesLibraryFiles:
+      /system/framework/org.apache.http.legacy.boot.jar
+    timeStamp=2026-11-21 23:09:07
+    firstInstallTime=2009-01-01 00:00:00
+    lastUpdateTime=2026-11-21 23:09:10
+    signatures=PackageSignatures{7b0ef1a version:3, signatures:[b4addb29], past signatures:[]}
+    installPermissionsFixed=true
+    pkgFlags=[ SYSTEM HAS_CODE ALLOW_CLEAR_USER_DATA UPDATED_SYSTEM_APP ]
+    declared permissions:
+      com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER: prot=normal, INSTALLED
+    requested permissions:
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.WRITE_MEDIA_STORAGE
+      android.permission.MANAGE_USB
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.INTERNET
+      android.permission.RECEIVE_BOOT_COMPLETED
+      android.permission.ACCESS_WIFI_STATE
+      android.permission.READ_PHONE_STATE
+      android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+      android.permission.ACCESS_FINE_LOCATION
+      android.permission.ACCESS_COARSE_LOCATION
+      android.permission.RECORD_AUDIO
+      android.permission.SYSTEM_ALERT_WINDOW
+      android.permission.GET_TASKS
+      android.permission.WAKE_LOCK
+      android.permission.BLUETOOTH_ADMIN
+      android.permission.BLUETOOTH
+      android.permission.CAMERA
+      android.permission.ACCESS_BACKGROUND_LOCATION
+      android.permission.POST_NOTIFICATIONS
+      android.permission.FOREGROUND_SERVICE
+      com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER
+      android.permission.READ_EXTERNAL_STORAGE
+      android.permission.REQUEST_INSTALL_PACKAGES
+      com.autonavi.amapauto_com.hihonor.security.permission.ACCESS_THREAT_DETECTION
+      android.permission.CHANGE_WIFI_STATE
+      android.permission.WRITE_SETTINGS
+    install permissions:
+      android.permission.REAL_GET_TASKS: granted=true
+      android.permission.ACCESS_CACHE_FILESYSTEM: granted=true
+      android.permission.BIND_INCALL_SERVICE: granted=true
+      android.permission.WRITE_SETTINGS: granted=true
+      android.permission.CONFIGURE_WIFI_DISPLAY: granted=true
+      android.permission.CONFIGURE_DISPLAY_COLOR_MODE: granted=true
+      android.permission.ACCESS_WIMAX_STATE: granted=true
+      android.permission.RECOVERY: granted=true
+      com.bandwa.openadb.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
+      android.permission.USE_CREDENTIALS: granted=true
+      android.permission.MODIFY_AUDIO_SETTINGS: granted=true
+      android.permission.ACCESS_CHECKIN_PROPERTIES: granted=true
+      android.permission.MODIFY_AUDIO_ROUTING: granted=true
+      android.permission.INSTALL_LOCATION_PROVIDER: granted=true
+      android.permission.USE_RESERVED_DISK: granted=true
+      com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER: granted=true
+      android.permission.SYSTEM_ALERT_WINDOW: granted=true
+      android.permission.BROADCAST_PHONE_ACCOUNT_REGISTRATION: granted=true
+      android.car.permission.CONTROL_CAR_CLIMATE: granted=true
+      android.permission.CONTROL_LOCATION_UPDATES: granted=true
+      android.car.permission.CAR_VENDOR_EXTENSION: granted=true
+      android.permission.CLEAR_APP_USER_DATA: granted=true
+      com.huawei.permission.NEARBY_OPERATOR_FUNCTION: granted=true
+      android.car.permission.CAR_EXTERIOR_ENVIRONMENT: granted=true
+      android.permission.BROADCAST_CALLLOG_INFO: granted=true
+      android.permission.INSTALL_PACKAGES: granted=true
+      android.permission.SHUTDOWN: granted=true
+      android.permission.NFC: granted=true
+      android.permission.INTERNAL_SYSTEM_WINDOW: granted=true
+      com.mediatek.permission.REQUEST_NLP_PACKAGE: granted=true
+      android.permission.NETWORK_SETTINGS: granted=true
+      android.permission.CALL_PRIVILEGED: granted=true
+      android.permission.CHANGE_NETWORK_STATE: granted=true
+      android.permission.MASTER_CLEAR: granted=true
+      android.permission.FOREGROUND_SERVICE: granted=true
+      android.permission.WRITE_SYNC_SETTINGS: granted=true
+      android.permission.RECEIVE_BOOT_COMPLETED: granted=true
+      android.permission.PEERS_MAC_ADDRESS: granted=true
+      android.permission.DEVICE_POWER: granted=true
+      android.permission.REMOVE_TASKS: granted=true
+      android.permission.READ_PRINT_SERVICES: granted=true
+      android.permission.MANAGE_PROFILE_AND_DEVICE_OWNERS: granted=true
+      android.permission.READ_PROFILE: granted=true
+      android.permission.BLUETOOTH: granted=true
+      com.android.alarm.permission.SET_ALARM: granted=true
+      android.permission.WRITE_MEDIA_STORAGE: granted=true
+      android.permission.WRITE_BLOCKED_NUMBERS: granted=true
+      android.permission.GET_TASKS: granted=true
+      android.permission.INTERNET: granted=true
+      android.permission.REORDER_TASKS: granted=true
+      android.permission.BLUETOOTH_ADMIN: granted=true
+      android.permission.CONTROL_VPN: granted=true
+      android.permission.MANAGE_FINGERPRINT: granted=true
+      android.permission.BIND_CONNECTION_SERVICE: granted=true
+      android.permission.ACCESS_INSTANT_APPS: granted=true
+      com.android.launcher.permission.WRITE_SETTINGS: granted=true
+      android.permission.MANAGE_USB: granted=true
+      android.permission.INTERACT_ACROSS_USERS_FULL: granted=true
+      android.permission.BIND_APPWIDGET: granted=true
+      android.permission.STOP_APP_SWITCHES: granted=true
+      android.permission.BATTERY_STATS: granted=true
+      android.permission.PACKAGE_USAGE_STATS: granted=true
+      android.permission.MOUNT_UNMOUNT_FILESYSTEMS: granted=true
+      android.permission.GET_ACCOUNTS_PRIVILEGED: granted=true
+      android.permission.TETHER_PRIVILEGED: granted=true
+      android.permission.WRITE_SECURE_SETTINGS: granted=true
+      android.permission.MOVE_PACKAGE: granted=true
+      android.permission.READ_BLOCKED_NUMBERS: granted=true
+      android.permission.STATUS_BAR_SERVICE: granted=true
+      android.permission.READ_SEARCH_INDEXABLES: granted=true
+      com.android.launcher.permission.READ_SETTINGS: granted=true
+      android.permission.ACCESS_LOCATION_EXTRA_COMMANDS: granted=true
+      android.permission.READ_PRIVILEGED_PHONE_STATE: granted=true
+      android.permission.TRIGGER_TIME_ZONE_RULES_CHECK: granted=true
+      android.permission.ACCESS_DOWNLOAD_MANAGER: granted=true
+      android.car.permission.CAR_IDENTIFICATION: granted=true
+      android.permission.BLUETOOTH_PRIVILEGED: granted=true
+      android.permission.NETWORK_STACK: granted=true
+      android.permission.HARDWARE_TEST: granted=true
+      android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME: granted=true
+      android.car.permission.CAR_POWERTRAIN: granted=true
+      android.intent.category.MASTER_CLEAR.permission.C2D_MESSAGE: granted=true
+      android.permission.BIND_JOB_SERVICE: granted=true
+      android.permission.CONFIRM_FULL_BACKUP: granted=true
+      android.permission.SET_TIME: granted=true
+      android.permission.WRITE_APN_SETTINGS: granted=true
+      android.permission.CHANGE_WIFI_STATE: granted=true
+      android.permission.MODIFY_DAY_NIGHT_MODE: granted=true
+      android.permission.MANAGE_USERS: granted=true
+      android.permission.DELETE_CACHE_FILES: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      android.permission.DISABLE_KEYGUARD: granted=true
+      android.permission.BACKUP: granted=true
+      android.permission.CHANGE_CONFIGURATION: granted=true
+      android.permission.USER_ACTIVITY: granted=true
+      android.permission.LOCAL_MAC_ADDRESS: granted=true
+      android.permission.READ_LOGS: granted=true
+      android.permission.COPY_PROTECTED_DATA: granted=true
+      android.permission.INTERACT_ACROSS_USERS: granted=true
+      android.permission.SET_WALLPAPER: granted=true
+      android.permission.SET_KEYBOARD_LAYOUT: granted=true
+      android.permission.READ_DREAM_STATE: granted=true
+      android.permission.MANAGE_APP_OPS_RESTRICTIONS: granted=true
+      android.permission.KILL_BACKGROUND_PROCESSES: granted=true
+      android.permission.MANAGE_USER_OEM_UNLOCK_STATE: granted=true
+      android.permission.USE_FINGERPRINT: granted=true
+      android.permission.REQUEST_NETWORK_SCORES: granted=true
+      android.permission.WRITE_USER_DICTIONARY: granted=true
+      android.permission.READ_SYNC_STATS: granted=true
+      android.permission.WRITE_DREAM_STATE: granted=true
+      android.permission.REBOOT: granted=true
+      android.permission.REQUEST_DELETE_PACKAGES: granted=true
+      android.permission.OEM_UNLOCK_STATE: granted=true
+      android.permission.MANAGE_DEVICE_ADMINS: granted=true
+      android.permission.CHANGE_APP_IDLE_STATE: granted=true
+      android.permission.BIND_SETTINGS_SUGGESTIONS_SERVICE: granted=true
+      android.permission.TEST_BLACKLISTED_PASSWORD: granted=true
+      android.permission.GRANT_RUNTIME_PERMISSIONS: granted=true
+      android.permission.SET_POINTER_SPEED: granted=true
+      android.permission.MANAGE_NOTIFICATIONS: granted=true
+      android.permission.SEND_SHOW_SUSPENDED_APP_DETAILS: granted=true
+      android.permission.CONNECTIVITY_INTERNAL: granted=true
+      android.permission.SET_WALLPAPER_HINTS: granted=true
+      android.permission.MANAGE_MEDIA_PROJECTION: granted=true
+      android.permission.READ_SYNC_SETTINGS: granted=true
+      android.permission.OVERRIDE_WIFI_CONFIG: granted=true
+      android.permission.FORCE_STOP_PACKAGES: granted=true
+      android.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS: granted=true
+      android.permission.CAPTURE_VIDEO_OUTPUT: granted=true
+      android.permission.ACCESS_NOTIFICATIONS: granted=true
+      android.permission.VIBRATE: granted=true
+      com.android.certinstaller.INSTALL_AS_USER: granted=true
+      android.permission.MANAGE_ACTIVITY_STACKS: granted=true
+      com.huawei.permission.HISIGHT_ACCESS: granted=true
+      android.permission.READ_USER_DICTIONARY: granted=true
+      android.permission.MANAGE_SCOPED_ACCESS_DIRECTORY_PERMISSIONS: granted=true
+      android.permission.ACCESS_WIFI_STATE: granted=true
+      com.huawei.hiviewlite.permission.USE_SERVICE: granted=true
+      android.permission.MANAGE_APP_OPS_MODES: granted=true
+      android.permission.CHANGE_WIMAX_STATE: granted=true
+      android.permission.REQUEST_INSTALL_PACKAGES: granted=true
+      android.permission.MODIFY_PHONE_STATE: granted=true
+      android.permission.STATUS_BAR: granted=true
+      android.permission.READ_FRAME_BUFFER: granted=true
+      android.permission.LOCATION_HARDWARE: granted=true
+      android.permission.WAKE_LOCK: granted=true
+      android.permission.INJECT_EVENTS: granted=true
+      android.permission.BIND_NETWORK_RECOMMENDATION_SERVICE: granted=true
+      android.car.permission.CAR_INFO: granted=true
+      android.permission.MEDIA_CONTENT_CONTROL: granted=true
+      android.permission.DELETE_PACKAGES: granted=true
+    User 0: ceDataInode=317 installed=true hidden=false suspended=false stopped=false notLaunched=false enabled=0 instant=false virtual=false
+
+Hidden system packages:
+  Package [com.autonavi.amapauto] (74bea4b):
+    userId=1000
+    sharedUser=SharedUserSetting{34e683c android.uid.system/1000}
+    pkg=Package{db7cc28 com.autonavi.amapauto}
+    codePath=/system/app/PSA_AmapAuto
+    resourcePath=/system/app/PSA_AmapAuto
+    legacyNativeLibraryDir=/system/app/PSA_AmapAuto/lib
+    primaryCpuAbi=arm64-v8a
+    secondaryCpuAbi=null
+    versionCode=6025796 minSdk=14 targetSdk=28
+    versionName=5.0.7.604198
+    splits=[base]
+    apkSigningVersion=0
+    applicationInfo=ApplicationInfo{6664d41 com.autonavi.amapauto}
+    flags=[ SYSTEM HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    privateFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE ]
+    dataDir=/data/user/0/com.autonavi.amapauto
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    usesOptionalLibraries:
+      org.apache.http.legacy
+    timeStamp=2009-01-01 00:00:00
+    firstInstallTime=2009-01-01 00:00:00
+    lastUpdateTime=2009-01-01 00:00:00
+    signatures=PackageSignatures{65ee2e6 version:0, signatures:[], past signatures:[]}
+    installPermissionsFixed=false
+    pkgFlags=[ SYSTEM HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    declared permissions:
+      com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER: prot=normal
+    requested permissions:
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.WRITE_MEDIA_STORAGE
+      android.permission.MANAGE_USB
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.INTERNET
+      android.permission.RECEIVE_BOOT_COMPLETED
+      android.permission.ACCESS_WIFI_STATE
+      android.permission.READ_PHONE_STATE
+      android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+      android.permission.ACCESS_FINE_LOCATION
+      android.permission.ACCESS_COARSE_LOCATION
+      android.permission.RECORD_AUDIO
+      android.permission.SYSTEM_ALERT_WINDOW
+      android.permission.GET_TASKS
+      android.permission.WAKE_LOCK
+      android.permission.BLUETOOTH_ADMIN
+      android.permission.BLUETOOTH
+      android.permission.CAMERA
+      android.permission.FOREGROUND_SERVICE
+      com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER
+      android.permission.READ_EXTERNAL_STORAGE
+      android.permission.REQUEST_INSTALL_PACKAGES
+      android.permission.CHANGE_WIFI_STATE
+      android.permission.WRITE_SETTINGS
+      android.car.permission.CAR_CONTROL_AUDIO_VOLUME
+    install permissions:
+      android.permission.REAL_GET_TASKS: granted=true
+      android.permission.ACCESS_CACHE_FILESYSTEM: granted=true
+      android.permission.BIND_INCALL_SERVICE: granted=true
+      android.permission.WRITE_SETTINGS: granted=true
+      android.permission.CONFIGURE_WIFI_DISPLAY: granted=true
+      android.permission.CONFIGURE_DISPLAY_COLOR_MODE: granted=true
+      android.permission.ACCESS_WIMAX_STATE: granted=true
+      android.permission.RECOVERY: granted=true
+      com.bandwa.openadb.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
+      android.permission.USE_CREDENTIALS: granted=true
+      android.permission.MODIFY_AUDIO_SETTINGS: granted=true
+      android.permission.ACCESS_CHECKIN_PROPERTIES: granted=true
+      android.permission.MODIFY_AUDIO_ROUTING: granted=true
+      android.permission.INSTALL_LOCATION_PROVIDER: granted=true
+      android.permission.USE_RESERVED_DISK: granted=true
+      com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER: granted=true
+      android.permission.SYSTEM_ALERT_WINDOW: granted=true
+      android.permission.BROADCAST_PHONE_ACCOUNT_REGISTRATION: granted=true
+      android.car.permission.CONTROL_CAR_CLIMATE: granted=true
+      android.permission.CONTROL_LOCATION_UPDATES: granted=true
+      android.car.permission.CAR_VENDOR_EXTENSION: granted=true
+      android.permission.CLEAR_APP_USER_DATA: granted=true
+      com.huawei.permission.NEARBY_OPERATOR_FUNCTION: granted=true
+      android.car.permission.CAR_EXTERIOR_ENVIRONMENT: granted=true
+      android.permission.BROADCAST_CALLLOG_INFO: granted=true
+      android.permission.INSTALL_PACKAGES: granted=true
+      android.permission.SHUTDOWN: granted=true
+      android.permission.NFC: granted=true
+      android.permission.INTERNAL_SYSTEM_WINDOW: granted=true
+      com.mediatek.permission.REQUEST_NLP_PACKAGE: granted=true
+      android.permission.NETWORK_SETTINGS: granted=true
+      android.permission.CALL_PRIVILEGED: granted=true
+      android.permission.CHANGE_NETWORK_STATE: granted=true
+      android.permission.MASTER_CLEAR: granted=true
+      android.permission.FOREGROUND_SERVICE: granted=true
+      android.permission.WRITE_SYNC_SETTINGS: granted=true
+      android.permission.RECEIVE_BOOT_COMPLETED: granted=true
+      android.permission.PEERS_MAC_ADDRESS: granted=true
+      android.permission.DEVICE_POWER: granted=true
+      android.permission.REMOVE_TASKS: granted=true
+      android.permission.READ_PRINT_SERVICES: granted=true
+      android.permission.MANAGE_PROFILE_AND_DEVICE_OWNERS: granted=true
+      android.permission.READ_PROFILE: granted=true
+      android.permission.BLUETOOTH: granted=true
+      com.android.alarm.permission.SET_ALARM: granted=true
+      android.permission.WRITE_MEDIA_STORAGE: granted=true
+      android.permission.WRITE_BLOCKED_NUMBERS: granted=true
+      android.permission.GET_TASKS: granted=true
+      android.permission.INTERNET: granted=true
+      android.permission.REORDER_TASKS: granted=true
+      android.permission.BLUETOOTH_ADMIN: granted=true
+      android.permission.CONTROL_VPN: granted=true
+      android.permission.MANAGE_FINGERPRINT: granted=true
+      android.permission.BIND_CONNECTION_SERVICE: granted=true
+      android.permission.ACCESS_INSTANT_APPS: granted=true
+      com.android.launcher.permission.WRITE_SETTINGS: granted=true
+      android.permission.MANAGE_USB: granted=true
+      android.permission.INTERACT_ACROSS_USERS_FULL: granted=true
+      android.permission.BIND_APPWIDGET: granted=true
+      android.permission.STOP_APP_SWITCHES: granted=true
+      android.permission.BATTERY_STATS: granted=true
+      android.permission.PACKAGE_USAGE_STATS: granted=true
+      android.permission.MOUNT_UNMOUNT_FILESYSTEMS: granted=true
+      android.permission.GET_ACCOUNTS_PRIVILEGED: granted=true
+      android.permission.TETHER_PRIVILEGED: granted=true
+      android.permission.WRITE_SECURE_SETTINGS: granted=true
+      android.permission.MOVE_PACKAGE: granted=true
+      android.permission.READ_BLOCKED_NUMBERS: granted=true
+      android.permission.STATUS_BAR_SERVICE: granted=true
+      android.permission.READ_SEARCH_INDEXABLES: granted=true
+      com.android.launcher.permission.READ_SETTINGS: granted=true
+      android.permission.ACCESS_LOCATION_EXTRA_COMMANDS: granted=true
+      android.permission.READ_PRIVILEGED_PHONE_STATE: granted=true
+      android.permission.TRIGGER_TIME_ZONE_RULES_CHECK: granted=true
+      android.permission.ACCESS_DOWNLOAD_MANAGER: granted=true
+      android.car.permission.CAR_IDENTIFICATION: granted=true
+      android.permission.BLUETOOTH_PRIVILEGED: granted=true
+      android.permission.NETWORK_STACK: granted=true
+      android.permission.HARDWARE_TEST: granted=true
+      android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME: granted=true
+      android.car.permission.CAR_POWERTRAIN: granted=true
+      android.intent.category.MASTER_CLEAR.permission.C2D_MESSAGE: granted=true
+      android.permission.BIND_JOB_SERVICE: granted=true
+      android.permission.CONFIRM_FULL_BACKUP: granted=true
+      android.permission.SET_TIME: granted=true
+      android.permission.WRITE_APN_SETTINGS: granted=true
+      android.permission.CHANGE_WIFI_STATE: granted=true
+      android.permission.MODIFY_DAY_NIGHT_MODE: granted=true
+      android.permission.MANAGE_USERS: granted=true
+      android.permission.DELETE_CACHE_FILES: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      android.permission.DISABLE_KEYGUARD: granted=true
+      android.permission.BACKUP: granted=true
+      android.permission.CHANGE_CONFIGURATION: granted=true
+      android.permission.USER_ACTIVITY: granted=true
+      android.permission.LOCAL_MAC_ADDRESS: granted=true
+      android.permission.READ_LOGS: granted=true
+      android.permission.COPY_PROTECTED_DATA: granted=true
+      android.permission.INTERACT_ACROSS_USERS: granted=true
+      android.permission.SET_WALLPAPER: granted=true
+      android.permission.SET_KEYBOARD_LAYOUT: granted=true
+      android.permission.READ_DREAM_STATE: granted=true
+      android.permission.MANAGE_APP_OPS_RESTRICTIONS: granted=true
+      android.permission.KILL_BACKGROUND_PROCESSES: granted=true
+      android.permission.MANAGE_USER_OEM_UNLOCK_STATE: granted=true
+      android.permission.USE_FINGERPRINT: granted=true
+      android.permission.REQUEST_NETWORK_SCORES: granted=true
+      android.permission.WRITE_USER_DICTIONARY: granted=true
+      android.permission.READ_SYNC_STATS: granted=true
+      android.permission.WRITE_DREAM_STATE: granted=true
+      android.permission.REBOOT: granted=true
+      android.permission.REQUEST_DELETE_PACKAGES: granted=true
+      android.permission.OEM_UNLOCK_STATE: granted=true
+      android.permission.MANAGE_DEVICE_ADMINS: granted=true
+      android.permission.CHANGE_APP_IDLE_STATE: granted=true
+      android.permission.BIND_SETTINGS_SUGGESTIONS_SERVICE: granted=true
+      android.permission.TEST_BLACKLISTED_PASSWORD: granted=true
+      android.permission.GRANT_RUNTIME_PERMISSIONS: granted=true
+      android.permission.SET_POINTER_SPEED: granted=true
+      android.permission.MANAGE_NOTIFICATIONS: granted=true
+      android.permission.SEND_SHOW_SUSPENDED_APP_DETAILS: granted=true
+      android.permission.CONNECTIVITY_INTERNAL: granted=true
+      android.permission.SET_WALLPAPER_HINTS: granted=true
+      android.permission.MANAGE_MEDIA_PROJECTION: granted=true
+      android.permission.READ_SYNC_SETTINGS: granted=true
+      android.permission.OVERRIDE_WIFI_CONFIG: granted=true
+      android.permission.FORCE_STOP_PACKAGES: granted=true
+      android.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS: granted=true
+      android.permission.CAPTURE_VIDEO_OUTPUT: granted=true
+      android.permission.ACCESS_NOTIFICATIONS: granted=true
+      android.permission.VIBRATE: granted=true
+      com.android.certinstaller.INSTALL_AS_USER: granted=true
+      android.permission.MANAGE_ACTIVITY_STACKS: granted=true
+      com.huawei.permission.HISIGHT_ACCESS: granted=true
+      android.permission.READ_USER_DICTIONARY: granted=true
+      android.permission.MANAGE_SCOPED_ACCESS_DIRECTORY_PERMISSIONS: granted=true
+      android.permission.ACCESS_WIFI_STATE: granted=true
+      com.huawei.hiviewlite.permission.USE_SERVICE: granted=true
+      android.permission.MANAGE_APP_OPS_MODES: granted=true
+      android.permission.CHANGE_WIMAX_STATE: granted=true
+      android.permission.REQUEST_INSTALL_PACKAGES: granted=true
+      android.permission.MODIFY_PHONE_STATE: granted=true
+      android.permission.STATUS_BAR: granted=true
+      android.permission.READ_FRAME_BUFFER: granted=true
+      android.permission.LOCATION_HARDWARE: granted=true
+      android.permission.WAKE_LOCK: granted=true
+      android.permission.INJECT_EVENTS: granted=true
+      android.permission.BIND_NETWORK_RECOMMENDATION_SERVICE: granted=true
+      android.car.permission.CAR_INFO: granted=true
+      android.permission.MEDIA_CONTENT_CONTROL: granted=true
+      android.permission.DELETE_PACKAGES: granted=true
+    User 0: ceDataInode=0 installed=true hidden=false suspended=false stopped=false notLaunched=false enabled=0 instant=false virtual=false
+
+Shared users:
+  SharedUser [android.uid.system] (34e683c):
+    userId=1000
+    install permissions:
+      android.permission.REAL_GET_TASKS: granted=true
+      android.permission.ACCESS_CACHE_FILESYSTEM: granted=true
+      android.permission.BIND_INCALL_SERVICE: granted=true
+      android.permission.WRITE_SETTINGS: granted=true
+      android.permission.CONFIGURE_WIFI_DISPLAY: granted=true
+      android.permission.CONFIGURE_DISPLAY_COLOR_MODE: granted=true
+      android.permission.ACCESS_WIMAX_STATE: granted=true
+      android.permission.RECOVERY: granted=true
+      com.bandwa.openadb.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
+      android.permission.USE_CREDENTIALS: granted=true
+      android.permission.MODIFY_AUDIO_SETTINGS: granted=true
+      android.permission.ACCESS_CHECKIN_PROPERTIES: granted=true
+      android.permission.MODIFY_AUDIO_ROUTING: granted=true
+      android.permission.INSTALL_LOCATION_PROVIDER: granted=true
+      android.permission.USE_RESERVED_DISK: granted=true
+      com.autonavi.amapauto.permission.WRITE_CONTENTPROVIDER: granted=true
+      android.permission.SYSTEM_ALERT_WINDOW: granted=true
+      android.permission.BROADCAST_PHONE_ACCOUNT_REGISTRATION: granted=true
+      android.car.permission.CONTROL_CAR_CLIMATE: granted=true
+      android.permission.CONTROL_LOCATION_UPDATES: granted=true
+      android.car.permission.CAR_VENDOR_EXTENSION: granted=true
+      android.permission.CLEAR_APP_USER_DATA: granted=true
+      com.huawei.permission.NEARBY_OPERATOR_FUNCTION: granted=true
+      android.car.permission.CAR_EXTERIOR_ENVIRONMENT: granted=true
+      android.permission.BROADCAST_CALLLOG_INFO: granted=true
+      android.permission.INSTALL_PACKAGES: granted=true
+      android.permission.SHUTDOWN: granted=true
+      android.permission.NFC: granted=true
+      android.permission.INTERNAL_SYSTEM_WINDOW: granted=true
+      com.mediatek.permission.REQUEST_NLP_PACKAGE: granted=true
+      android.permission.NETWORK_SETTINGS: granted=true
+      android.permission.CALL_PRIVILEGED: granted=true
+      android.permission.CHANGE_NETWORK_STATE: granted=true
+      android.permission.MASTER_CLEAR: granted=true
+      android.permission.FOREGROUND_SERVICE: granted=true
+      android.permission.WRITE_SYNC_SETTINGS: granted=true
+      android.permission.RECEIVE_BOOT_COMPLETED: granted=true
+      android.permission.PEERS_MAC_ADDRESS: granted=true
+      android.permission.DEVICE_POWER: granted=true
+      android.permission.REMOVE_TASKS: granted=true
+      android.permission.READ_PRINT_SERVICES: granted=true
+      android.permission.MANAGE_PROFILE_AND_DEVICE_OWNERS: granted=true
+      android.permission.READ_PROFILE: granted=true
+      android.permission.BLUETOOTH: granted=true
+      com.android.alarm.permission.SET_ALARM: granted=true
+      android.permission.WRITE_MEDIA_STORAGE: granted=true
+      android.permission.WRITE_BLOCKED_NUMBERS: granted=true
+      android.permission.GET_TASKS: granted=true
+      android.permission.INTERNET: granted=true
+      android.permission.REORDER_TASKS: granted=true
+      android.permission.BLUETOOTH_ADMIN: granted=true
+      android.permission.CONTROL_VPN: granted=true
+      android.permission.MANAGE_FINGERPRINT: granted=true
+      android.permission.BIND_CONNECTION_SERVICE: granted=true
+      android.permission.ACCESS_INSTANT_APPS: granted=true
+      com.android.launcher.permission.WRITE_SETTINGS: granted=true
+      android.permission.MANAGE_USB: granted=true
+      android.permission.INTERACT_ACROSS_USERS_FULL: granted=true
+      android.permission.BIND_APPWIDGET: granted=true
+      android.permission.STOP_APP_SWITCHES: granted=true
+      android.permission.BATTERY_STATS: granted=true
+      android.permission.PACKAGE_USAGE_STATS: granted=true
+      android.permission.MOUNT_UNMOUNT_FILESYSTEMS: granted=true
+      android.permission.GET_ACCOUNTS_PRIVILEGED: granted=true
+      android.permission.TETHER_PRIVILEGED: granted=true
+      android.permission.WRITE_SECURE_SETTINGS: granted=true
+      android.permission.MOVE_PACKAGE: granted=true
+      android.permission.READ_BLOCKED_NUMBERS: granted=true
+      android.permission.STATUS_BAR_SERVICE: granted=true
+      android.permission.READ_SEARCH_INDEXABLES: granted=true
+      com.android.launcher.permission.READ_SETTINGS: granted=true
+      android.permission.ACCESS_LOCATION_EXTRA_COMMANDS: granted=true
+      android.permission.READ_PRIVILEGED_PHONE_STATE: granted=true
+      android.permission.TRIGGER_TIME_ZONE_RULES_CHECK: granted=true
+      android.permission.ACCESS_DOWNLOAD_MANAGER: granted=true
+      android.car.permission.CAR_IDENTIFICATION: granted=true
+      android.permission.BLUETOOTH_PRIVILEGED: granted=true
+      android.permission.NETWORK_STACK: granted=true
+      android.permission.HARDWARE_TEST: granted=true
+      android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME: granted=true
+      android.car.permission.CAR_POWERTRAIN: granted=true
+      android.intent.category.MASTER_CLEAR.permission.C2D_MESSAGE: granted=true
+      android.permission.BIND_JOB_SERVICE: granted=true
+      android.permission.CONFIRM_FULL_BACKUP: granted=true
+      android.permission.SET_TIME: granted=true
+      android.permission.WRITE_APN_SETTINGS: granted=true
+      android.permission.CHANGE_WIFI_STATE: granted=true
+      android.permission.MODIFY_DAY_NIGHT_MODE: granted=true
+      android.permission.MANAGE_USERS: granted=true
+      android.permission.DELETE_CACHE_FILES: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      android.permission.DISABLE_KEYGUARD: granted=true
+      android.permission.BACKUP: granted=true
+      android.permission.CHANGE_CONFIGURATION: granted=true
+      android.permission.USER_ACTIVITY: granted=true
+      android.permission.LOCAL_MAC_ADDRESS: granted=true
+      android.permission.READ_LOGS: granted=true
+      android.permission.COPY_PROTECTED_DATA: granted=true
+      android.permission.INTERACT_ACROSS_USERS: granted=true
+      android.permission.SET_WALLPAPER: granted=true
+      android.permission.SET_KEYBOARD_LAYOUT: granted=true
+      android.permission.READ_DREAM_STATE: granted=true
+      android.permission.MANAGE_APP_OPS_RESTRICTIONS: granted=true
+      android.permission.KILL_BACKGROUND_PROCESSES: granted=true
+      android.permission.MANAGE_USER_OEM_UNLOCK_STATE: granted=true
+      android.permission.USE_FINGERPRINT: granted=true
+      android.permission.REQUEST_NETWORK_SCORES: granted=true
+      android.permission.WRITE_USER_DICTIONARY: granted=true
+      android.permission.READ_SYNC_STATS: granted=true
+      android.permission.WRITE_DREAM_STATE: granted=true
+      android.permission.REBOOT: granted=true
+      android.permission.REQUEST_DELETE_PACKAGES: granted=true
+      android.permission.OEM_UNLOCK_STATE: granted=true
+      android.permission.MANAGE_DEVICE_ADMINS: granted=true
+      android.permission.CHANGE_APP_IDLE_STATE: granted=true
+      android.permission.BIND_SETTINGS_SUGGESTIONS_SERVICE: granted=true
+      android.permission.TEST_BLACKLISTED_PASSWORD: granted=true
+      android.permission.GRANT_RUNTIME_PERMISSIONS: granted=true
+      android.permission.SET_POINTER_SPEED: granted=true
+      android.permission.MANAGE_NOTIFICATIONS: granted=true
+      android.permission.SEND_SHOW_SUSPENDED_APP_DETAILS: granted=true
+      android.permission.CONNECTIVITY_INTERNAL: granted=true
+      android.permission.SET_WALLPAPER_HINTS: granted=true
+      android.permission.MANAGE_MEDIA_PROJECTION: granted=true
+      android.permission.READ_SYNC_SETTINGS: granted=true
+      android.permission.OVERRIDE_WIFI_CONFIG: granted=true
+      android.permission.FORCE_STOP_PACKAGES: granted=true
+      android.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS: granted=true
+      android.permission.CAPTURE_VIDEO_OUTPUT: granted=true
+      android.permission.ACCESS_NOTIFICATIONS: granted=true
+      android.permission.VIBRATE: granted=true
+      com.android.certinstaller.INSTALL_AS_USER: granted=true
+      android.permission.MANAGE_ACTIVITY_STACKS: granted=true
+      com.huawei.permission.HISIGHT_ACCESS: granted=true
+      android.permission.READ_USER_DICTIONARY: granted=true
+      android.permission.MANAGE_SCOPED_ACCESS_DIRECTORY_PERMISSIONS: granted=true
+      android.permission.ACCESS_WIFI_STATE: granted=true
+      com.huawei.hiviewlite.permission.USE_SERVICE: granted=true
+      android.permission.MANAGE_APP_OPS_MODES: granted=true
+      android.permission.CHANGE_WIMAX_STATE: granted=true
+      android.permission.REQUEST_INSTALL_PACKAGES: granted=true
+      android.permission.MODIFY_PHONE_STATE: granted=true
+      android.permission.STATUS_BAR: granted=true
+      android.permission.READ_FRAME_BUFFER: granted=true
+      android.permission.LOCATION_HARDWARE: granted=true
+      android.permission.WAKE_LOCK: granted=true
+      android.permission.INJECT_EVENTS: granted=true
+      android.permission.BIND_NETWORK_RECOMMENDATION_SERVICE: granted=true
+      android.car.permission.CAR_INFO: granted=true
+      android.permission.MEDIA_CONTENT_CONTROL: granted=true
+      android.permission.DELETE_PACKAGES: granted=true
+    User 0: 
+      gids=[2001, 1065, 3002, 1023, 3003, 3001, 1007]
+      runtime permissions:
+        android.permission.READ_SMS: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.READ_CALL_LOG: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.ACCESS_FINE_LOCATION: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.RECEIVE_WAP_PUSH: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.RECEIVE_SMS: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.READ_EXTERNAL_STORAGE: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.ACCESS_COARSE_LOCATION: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.READ_PHONE_STATE: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.CALL_PHONE: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.WRITE_CONTACTS: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.CAMERA: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.WRITE_CALL_LOG: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.PROCESS_OUTGOING_CALLS: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.GET_ACCOUNTS: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.WRITE_EXTERNAL_STORAGE: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.RECORD_AUDIO: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+        android.permission.READ_CONTACTS: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+
+Package Changes:
+  Sequence number=4
+  User 0:
+    seq=1, package=com.cusc.service.groupoil
+    seq=3, package=com.genee.psavoice
+
+
+Dexopt state:
+  [com.autonavi.amapauto]
+    path: /data/app/com.autonavi.amapauto-H7qxfimLK2z_RB3_IYc67A==/base.apk
+      arm: [status=quicken] [reason=unknown]
+      known secondary dex files:
+        /data/user/0/com.autonavi.amapauto/files/taobao_onedy.apk
+          class loader context: PCL[];PCL[/system/framework/org.apache.http.legacy.boot.jar:/data/app/com.autonavi.amapauto-H7qxfimLK2z_RB3_IYc67A==/base.apk]
+
+
+Compiler stats:
+  [com.autonavi.amapauto]
+    (No recorded stats)

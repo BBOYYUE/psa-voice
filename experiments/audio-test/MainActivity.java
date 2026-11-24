@@ -1,4 +1,4 @@
-package com.genee.psavoice;
+package com.sollado.psavoice;
 
 import android.Manifest;
 import android.app.Activity;
